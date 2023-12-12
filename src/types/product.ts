@@ -1,10 +1,10 @@
 export interface ProductProps {
-  _id: string;
+  _id: string | number;
   img: string;
-  quantity: number;
+  quantity?: any;
   productName: string;
   price: string;
   color: string;
   badge: boolean;
-  des: string;
+  des?: string;
 }
