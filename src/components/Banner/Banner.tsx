@@ -5,8 +5,10 @@ import {
   bannerImgOne,
   bannerImgTwo,
   bannerImgThree,
+  bannerImgFour,
 } from "../../assets/images";
 import Image from "../designLayouts/Image";
+import { Container } from "@mui/material";
 
 const Banner = () => {
   const [dotActive, setDocActive] = useState<number>(0);
@@ -24,9 +26,9 @@ const Banner = () => {
       <div
         style={{
           position: "absolute",
-          top: "50%",
-          left: "7%",
-          transform: "translateY(-50%)",
+          bottom: "5%",
+          left: "50%",
+          transform: "rotateZ(-90deg)",
         }}
       >
         <ul style={{ margin: "0px" }}> {dots} </ul>
@@ -42,6 +44,7 @@ const Banner = () => {
                 borderRight: "3px #262626 solid",
                 padding: "8px 0",
                 cursor: "pointer",
+                // transform: "rotateY(90deg)",
               }
             : {
                 width: "30px",
@@ -64,9 +67,8 @@ const Banner = () => {
             <div
               style={{
                 position: "absolute",
-                top: "50%",
-                left: "2%",
-                transform: "translateY(-50%)",
+                bottom: "5%",
+                left: "50%",
               }}
             >
               <ul style={{ margin: "0px" }}> {dots} </ul>
@@ -100,21 +102,26 @@ const Banner = () => {
     ],
   };
   return (
-    <div className="w-full bg-white">
+    <div className="p-0">
       <Slider {...settings}>
         <Link to="/offer">
           <div>
-            <Image imgSrc={bannerImgOne} />
+            <Image className={"h-[800px] w-full"} imgSrc={bannerImgOne} />
           </div>
         </Link>
         <Link to="/offer">
           <div>
-            <Image imgSrc={bannerImgTwo} />
+            <Image className={"h-[800px] w-full"} imgSrc={bannerImgTwo} />
           </div>
         </Link>
         <Link to="/offer">
           <div>
-            <Image imgSrc={bannerImgThree} />
+            <Image className={"h-[800px] w-full"} imgSrc={bannerImgThree} />
+          </div>
+        </Link>
+        <Link to="/offer">
+          <div>
+            <Image className={"h-[800px] w-full"} imgSrc={bannerImgFour} />
           </div>
         </Link>
       </Slider>
