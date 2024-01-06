@@ -15,6 +15,10 @@ module.exports = {
         lg: "960px",
         lgl: "1024px",
         xl: "1280px",
+        navLink: "22px",
+        title80: "80px",
+        title28: "28px",
+        title60: "60px",
       },
       fontFamily: {
         bodyFont: ["DM Sans", "sans-serif"],
@@ -23,6 +27,11 @@ module.exports = {
       colors: {
         primeColor: "#262626",
         lightText: "#6D6D6D",
+        delayedYellow: "#FCFE00",
+        springGreen: "#39FF14",
+        electricPurple: "#5501EE",
+        purple: "#7F187F",
+        vividPink: "#FF0F7A",
       },
       boxShadow: {
         testShadow: "0px 0px 54px -13px rgba(0,0,0,0.7)",
