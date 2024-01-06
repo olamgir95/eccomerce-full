@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import Slider from "react-slick";
+import { useRef } from "react";
+
 import {
   bannerImgOne,
   bannerImgTwo,
@@ -8,124 +7,89 @@ import {
   bannerImgFour,
 } from "../../assets/images";
 import Image from "../designLayouts/Image";
-import { Container } from "@mui/material";
+import { Swiper, SwiperSlide } from "swiper/react";
 
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
+// import required modules
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
+
+interface AutoplayProps {
+  delay: number;
+  disableOnInteraction: boolean;
+}
+
+interface PaginationProps {
+  clickable: boolean;
+}
+
+interface SwiperProps {
+  spaceBetween: number;
+  centeredSlides: boolean;
+  autoplay: AutoplayProps;
+  pagination: PaginationProps;
+  navigation: boolean;
+  modules: any[]; // You can be more specific with the types if needed
+  onAutoplayTimeLeft: (s: any, time: number, progress: number) => void;
+  className: string;
+}
 const Banner = () => {
-  const [dotActive, setDocActive] = useState<number>(0);
-  const settings = {
-    dots: true,
-    infinite: true,
-    autoplay: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: false,
-    beforeChange: (prev: number, next: number) => {
-      setDocActive(next);
+  const progressCircle = useRef<SVGSVGElement>(null);
+  const progressContent = useRef<HTMLSpanElement>(null);
+
+  const onAutoplayTimeLeft = (s: any, time: number, progress: number) => {
+    if (progressCircle.current) {
+      progressCircle.current.style.setProperty(
+        "--progress",
+        String(1 - progress)
+      );
+    }
+    if (progressContent.current) {
+      progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
+    }
+  };
+  const swiperOptions: SwiperProps = {
+    spaceBetween: 30,
+    centeredSlides: true,
+    autoplay: {
+      delay: 2500,
+      disableOnInteraction: false,
     },
-    appendDots: (dots: JSX.Element) => (
-      <div
-        style={{
-          position: "absolute",
-          bottom: "5%",
-          left: "50%",
-          transform: "rotateZ(-90deg)",
-        }}
-      >
-        <ul style={{ margin: "0px" }}> {dots} </ul>
-      </div>
-    ),
-    customPaging: (i: number) => (
-      <div
-        style={
-          i === dotActive
-            ? {
-                width: "30px",
-                color: "#262626",
-                borderRight: "3px #262626 solid",
-                padding: "8px 0",
-                cursor: "pointer",
-                // transform: "rotateY(90deg)",
-              }
-            : {
-                width: "30px",
-                color: "transparent",
-                borderRight: "3px white solid",
-                padding: "8px 0",
-                cursor: "pointer",
-              }
-        }
-      >
-        0{i + 1}
-      </div>
-    ),
-    responsive: [
-      {
-        breakpoint: 576,
-        settings: {
-          dots: true,
-          appendDots: (dots: JSX.Element) => (
-            <div
-              style={{
-                position: "absolute",
-                bottom: "5%",
-                left: "50%",
-              }}
-            >
-              <ul style={{ margin: "0px" }}> {dots} </ul>
-            </div>
-          ),
-          customPaging: (i: number) => (
-            <div
-              style={
-                i === dotActive
-                  ? {
-                      width: "25px",
-                      color: "#262626",
-                      borderRight: "3px #262626 solid",
-                      cursor: "pointer",
-                      fontSize: "12px",
-                    }
-                  : {
-                      width: "25px",
-                      color: "transparent",
-                      borderRight: "3px white solid",
-                      cursor: "pointer",
-                      fontSize: "12px",
-                    }
-              }
-            >
-              0{i + 1}
-            </div>
-          ),
-        },
-      },
-    ],
+    pagination: {
+      clickable: true,
+    },
+    navigation: true,
+    modules: [Autoplay, Pagination, Navigation],
+    onAutoplayTimeLeft: onAutoplayTimeLeft,
+    className: "mySwiper",
   };
   return (
-    <div className="p-0">
-      <Slider {...settings}>
-        <Link to="/offer">
-          <div>
-            <Image className={"h-[800px] w-full"} imgSrc={bannerImgOne} />
-          </div>
-        </Link>
-        <Link to="/offer">
-          <div>
-            <Image className={"h-[800px] w-full"} imgSrc={bannerImgTwo} />
-          </div>
-        </Link>
-        <Link to="/offer">
-          <div>
-            <Image className={"h-[800px] w-full"} imgSrc={bannerImgThree} />
-          </div>
-        </Link>
-        <Link to="/offer">
-          <div>
-            <Image className={"h-[800px] w-full"} imgSrc={bannerImgFour} />
-          </div>
-        </Link>
-      </Slider>
-    </div>
+    <>
+      <Swiper {...swiperOptions}>
+        <SwiperSlide>
+          <Image className="h-full cover" imgSrc={bannerImgOne} />
+        </SwiperSlide>
+        <SwiperSlide>
+          <Image className="h-full cover" imgSrc={bannerImgTwo} />
+        </SwiperSlide>
+        <SwiperSlide>
+          <Image className="" imgSrc={bannerImgThree} />
+        </SwiperSlide>
+        <SwiperSlide>
+          <Image className="h-full cover" imgSrc={bannerImgFour} />
+        </SwiperSlide>
+
+        <div className="autoplay-progress" slot="container-end">
+          <svg viewBox="0 0 48 48" ref={progressCircle}>
+            <circle cx="24" cy="24" r="20"></circle>
+          </svg>
+          <span ref={progressContent}></span>
+        </div>
+      </Swiper>
+    </>
   );
 };
 

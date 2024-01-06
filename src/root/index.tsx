@@ -5,6 +5,7 @@ import {
   createRoutesFromElements,
   Route,
   ScrollRestoration,
+  useLocation,
 } from "react-router-dom";
 import Footer from "../components/home/Footer/Footer";
 import FooterBottom from "../components/home/Footer/FooterBottom";
@@ -24,10 +25,12 @@ import ProductDetails from "../pages/ProductDetails/ProductDetails";
 import Shop from "../pages/Shop/Shop";
 
 const Layout = () => {
+  const { pathname } = useLocation();
+
   return (
     <div>
       <Header />
-      <HeaderBottom />
+      {pathname === "/cart" ? null : <HeaderBottom />}
       <SpecialCase />
       <ScrollRestoration />
       <Outlet />
@@ -36,22 +39,23 @@ const Layout = () => {
     </div>
   );
 };
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       <Route path="/" element={<Layout />}>
-        <Route index element={<Home />}></Route>
-        <Route path="/shop" element={<Shop />}></Route>
-        <Route path="/about" element={<About />}></Route>
-        <Route path="/contact" element={<Contact />}></Route>
-        <Route path="/journal" element={<Journal />}></Route>
-        <Route path="/offer" element={<Offer />}></Route>
-        <Route path="/product/:_id" element={<ProductDetails />}></Route>
-        <Route path="/cart" element={<Cart />}></Route>
-        <Route path="/paymentgateway" element={<Payment />}></Route>
+        <Route index element={<Home />} />
+        <Route path="/shop" element={<Shop />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/journal" element={<Journal />} />
+        <Route path="/offer" element={<Offer />} />
+        <Route path="/product/:_id" element={<ProductDetails />} />
+        <Route path="/paymentgateway" element={<Payment />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/cart" element={<Cart />} />
       </Route>
-      <Route path="/signup" element={<SignUp />}></Route>
-      <Route path="/signin" element={<SignIn />}></Route>
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/signin" element={<SignIn />} />
     </Route>
   )
 );
