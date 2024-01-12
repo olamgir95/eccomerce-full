@@ -8,7 +8,6 @@ import {
   useLocation,
 } from "react-router-dom";
 import Footer from "../components/home/Footer/Footer";
-import FooterBottom from "../components/home/Footer/FooterBottom";
 import Header from "../components/home/Header/Header";
 import HeaderBottom from "../components/home/Header/HeaderBottom";
 import SpecialCase from "../components/SpecialCase/SpecialCase";
@@ -18,15 +17,34 @@ import SignUp from "../pages/Account/SignUp";
 import Cart from "../pages/Cart/Cart";
 import Contact from "../pages/Contact/Contact";
 import Home from "../pages/Home/Home";
-import Journal from "../pages/Journal/Journal";
 import Offer from "../pages/Offer/Offer";
 import Payment from "../pages/payment/Payment";
 import ProductDetails from "../pages/ProductDetails/ProductDetails";
 import Shop from "../pages/Shop/Shop";
+import { CommunityPage } from "../pages/CommunityPage";
+import AOS, { AosOptions } from "aos";
+import { useEffect } from "react";
+import "aos/dist/aos.css";
+
+interface CustomAosOptions extends AosOptions {
+  container?: string; // Add the 'container' property
+}
 
 const Layout = () => {
   const { pathname } = useLocation();
 
+  useEffect(() => {
+    const aosOptions: CustomAosOptions = {
+      offset: 100,
+      duration: 800,
+      easing: "ease-in-sine",
+      delay: 100,
+      container: ".custom-scroll-container", // Replace with your container selector
+    };
+
+    AOS.init(aosOptions);
+    AOS.refresh();
+  }, [pathname]);
   return (
     <div>
       <Header />
@@ -35,7 +53,6 @@ const Layout = () => {
       <ScrollRestoration />
       <Outlet />
       <Footer />
-      <FooterBottom />
     </div>
   );
 };
@@ -47,7 +64,7 @@ const router = createBrowserRouter(
         <Route index element={<Home />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/journal" element={<Journal />} />
+        <Route path="/community" element={<CommunityPage />} />
         <Route path="/offer" element={<Offer />} />
         <Route path="/product/:_id" element={<ProductDetails />} />
         <Route path="/paymentgateway" element={<Payment />} />
