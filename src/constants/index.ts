@@ -29,8 +29,8 @@ export const navBarList: NavBarItem[] = [
   },
   {
     _id: 1003,
-    title: "About",
-    link: "/about",
+    title: "Help",
+    link: "/help",
   },
   {
     _id: 1004,
@@ -39,8 +39,8 @@ export const navBarList: NavBarItem[] = [
   },
   {
     _id: 1005,
-    title: "Journal",
-    link: "/journal",
+    title: "Community",
+    link: "/community",
   },
 ];
 // =================== NavBarList End here ======================

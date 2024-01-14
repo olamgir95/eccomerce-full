@@ -1,28 +1,27 @@
 import React from "react";
-import { createRoot } from "react-dom/client";
+import { BrowserRouter as Router } from "react-router-dom";
+import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/integration/react";
 import CssBaseline from "@mui/material/CssBaseline";
-import Routers from "./root";
+import App from "./root/App";
 import { StyledEngineProvider, ThemeProvider } from "@mui/material/styles";
 import theme from "./app/MaterialTheme";
-import { persistor, store } from "./redux/store";
+import { store } from "./redux/store";
+import "slick-carousel/slick/slick.css";
 import "./index.css";
 
-const container = document.getElementById("root")!;
-const root = createRoot(container);
-
-root.render(
+ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <StyledEngineProvider injectFirst>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <PersistGate loading={null} persistor={persistor}>
-            <Routers />
-          </PersistGate>
+          <Router>
+            <App />
+          </Router>
         </ThemeProvider>
       </StyledEngineProvider>
     </Provider>
-  </React.StrictMode>
+  </React.StrictMode>,
+  document.getElementById("root")
 );
