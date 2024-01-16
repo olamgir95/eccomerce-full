@@ -5,8 +5,8 @@ export interface Event {
   event_title: string;
   event_description: string;
   event_status: string;
-  seller_mb_nick: string;
   event_image: string;
+  event_date: Date;
   createdAt: Date;
   updatedAt: Date;
 }
