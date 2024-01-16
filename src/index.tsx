@@ -8,6 +8,7 @@ import { StyledEngineProvider, ThemeProvider } from "@mui/material/styles";
 import theme from "./app/MaterialTheme";
 import { store } from "./redux/store";
 import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import "./index.css";
 
 ReactDOM.render(

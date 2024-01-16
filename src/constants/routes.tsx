@@ -2,7 +2,7 @@ import Home from "../pages/Home/Home";
 import Shop from "../pages/Shop/Shop";
 import Header from "../components/home/Header/Header";
 import HeaderBottom from "../components/home/Header/HeaderBottom";
-import SpecialCase from "../components/SpecialCase/SpecialCase";
+// import SpecialCase from "../components/SpecialCase/SpecialCase";
 import { Outlet, useLocation } from "react-router-dom";
 import Contact from "../pages/Contact/Contact";
 import { CommunityPage } from "../pages/CommunityPage";
@@ -35,7 +35,7 @@ const Layout = () => {
       {pathname === "/cart" || "/community" || "/member-page" ? null : (
         <HeaderBottom />
       )}
-      <SpecialCase />
+      {/* <SpecialCase /> */}
       <Outlet />
       <Footer />
     </div>
