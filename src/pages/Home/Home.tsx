@@ -1,25 +1,46 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Banner from "../../components/Banner/Banner";
 import BannerBottom from "../../components/Banner/BannerBottom";
-import BestSellers from "../../components/home/BestSellers/BestSellers";
-import NewArrivals from "../../components/home/NewArrivals/NewArrivals";
-import SpecialOffers from "../../components/home/SpecialOffers/SpecialOffers";
-import YearProduct from "../../components/home/YearProduct/YearProduct";
+
 import { Container } from "@mui/material";
 import { TopBrands } from "../../components/home/TopBrands/TopBrands";
+import Subscribe from "../../components/Subscribe/Subscribe";
+import { useDispatch } from "react-redux";
+import { actionDispatch } from "./useReduxStore";
+import SellerApiService from "../../app/ApiServices/sellerApiService";
+import TrendArticles from "../../components/home/TrendArticles/TrendArticles";
 
 const Home = () => {
+  const {
+    setTopSellers,
+    setNewProducts,
+    setTrendProducts,
+    setNewEvents,
+    setTrendArticles,
+  } = actionDispatch(useDispatch());
+
+  //selector: store => store
+  useEffect(() => {
+    // backend data request =>
+    const sellerService = new SellerApiService();
+
+    sellerService
+      .getTopSellers()
+      .then((data) => {
+        setTopSellers(data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <div>
       <Banner />
       <BannerBottom />
       <Container>
         <TopBrands />
-        <NewArrivals />
-        <BestSellers />
-        <YearProduct />
-        <SpecialOffers />
+        <TrendArticles />
       </Container>
+      <Subscribe />
     </div>
   );
 };
