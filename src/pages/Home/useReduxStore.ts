@@ -26,7 +26,7 @@ export const actionDispatch = (dispatch: Dispatch) => ({
 });
 
 //redux selector
-export const SellersRetriever = createSelector(
+export const homeRetriever = createSelector(
   retrieveTopSellers,
   retrieveNewProducts,
   retrieveTrendProducts,

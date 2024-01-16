@@ -23,6 +23,17 @@ module.exports = {
       colors: {
         primeColor: "#262626",
         lightText: "#6D6D6D",
+        delayedYellow: "#FCFE00",
+        springGreen: "#39FF14",
+        electricPurple: "#5501EE",
+        card_bg_01: "#d6e5fb",
+        card_bg_02: "#ceebe9",
+        card_bg_03: "#e2f2b2",
+        card_bg_04: "#fdefe6",
+        purple: "#7F187F",
+        vividPink: "#FF0F7A",
+        primary: "#fea928",
+        secondary: "#ed8900",
       },
       boxShadow: {
         testShadow: "0px 0px 54px -13px rgba(0,0,0,0.7)",
