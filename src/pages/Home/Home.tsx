@@ -13,6 +13,7 @@ import ProductApiService from "../../app/ApiServices/productApiService";
 import NewArrivals from "../../components/home/NewArrivals/NewArrivals";
 import BestSellers from "../../components/home/BestSellers/BestSellers";
 import MemberApiService from "../../app/ApiServices/memberApiService";
+import Events from "../Events/Events";
 
 const Home = () => {
   const {
@@ -84,6 +85,7 @@ const Home = () => {
         <TopBrands />
         <NewArrivals />
         <BestSellers />
+        <Events />
         <TrendArticles />
       </Container>
       <Subscribe />

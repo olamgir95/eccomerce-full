@@ -1,3 +1,5 @@
+import { Member } from "./user";
+
 export interface Event {
   _id: string;
   seller_mb_id: string;
@@ -6,7 +8,8 @@ export interface Event {
   event_description: string;
   event_status: string;
   event_image: string;
-  event_date: Date;
+  event_date: string;
+  member_data?: Member;
   createdAt: Date;
   updatedAt: Date;
 }
