@@ -7,7 +7,7 @@ import { Seller, Member } from "./user";
 
 export interface AppRootState {
   homePage: HomePageState;
-  SellerPage: SellerPageState;
+  shopPage: ShopPageState;
   ordersPage: OrdersPageState;
   communityPage: CommunityPageState;
   memberPage: MemberPageState;
@@ -21,11 +21,8 @@ export interface HomePageState {
   trendArticles: Article[];
 }
 
-export interface SellerPageState {
-  targetSellers: Seller[];
-  rendomSellers: Seller[];
-  chosenSeller: Seller | null;
-  targetProducts: Product[];
+export interface ShopPageState {
+  allProducts: Product[];
   chosenProduct: Product | null;
 }
 
