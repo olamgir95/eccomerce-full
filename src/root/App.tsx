@@ -1,4 +1,4 @@
-import { Route, useLocation, Routes } from "react-router-dom";
+import { Route, useLocation, Routes, useNavigate } from "react-router-dom";
 import SignIn from "../pages/Account/SignIn";
 import SignUp from "../pages/Account/SignUp";
 import AOS, { AosOptions } from "aos";
@@ -15,7 +15,7 @@ interface CustomAosOptions extends AosOptions {
 }
 
 function App() {
-  const { pathname } = useLocation();
+  const pathname = window.location.pathname;
 
   useEffect(() => {
     const aosOptions: CustomAosOptions = {
@@ -35,7 +35,7 @@ function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Layout />}>
-          {routes.map((route) => (
+          {routes?.map((route) => (
             <Route key={route.path} path={route.path} element={route.element} />
           ))}
         </Route>
