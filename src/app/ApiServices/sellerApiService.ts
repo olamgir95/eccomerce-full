@@ -10,11 +10,9 @@ export default class SellerApiService {
     this.path = serverApi;
   }
 
-  async getTopSellers(): Promise<Seller[]> {
+  async getTopSellers(data: any): Promise<Seller[]> {
     try {
-      console.log("kirdi");
-
-      const url = "/sellers?order=top&page=1&limit=4",
+      const url = `/sellers?order=${data.order}&page=1&limit=${data.limit}`,
         result = await axios.get(this.path + url, { withCredentials: true });
       assert.ok(result, Definer.general_err1);
 

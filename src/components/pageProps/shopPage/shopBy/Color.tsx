@@ -1,0 +1,50 @@
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import NavTitle from "./NavTitle";
+import { useShopContext } from "../useShopContext";
+import { colors } from "../../../../constants/shopFilterCategories";
+
+const Color = () => {
+  const [showColors, setShowColors] = useState(true);
+  const { updateTargetSearchObj } = useShopContext();
+
+  const handleColorChange = (selectedColor: string, category: string) => {
+    updateTargetSearchObj(selectedColor, category);
+  };
+
+  return (
+    <div>
+      <div
+        onClick={() => setShowColors(!showColors)}
+        className="cursor-pointer transition-all"
+      >
+        <NavTitle title="Shop by Color" icons={true} />
+      </div>
+      {showColors && (
+        <motion.div
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <ul className="flex flex-col gap-4 text-sm lg:text-base text-[#767676]">
+            {colors?.map((item) => (
+              <li
+                key={item._id}
+                onClick={() => handleColorChange(item.title, "color")}
+                className="border-b-[1px] cursor-pointer capitalize border-b-[#F0F0F0] pb-2 flex items-center gap-2"
+              >
+                <span
+                  style={{ background: item.base }}
+                  className={`w-3 h-3 border-gray-300 border-[1px] border-solid  rounded-full`}
+                ></span>
+                {item.title}
+              </li>
+            ))}
+          </ul>
+        </motion.div>
+      )}
+    </div>
+  );
+};
+
+export default Color;
