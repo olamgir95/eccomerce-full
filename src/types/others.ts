@@ -10,6 +10,8 @@ export interface ProductSearchObj {
   order: string;
   seller_mb_id?: string;
   product_collection?: string;
+  product_color?: string;
+  product_price?: number;
 }
 
 export interface MemberLiken {
