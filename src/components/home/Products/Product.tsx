@@ -18,7 +18,7 @@ const Products = (props: any) => {
   const image_path = `${serverApi}/${product?.product_images[0]}`;
   return (
     <div className="w-full max-w-[290px] relative group px-2">
-      <div className="max-w-80 max-h-80 relative overflow-y-hidden bg-white">
+      <div className="max-w-80 max-h-80 relative overflow-y-hidden ">
         <div>
           <Image
             className={

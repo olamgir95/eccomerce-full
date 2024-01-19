@@ -3,7 +3,11 @@ import { ProductSearchObj } from "../../../types/others";
 
 interface ShopContextProps {
   targetSearchObj: ProductSearchObj;
-  updateTargetSearchObj: (value: any, category: string) => void;
+  updateTargetSearchObj: (
+    value?: string,
+    category?: string,
+    data?: { min?: number; max?: number }
+  ) => void;
   setTargetSearchObj: React.Dispatch<React.SetStateAction<ProductSearchObj>>;
 }
 
@@ -21,24 +25,38 @@ export const ShopProvider: React.FC<ShopProviderProps> = ({ children }) => {
     seller_mb_id: "",
     product_collection: "",
     product_color: "",
-    product_price: 0,
+    product_price_min: 0,
+    product_price_max: 0,
   });
 
-  const updateTargetSearchObj = (value: any, category: string) => {
+  const updateTargetSearchObj = (
+    value?: string,
+    category?: string,
+    data?: { min?: number; max?: number }
+  ) => {
     if (category === "collection") {
       targetSearchObj.product_collection = value;
-      targetSearchObj.page = 1;
+      targetSearchObj.product_color = "";
+      //   targetSearchObj.page = 1;
     }
     if (category === "color") {
       targetSearchObj.product_color = value;
+      targetSearchObj.product_collection = "";
       targetSearchObj.page = 1;
     }
     if (category === "price") {
-      targetSearchObj.product_price = value;
+      targetSearchObj.order = "product_price";
+      targetSearchObj.product_price_min = data?.min;
+      targetSearchObj.product_price_max = data?.max;
+      targetSearchObj.product_collection = "";
+      targetSearchObj.product_color = "";
+
       targetSearchObj.page = 1;
     }
     if (category === "brand") {
       targetSearchObj.product_collection = "";
+      targetSearchObj.product_color = "";
+
       targetSearchObj.seller_mb_id = value;
       targetSearchObj.page = 1;
     }

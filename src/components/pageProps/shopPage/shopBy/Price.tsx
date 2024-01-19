@@ -1,56 +1,89 @@
-import React from "react";
+import * as React from "react";
+import Slider, { SliderThumb } from "@mui/material/Slider";
+import { styled } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 import NavTitle from "./NavTitle";
+import { useShopContext } from "../useShopContext";
 
-const Price = () => {
-  const priceList = [
-    {
-      _id: 950,
-      priceOne: 0.0,
-      priceTwo: 49.99,
+const AirbnbSlider = styled(Slider)(({ theme }) => ({
+  color: "#3a8589",
+  height: 3,
+  padding: "13px 0",
+  "& .MuiSlider-thumb": {
+    height: 27,
+    width: 27,
+    backgroundColor: "#fff",
+    border: "1px solid currentColor",
+    "&:hover": {
+      boxShadow: "0 0 0 8px rgba(58, 133, 137, 0.16)",
     },
-    {
-      _id: 951,
-      priceOne: 50.0,
-      priceTwo: 99.99,
+    "& .airbnb-bar": {
+      height: 9,
+      width: 1,
+      backgroundColor: "currentColor",
+      marginLeft: 1,
+      marginRight: 1,
     },
-    {
-      _id: 952,
-      priceOne: 100.0,
-      priceTwo: 199.99,
-    },
-    {
-      _id: 953,
-      priceOne: 200.0,
-      priceTwo: 399.99,
-    },
-    {
-      _id: 954,
-      priceOne: 400.0,
-      priceTwo: 599.99,
-    },
-    {
-      _id: 955,
-      priceOne: 600.0,
-      priceTwo: 1000.0,
-    },
-  ];
+  },
+  "& .MuiSlider-track": {
+    height: 3,
+  },
+  "& .MuiSlider-rail": {
+    color: theme.palette.mode === "dark" ? "#bfbfbf" : "#d8d8d8",
+    opacity: theme.palette.mode === "dark" ? undefined : 1,
+    height: 3,
+  },
+}));
+
+interface AirbnbThumbComponentProps extends React.HTMLAttributes<unknown> {}
+
+function AirbnbThumbComponent(props: AirbnbThumbComponentProps) {
+  const { children, ...other } = props;
   return (
-    <div className="cursor-pointer">
-      <NavTitle title="Shop by Price" icons={false} />
-      <div className="font-titleFont">
-        <ul className="flex flex-col gap-4 text-sm lg:text-base text-[#767676]">
-          {priceList?.map((item) => (
-            <li
-              key={item._id}
-              className="border-b-[1px] border-b-[#F0F0F0] pb-2 flex items-center gap-2 hover:text-primeColor hover:border-gray-400 duration-300"
-            >
-              ${item.priceOne.toFixed(2)} - ${item.priceTwo.toFixed(2)}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
+    <SliderThumb {...other}>
+      {children}
+      <span className="airbnb-bar" />
+      <span className="airbnb-bar" />
+      <span className="airbnb-bar" />
+    </SliderThumb>
   );
-};
+}
 
-export default Price;
+export default function Price() {
+  const [priceRange, setPriceRange] = React.useState<number[]>([0, 1000]);
+  const { updateTargetSearchObj } = useShopContext();
+
+  const handleSliderChange = (event: Event, newValue: number | number[]) => {
+    setPriceRange(newValue as number[]);
+    updateTargetSearchObj("", "price", {
+      min: priceRange[0],
+      max: priceRange[1],
+    });
+  };
+
+  return (
+    <Box sx={{ width: 220 }}>
+      <Box sx={{ m: 3 }} />
+      <NavTitle title="Shop by Price" icons={false} />
+      <AirbnbSlider
+        slots={{ thumb: AirbnbThumbComponent }}
+        getAriaLabel={(index) =>
+          index === 0 ? "Minimum price" : "Maximum price"
+        }
+        defaultValue={priceRange}
+        onChange={handleSliderChange}
+        min={0}
+        max={1000}
+      />
+      <Box
+        display={"flex"}
+        flexDirection={"row"}
+        justifyContent={"space-between"}
+      >
+        <Typography> {priceRange[0]}$</Typography>
+        <Typography> {priceRange[1]}$</Typography>
+      </Box>
+    </Box>
+  );
+}

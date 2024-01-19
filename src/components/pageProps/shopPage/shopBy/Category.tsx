@@ -29,20 +29,22 @@ const Category = () => {
             transition={{ duration: 0.5 }}
           >
             <ul className="flex flex-col gap-4 text-sm lg:text-base text-[#767676]">
-              <li
+              <label
                 onClick={() => handleCategoryChange("", "all")}
-                className="border-b-[1px] capitalize cursor-pointer focus-within:border-black border-b-[#F0F0F0] pb-2 flex items-center justify-between"
+                className="border-b-[1px] capitalize cursor-pointer gap-3 justify-start border-b-[#F0F0F0] pb-2 flex items-center "
               >
-                All
-              </li>
+                <input type="radio" name="group1" />
+                <span className="custom-checkbox"></span>All
+              </label>
               {items?.map(({ _id, title }) => (
-                <li
+                <label
                   key={_id}
                   onClick={() => handleCategoryChange(title, "collection")}
-                  className="border-b-[1px] capitalize cursor-pointer focus-within:border-black border-b-[#F0F0F0] pb-2 flex items-center justify-between"
+                  className="border-b-[1px] capitalize cursor-pointer justify-start border-b-[#F0F0F0] pb-2 flex items-center gap-3"
                 >
-                  {title}
-                </li>
+                  <input type="radio" name="group1" />
+                  <span className="custom-checkbox"></span> {title}
+                </label>
               ))}
             </ul>
           </motion.div>
