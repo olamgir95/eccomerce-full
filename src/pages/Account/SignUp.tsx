@@ -1,35 +1,29 @@
-import React, { ChangeEvent, MouseEvent, useState } from "react";
+import { ChangeEvent, MouseEvent, useState } from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logoLight from "../../assets/images/logo.png";
 import { TextField } from "@mui/material";
+import MemberApiService from "../../app/ApiServices/memberApiService";
+import {
+  sweetErrorHandling,
+  sweetTopSmallSuccessAlert,
+} from "../../lib/sweetAlert";
 
 const SignUp = () => {
-  // ============= Initial State Start here =============
-  const [clientName, setClientName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [checked, setChecked] = useState(false);
-  // ============= Initial State End here ===============
-  // ============= Error Msg Start here =================
-  const [errClientName, setErrClientName] = useState("");
-  const [errEmail, setErrEmail] = useState("");
-  const [errPhone, setErrPhone] = useState("");
-  const [errPassword, setErrPassword] = useState("");
-  const [errConPassword, setErrConPassword] = useState("");
-  // ============= Error Msg End here ===================
-  const [successMsg, setSuccessMsg] = useState("");
-  // ============= Event Handler Start here =============
+  const navigate = useNavigate();
+  const [clientName, setClientName] = useState<string>("");
+  const [phone, setPhone] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [checked, setChecked] = useState<boolean>(false);
+  const [errClientName, setErrClientName] = useState<string>("");
+  const [errPhone, setErrPhone] = useState<string>("");
+  const [errPassword, setErrPassword] = useState<string>("");
+
   const handleName = (e: ChangeEvent<HTMLInputElement>) => {
     setClientName(e.target.value);
     setErrClientName("");
   };
-  const handleEmail = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-    setErrEmail("");
-  };
+
   const handlePhone = (e: ChangeEvent<HTMLInputElement>) => {
     setPhone(e.target.value);
     setErrPhone("");
@@ -39,70 +33,52 @@ const SignUp = () => {
     setErrPassword("");
   };
 
-  const handleConfirmPassword = (e: ChangeEvent<HTMLInputElement>) => {
-    setConfirmPassword(e.target.value);
-    setConfirmPassword("");
-  };
-
-  // ============= Event Handler End here ===============
-  // ================= Email Validation start here =============
-  const EmailValidation = (email: string) => {
-    return String(email)
-      .toLowerCase()
-      .match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i);
-  };
-  // ================= Email Validation End here ===============
-
-  const handleSignUp = (e: MouseEvent<HTMLButtonElement>) => {
+  const handleSignUp = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (checked) {
       if (!clientName) {
         setErrClientName("Enter your name");
       }
-      if (!email) {
-        setErrEmail("Enter your email");
-      } else {
-        if (!EmailValidation(email)) {
-          setErrEmail("Enter a Valid email");
-        }
-      }
+
       if (!phone) {
         setErrPhone("Enter your phone number");
       }
       if (!password) {
         setErrPassword("Create a password");
       } else {
-        if (password.length < 6) {
-          setErrPassword("Passwords must be at least 6 characters");
+        if (password.length < 4) {
+          setErrPassword("Passwords must be at least 4 characters");
         }
       }
 
-      if (!confirmPassword) {
-        setErrConPassword("Enter your confirm password");
+      if (isNaN(Number(phone))) {
+        setErrPhone("Please enter only number for phone number");
       }
 
-      if (confirmPassword !== password) {
-        setErrConPassword("Please correct password");
-      }
-
-      // ============== Getting the value ==============
-      if (
-        clientName &&
-        email &&
-        EmailValidation(email) &&
-        password &&
-        password.length >= 6 &&
-        confirmPassword
-      ) {
-        setSuccessMsg(
-          `Hello dear ${clientName}, Welcome you to Shopsy Admin panel. We received your Sign up request. We are processing to validate your access. Till then stay connected and additional assistance will be sent to you by your mail at ${email}`
-        );
+      if (clientName && password && password.length >= 4) {
         setClientName("");
-        setEmail("");
         setPhone("");
         setPassword("");
-        setConfirmPassword("");
       }
+    }
+
+    try {
+      const signup_data = {
+        mb_nick: clientName,
+        mb_password: password,
+        mb_phone: phone,
+      };
+
+      const memberApiService = new MemberApiService();
+      await memberApiService.signupRequest(signup_data);
+
+      await sweetTopSmallSuccessAlert("Sign up successfully", 700, true);
+      navigate("/");
+      return true;
+    } catch (err) {
+      console.log(err);
+
+      sweetErrorHandling(err).then();
     }
   };
   return (
@@ -177,146 +153,97 @@ const SignUp = () => {
         </div>
       </div>
       <div className="w-full lgl:w-[500px] h-full flex flex-col justify-center">
-        {successMsg ? (
-          <div className="w-[500px]">
-            <p className="w-full px-4 py-10 text-green-500 font-medium font-titleFont">
-              {successMsg}
-            </p>
-            <Link to="/signin">
-              <button
-                className="w-full h-10 bg-primeColor rounded-md text-gray-200 text-base font-titleFont font-semibold 
-            tracking-wide hover:bg-black hover:text-white duration-300"
-              >
-                Sign in
-              </button>
-            </Link>
-          </div>
-        ) : (
-          <form className="w-full mt-32 lgl:w-[500px] h-screen flex items-center justify-center">
-            <div className="px-6 py-4 w-full h-[96%] flex flex-col justify-start overflow-y-scroll scrollbar-thin scrollbar-thumb-primeColor">
-              <h1 className="font-titleFont underline underline-offset-4 decoration-[1px] font-semibold text-2xl mdl:text-3xl mb-4">
-                Create your account
-              </h1>
-              <div className="flex flex-col gap-3">
-                {/* client name */}
-                <div className="flex flex-col gap-.5">
-                  <TextField
-                    id="outlined-basic"
-                    label="Name"
-                    variant="outlined"
-                    value={clientName}
-                    onChange={handleName}
-                  />
-                  {errClientName && (
-                    <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
-                      <span className="font-bold italic mr-1">!</span>
-                      {errClientName}
-                    </p>
-                  )}
-                </div>
-                {/* Email */}
-                <div className="flex flex-col gap-.5">
-                  <TextField
-                    id="outlined-password-input"
-                    label="Email"
-                    type="email"
-                    autoComplete="current-email"
-                    onChange={handleEmail}
-                    value={email}
-                  />
-                  {errEmail && (
-                    <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
-                      <span className="font-bold italic mr-1">!</span>
-                      {errEmail}
-                    </p>
-                  )}
-                </div>
-                {/* Phone Number */}
-                <div className="flex flex-col gap-.5">
-                  <TextField
-                    id="outlined-password-input"
-                    label="Phone Number"
-                    type="phone"
-                    onChange={handlePhone}
-                    value={phone}
-                  />
-                  {errPhone && (
-                    <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
-                      <span className="font-bold italic mr-1">!</span>
-                      {errPhone}
-                    </p>
-                  )}
-                </div>
-                {/* Password */}
-                <div className="flex flex-col gap-.5">
-                  <TextField
-                    id="outlined-password-input"
-                    label="Password"
-                    type="password"
-                    autoComplete="current-password"
-                    onChange={handlePassword}
-                    value={password}
-                  />
-                  {errPassword && (
-                    <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
-                      <span className="font-bold italic mr-1">!</span>
-                      {errPassword}
-                    </p>
-                  )}
-                </div>
-
-                {/* ConfirmPassword */}
-                <div className="flex flex-col gap-.5">
-                  <TextField
-                    id="outlined-password-input"
-                    label="Confirm Password"
-                    type="password"
-                    autoComplete="current-password"
-                    onChange={handleConfirmPassword}
-                    value={confirmPassword}
-                  />
-                  {errConPassword && (
-                    <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
-                      <span className="font-bold italic mr-1">!</span>
-                      {errConPassword}
-                    </p>
-                  )}
-                </div>
-                {/* Checkbox */}
-                <div className="flex items-start mdl:items-center gap-2">
-                  <input
-                    onChange={() => setChecked(!checked)}
-                    className="w-4 h-4 mt-1 mdl:mt-0 cursor-pointer"
-                    type="checkbox"
-                  />
-                  <p className="text-sm text-primeColor">
-                    I agree to the Shopsy{" "}
-                    <span className="text-blue-500">Terms of Service </span>and{" "}
-                    <span className="text-blue-500">Privacy Policy</span>.
+        <form className="w-full mt-32 lgl:w-[500px] h-screen flex items-center justify-center">
+          <div className="px-6 py-4 w-full h-[96%] flex flex-col justify-start overflow-y-scroll scrollbar-thin scrollbar-thumb-primeColor">
+            <h1 className="font-titleFont underline underline-offset-4 decoration-[1px] font-semibold text-2xl mdl:text-3xl mb-4">
+              Create your account
+            </h1>
+            <div className="flex flex-col gap-3">
+              {/* client name */}
+              <div className="flex flex-col gap-.5">
+                <TextField
+                  id="outlined-basic"
+                  label="Name"
+                  variant="outlined"
+                  value={clientName}
+                  onChange={handleName}
+                />
+                {errClientName && (
+                  <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
+                    <span className="font-bold italic mr-1">!</span>
+                    {errClientName}
                   </p>
-                </div>
-                <button
-                  onClick={handleSignUp}
-                  className={`${
-                    checked
-                      ? "bg-blue-500 hover:bg-blue-700   cursor-pointer"
-                      : " bg-blue-300 hover:bg-blue-400  cursor-none"
-                  } w-full  text-base font-medium h-10 rounded-md text-white duration-300`}
-                >
-                  Create Account
-                </button>
-                <p className="text-sm text-center font-titleFont font-medium">
-                  Don't have an Account?{" "}
-                  <Link to="/signin">
-                    <span className="ml-2 text-blue-400 hover:text-blue-600 duration-300">
-                      Sign in
-                    </span>
-                  </Link>
+                )}
+              </div>
+
+              {/* Phone Number */}
+              <div className="flex flex-col gap-.5">
+                <TextField
+                  id="outlined-password-input"
+                  label="Phone Number"
+                  type="phone"
+                  onChange={handlePhone}
+                  value={phone}
+                />
+                {errPhone && (
+                  <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
+                    <span className="font-bold italic mr-1">!</span>
+                    {errPhone}
+                  </p>
+                )}
+              </div>
+              {/* Password */}
+              <div className="flex flex-col gap-.5">
+                <TextField
+                  id="outlined-password-input"
+                  label="Password"
+                  type="password"
+                  autoComplete="current-password"
+                  onChange={handlePassword}
+                  value={password}
+                />
+                {errPassword && (
+                  <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
+                    <span className="font-bold italic mr-1">!</span>
+                    {errPassword}
+                  </p>
+                )}
+              </div>
+
+              {/* Checkbox */}
+              <div className="flex items-start mdl:items-center gap-2">
+                <input
+                  onChange={() => setChecked(!checked)}
+                  className="w-4 h-4 mt-1 mdl:mt-0 cursor-pointer"
+                  type="checkbox"
+                />
+                <p className="text-sm text-primeColor">
+                  I agree to the Shopsy
+                  <span className="text-blue-500">Terms of Service </span>and
+                  <span className="text-blue-500">Privacy Policy</span>.
                 </p>
               </div>
+              <button
+                onClick={handleSignUp}
+                className={`${
+                  checked
+                    ? "bg-blue-500 hover:bg-blue-700   cursor-pointer"
+                    : " bg-blue-300 hover:bg-blue-400  cursor-none"
+                } w-full  text-base font-medium h-10 rounded-md text-white duration-300`}
+              >
+                Create Account
+              </button>
+              <p className="text-sm text-center font-titleFont font-medium">
+                Don't have an Account?
+                <Link to="/signin">
+                  <span className="ml-2 text-blue-400 hover:text-blue-600 duration-300">
+                    Sign in
+                  </span>
+                </Link>
+              </p>
             </div>
-          </form>
-        )}
+          </div>
+        </form>
       </div>
     </div>
   );

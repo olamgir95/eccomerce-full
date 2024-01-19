@@ -1,49 +1,65 @@
-import React, { ChangeEvent, MouseEvent, useState } from "react";
+import { ChangeEvent, MouseEvent, useState } from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logoLight from "../../assets/images/logo.png";
 import { TextField } from "@mui/material";
+import {
+  sweetErrorHandling,
+  sweetTopSmallSuccessAlert,
+} from "../../lib/sweetAlert";
+import MemberApiService from "../../app/ApiServices/memberApiService";
 
 const SignIn = () => {
-  // ============= Initial State Start here =============
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  // ============= Initial State End here ===============
-  // ============= Error Msg Start here =================
-  const [errEmail, setErrEmail] = useState("");
-  const [errPassword, setErrPassword] = useState("");
+  const navigate = useNavigate();
+  const [password, setPassword] = useState<string>("");
+  const [errPassword, setErrPassword] = useState<string>("");
+  const [clientName, setClientName] = useState<string>("");
+  const [errClientName, setErrClientName] = useState<string>("");
 
-  // ============= Error Msg End here ===================
-  const [successMsg, setSuccessMsg] = useState("");
-  // ============= Event Handler Start here =============
-  const handleEmail = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-    setErrEmail("");
-  };
   const handlePassword = (e: ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
     setErrPassword("");
   };
-  // ============= Event Handler End here ===============
-  const handleSignUp = (e: MouseEvent<HTMLButtonElement>) => {
+
+  const handleName = (e: ChangeEvent<HTMLInputElement>) => {
+    setClientName(e.target.value);
+    setErrClientName("");
+  };
+
+  const handleSignUp = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    if (!email) {
-      setErrEmail("Enter your email");
+    if (!clientName) {
+      setErrClientName("Enter your name");
     }
 
     if (!password) {
-      setErrPassword("Create a password");
+      setErrPassword("Please enter correct password");
     }
-    // ============== Getting the value ==============
-    if (email && password) {
-      setSuccessMsg(
-        `Hello dear, Thank you for your attempt. We are processing to validate your access. Till then stay connected and additional assistance will be sent to you by your mail at ${email}`
-      );
-      setEmail("");
+
+    if (clientName && password) {
+      setClientName("");
       setPassword("");
     }
+
+    try {
+      const login_data = {
+        mb_nick: clientName,
+        mb_password: password,
+      };
+
+      const memberApiService = new MemberApiService();
+      await memberApiService.loginRequest(login_data);
+
+      await sweetTopSmallSuccessAlert("Log in successfully", 700, true);
+      navigate("/");
+      return true;
+    } catch (err) {
+      console.log(err);
+      sweetErrorHandling(err).then();
+    }
   };
+
   return (
     <div className="w-full h-screen flex items-center justify-center">
       <div className="w-1/2 hidden lgl:inline-flex h-full text-white">
@@ -118,81 +134,64 @@ const SignIn = () => {
         </div>
       </div>
       <div className="w-full lgl:w-1/2 h-full">
-        {successMsg ? (
-          <div className="w-full lgl:w-[500px] h-full flex flex-col justify-center">
-            <p className="w-full px-4 py-10 text-green-500 font-medium font-titleFont">
-              {successMsg}
-            </p>
-            <Link to="/signup">
-              <button
-                className="w-full h-10 bg-primeColor text-gray-200 rounded-md text-base font-titleFont font-semibold 
-            tracking-wide hover:bg-black hover:text-white duration-300"
-              >
-                Sign Up
-              </button>
-            </Link>
-          </div>
-        ) : (
-          <form className="w-full lgl:w-[450px] h-screen flex  justify-center">
-            <div className="px-6 py-4 w-full h-[90%] flex flex-col justify-center overflow-y-scroll scrollbar-thin scrollbar-thumb-primeColor">
-              <h1 className="font-titleFont underline underline-offset-4 decoration-[1px] font-semibold text-3xl mdl:text-4xl mb-4">
-                Sign in
-              </h1>
-              <div className="flex flex-col gap-3">
-                {/* Email */}
-                <div className="flex flex-col gap-.5">
-                  <TextField
-                    id="outlined-password-input"
-                    label="Email"
-                    type="email"
-                    autoComplete="current-email"
-                    onChange={handleEmail}
-                    value={email}
-                  />
-                  {errEmail && (
-                    <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
-                      <span className="font-bold italic mr-1">!</span>
-                      {errEmail}
-                    </p>
-                  )}
-                </div>
-
-                {/* Password */}
-                <div className="flex flex-col gap-.5">
-                  <TextField
-                    id="outlined-password-input"
-                    label="Password"
-                    type="password"
-                    autoComplete="current-password"
-                    onChange={handlePassword}
-                    value={password}
-                  />
-                  {errPassword && (
-                    <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
-                      <span className="font-bold italic mr-1">!</span>
-                      {errPassword}
-                    </p>
-                  )}
-                </div>
-
-                <button
-                  onClick={handleSignUp}
-                  className="bg-blue-400 hover:bg-blue-600  hover:text-lg text-white cursor-pointer w-full text-base font-medium h-10 rounded-md  duration-300"
-                >
-                  Sign In
-                </button>
-                <p className="text-sm text-center font-titleFont font-medium">
-                  Don't have an Account?
-                  <Link to="/signup">
-                    <span className="ml-2 text-blue-400 hover:text-blue-600 duration-300">
-                      Sign up
-                    </span>
-                  </Link>
-                </p>
+        <form className="w-full lgl:w-[450px] h-screen flex  justify-center">
+          <div className="px-6 py-4 w-full h-[90%] flex flex-col justify-center overflow-y-scroll scrollbar-thin scrollbar-thumb-primeColor">
+            <h1 className="font-titleFont underline underline-offset-4 decoration-[1px] font-semibold text-3xl mdl:text-4xl mb-4">
+              Sign in
+            </h1>
+            <div className="flex flex-col gap-3">
+              {/* client name */}
+              <div className="flex flex-col gap-.5">
+                <TextField
+                  id="outlined-basic"
+                  label="Name"
+                  variant="outlined"
+                  value={clientName}
+                  onChange={handleName}
+                />
+                {errClientName && (
+                  <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
+                    <span className="font-bold italic mr-1">!</span>
+                    {errClientName}
+                  </p>
+                )}
               </div>
+
+              {/* Password */}
+              <div className="flex flex-col gap-.5">
+                <TextField
+                  id="outlined-password-input"
+                  label="Password"
+                  type="password"
+                  autoComplete="current-password"
+                  onChange={handlePassword}
+                  value={password}
+                />
+                {errPassword && (
+                  <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
+                    <span className="font-bold italic mr-1">!</span>
+                    {errPassword}
+                  </p>
+                )}
+              </div>
+
+              <button
+                onClick={handleSignUp}
+                className="bg-blue-400 hover:bg-blue-600  hover:text-lg text-white cursor-pointer w-full text-base font-medium h-10 rounded-md  duration-300"
+              >
+                Sign In
+              </button>
+              <p className="text-sm text-center font-titleFont font-medium">
+                Don't have an Account?
+                <Link to="/signup">
+                  <span className="ml-2 text-blue-400 hover:text-blue-600 duration-300">
+                    Sign up
+                  </span>
+                </Link>
+              </p>
             </div>
-          </form>
-        )}
+          </div>
+        </form>
       </div>
     </div>
   );
