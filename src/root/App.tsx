@@ -6,6 +6,7 @@ import Layout, { routes } from "../constants/routes";
 import { useEffect } from "react";
 import "aos/dist/aos.css";
 import ScrollToTop from "./../constants/scrollToTop";
+import { CombinedProvider } from "../constants/useCombinedContext";
 
 interface CustomAosOptions extends AosOptions {
   offset: number;
@@ -15,7 +16,7 @@ interface CustomAosOptions extends AosOptions {
 }
 
 function App() {
-  const pathname = window.location.pathname;
+  const { pathname } = useLocation();
 
   useEffect(() => {
     const aosOptions: CustomAosOptions = {
@@ -31,18 +32,24 @@ function App() {
   }, [pathname]);
 
   return (
-    <div className="font-bodyFont custom-scroll-container">
+    <>
       <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          {routes?.map((route) => (
-            <Route key={route.path} path={route.path} element={route.element} />
-          ))}
-        </Route>
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/signin" element={<SignIn />} />
-      </Routes>
-    </div>
+      <CombinedProvider>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            {routes?.map((route) => (
+              <Route
+                key={route.path}
+                path={route.path}
+                element={route.element}
+              />
+            ))}
+          </Route>
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signin" element={<SignIn />} />
+        </Routes>
+      </CombinedProvider>
+    </>
   );
 }
 

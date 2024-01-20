@@ -22,16 +22,13 @@ import { verifyMemberData } from "../../../app/ApiServices/verify";
 import { serverApi } from "../../../lib/config";
 import { useNavigate } from "react-router-dom";
 import { MdOutlineLocationOn } from "react-icons/md";
+import { useCombinedContext } from "../../../constants/useCombinedContext";
 
 export const TopBrands = () => {
   const { topSellers } = useSelector(homeRetriever);
   const refs: any = useRef([]);
-
+  const { setBrandName, handleBrandChange } = useCombinedContext();
   const navigate = useNavigate();
-
-  const chosenRestaurantHandler = (id: string) => {
-    navigate(`/sellers/${id}`);
-  };
 
   const targetLikeTop = async (e: any, id: string) => {
     try {
@@ -49,7 +46,6 @@ export const TopBrands = () => {
       } else {
         e.target.style.fill = "white";
         refs.current[like_result.like_ref_id].innerHTML--;
-        await sweetTopSmallSuccessAlert("success", 700, false);
       }
       console.log("ref test", refs.current);
     } catch (err: any) {
@@ -74,7 +70,7 @@ export const TopBrands = () => {
         </div>
 
         <div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 place-items-center gap-5">
+          <div className="flex flex-wrap w-full place-items-center items-center justify-center gap-4">
             {topSellers?.map((seller: Seller, index: number) => {
               const imag_path = `${serverApi}/${seller?.mb_image}`;
               const delay = 200 * index;
@@ -85,11 +81,15 @@ export const TopBrands = () => {
                     data-aos-delay={delay}
                     sx={{
                       minHeight: 430,
-                      maxWidth: 300,
+                      maxWidth: 290,
                       width: "100%",
                       cursor: "pointer",
                     }}
-                    onClick={() => chosenRestaurantHandler(seller?._id)}
+                    onClick={() => {
+                      handleBrandChange(seller?._id, "brand");
+                      setBrandName(seller?.mb_nick);
+                      navigate("/shop");
+                    }}
                   >
                     <CardCover>
                       <img
@@ -183,7 +183,7 @@ export const TopBrands = () => {
                         >
                           {seller?.mb_likes}
                         </div>
-                        likes
+                        {seller?.mb_likes > 1 ? "likes" : "like"}
                       </Typography>
                     </CardOverflow>
                   </Card>
