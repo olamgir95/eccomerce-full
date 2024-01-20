@@ -46,7 +46,7 @@ export default function Events() {
             modules={[EffectCoverflow, Pagination]}
             className="mySwiper"
           >
-            {newEvents.map((event: Event) => {
+            {newEvents?.map((event: Event) => {
               const image_path = `${serverApi}/${event?.event_image}`;
               const formattedDate = dayjs(event?.event_date).format(
                 "YYYY-MM-DD HH:mm"

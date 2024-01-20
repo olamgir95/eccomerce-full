@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
 import Banner from "../../components/Banner/Banner";
 import BannerBottom from "../../components/Banner/BannerBottom";
-
 import { Container } from "@mui/material";
 import { TopBrands } from "../../components/home/TopBrands/TopBrands";
 import Subscribe from "../../components/Subscribe/Subscribe";
 import { useDispatch } from "react-redux";
-import { actionDispatch } from "./useReduxStore";
+import { actionDispatchHome } from "./useReduxHome";
 import SellerApiService from "../../app/ApiServices/sellerApiService";
 import TrendArticles from "../../components/home/TrendArticles/TrendArticles";
 import ProductApiService from "../../app/ApiServices/productApiService";
@@ -14,6 +13,7 @@ import NewArrivals from "../../components/home/NewArrivals/NewArrivals";
 import BestSellers from "../../components/home/BestSellers/BestSellers";
 import MemberApiService from "../../app/ApiServices/memberApiService";
 import Events from "../Events/Events";
+import HeaderBottom from "./../../components/home/Header/HeaderBottom";
 
 const Home = () => {
   const {
@@ -22,7 +22,7 @@ const Home = () => {
     setTrendProducts,
     setNewEvents,
     setTrendArticles,
-  } = actionDispatch(useDispatch());
+  } = actionDispatchHome(useDispatch());
 
   //selector: store => store
   useEffect(() => {
@@ -31,7 +31,7 @@ const Home = () => {
     const productService = new ProductApiService();
     const memberService = new MemberApiService();
     sellerService
-      .getTopSellers()
+      .getTopSellers({ order: "top", limit: 4 })
       .then((data) => {
         setTopSellers(data);
       })
@@ -40,7 +40,7 @@ const Home = () => {
     productService
       .getNewProducts({
         order: "createdAt",
-        limit: 4,
+        limit: 5,
         page: 1,
       })
       .then((data) => {
@@ -79,15 +79,14 @@ const Home = () => {
 
   return (
     <div>
+      <HeaderBottom able={true} />
       <Banner />
       <BannerBottom />
-      <Container>
-        <TopBrands />
-        <NewArrivals />
-        <BestSellers />
-        <Events />
-        <TrendArticles />
-      </Container>
+      <TopBrands />
+      <NewArrivals />
+      <BestSellers />
+      <Events />
+      <TrendArticles />
       <Subscribe />
     </div>
   );

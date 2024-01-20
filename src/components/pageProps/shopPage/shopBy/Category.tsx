@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import NavTitle from "./NavTitle";
 import { motion } from "framer-motion";
 import { items } from "../../../../constants/shopFilterCategories";
-import { useShopContext } from "../useShopContext";
 import { Box, Stack } from "@mui/material";
+import { useCombinedContext } from "../../../../constants/useCombinedContext";
 
 const Category = () => {
   const [showCategory, setShowCategory] = useState(true);
-  const { updateTargetSearchObj } = useShopContext();
+  const { updateTargetSearchObj } = useCombinedContext();
 
   const handleCategoryChange = (value: string, category: string) => {
     updateTargetSearchObj(value, category);
@@ -28,7 +28,7 @@ const Category = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-            <ul className="flex flex-col gap-4 text-sm lg:text-base text-[#767676]">
+            <ul className="flex flex-col gap-4 text-sm lg:text-[16px] leading-4 text-[#767676]">
               <label
                 onClick={() => handleCategoryChange("", "all")}
                 className="border-b-[1px] capitalize cursor-pointer gap-3 justify-start border-b-[#F0F0F0] pb-2 flex items-center "
@@ -40,7 +40,7 @@ const Category = () => {
                 <label
                   key={_id}
                   onClick={() => handleCategoryChange(title, "collection")}
-                  className="border-b-[1px] capitalize cursor-pointer justify-start border-b-[#F0F0F0] pb-2 flex items-center gap-3"
+                  className="border-b-[1px] capitalize cursor-pointer justify-start border-b-[#F0F0F0] pb-1 flex items-center gap-3"
                 >
                   <input type="radio" name="group1" />
                   <span className="custom-checkbox"></span> {title}

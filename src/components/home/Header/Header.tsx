@@ -95,20 +95,8 @@ const Header = () => {
                           key={_id}
                           className={
                             verifyMemberData
-                              ? `last:border-r-0 flex font-normal hover:font-bold w-full  
-                              max-w-28 h-6 justify-center items-center px-2 text-base 
-                              text-[#767676] hover:underline underline-offset-[4px] 
-                              decoration-[1px] hover:text-orange-400  md:border-l-[2px]
-                               border-l-gray-300 hoverEffect  first:border-l-0`
-                              : `flex font-normal hover:font-bold w-full  max-w-28 h-6 justify-center items-center px-2 text-base 
- text-[#767676] hover:underline underline-offset-[4px] 
-                              decoration-[1px] hover:text-orange-400  md:border-l-[2px]
-                               border-l-gray-300 hoverEffect  first:border-l-0` +
-                                `flex font-normal hover:font-bold w-full  
-                          max-w-28 h-6 justify-center items-center px-2 text-base 
-                          text-[#767676] hover:underline underline-offset-[4px] 
-                          decoration-[1px] hover:text-orange-400  md:border-l-[2px]
-                           border-l-gray-300 hoverEffect  first:border-l-0`
+                              ? "verify_member"
+                              : "non_verify_member"
                           }
                           to={link}
                           state={{ data: location.pathname.split("/")[1] }}

@@ -3,14 +3,14 @@ import SamplePrevArrow from "./SamplePrevArrow";
 
 export const settings = {
   speed: 500,
-  slidesToShow: 4,
   slidesToScroll: 1,
+  slidesToShow: 4,
   nextArrow: <SampleNextArrow />,
   prevArrow: <SamplePrevArrow />,
   infinite: true,
   responsive: [
     {
-      breakpoint: 1320,
+      breakpoint: 1440,
       settings: {
         slidesToShow: 4,
         slidesToScroll: 1,

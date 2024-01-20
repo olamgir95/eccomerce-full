@@ -18,7 +18,7 @@ import { Product } from "../../types/product";
 import { Event } from "../../types/event";
 
 //redux slice
-export const actionDispatch = (dispatch: Dispatch) => ({
+export const actionDispatchHome = (dispatch: Dispatch) => ({
   setTopSellers: (data: Seller[]) => dispatch(setTopSellers(data)),
   setNewProducts: (data: Product[]) => dispatch(setNewProducts(data)),
   setTrendProducts: (data: Product[]) => dispatch(setTrendProducts(data)),

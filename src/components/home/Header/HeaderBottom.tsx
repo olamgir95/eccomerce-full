@@ -11,11 +11,11 @@ import {
   shopRetriever,
 } from "../../../pages/ShopPage/useReduxShop";
 import { items } from "../../../constants/shopFilterCategories";
-import { useShopContext } from "../../pageProps/shopPage/useShopContext";
 import { Product } from "../../../types/product";
 import { serverApi } from "../../../lib/config";
 import ProductApiService from "../../../app/ApiServices/productApiService";
 import { useDispatch } from "react-redux";
+import { useCombinedContext } from "../../../constants/useCombinedContext";
 
 const HeaderBottom = (props: any) => {
   const { able } = props;
@@ -26,7 +26,7 @@ const HeaderBottom = (props: any) => {
   const ref = useRef<HTMLDivElement>(null);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-  const { updateTargetSearchObj } = useShopContext();
+  const { updateTargetSearchObj } = useCombinedContext();
   const { setAllProducts, setChosenProduct } = actionDispatch(useDispatch());
 
   const handleCategoryChange = (value: string, category: string) => {

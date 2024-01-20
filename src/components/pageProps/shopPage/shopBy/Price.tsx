@@ -4,7 +4,7 @@ import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import NavTitle from "./NavTitle";
-import { useShopContext } from "../useShopContext";
+import { useCombinedContext } from "../../../../constants/useCombinedContext";
 
 const AirbnbSlider = styled(Slider)(({ theme }) => ({
   color: "#3a8589",
@@ -52,7 +52,7 @@ function AirbnbThumbComponent(props: AirbnbThumbComponentProps) {
 
 export default function Price() {
   const [priceRange, setPriceRange] = React.useState<number[]>([0, 1000]);
-  const { updateTargetSearchObj } = useShopContext();
+  const { updateTargetSearchObj } = useCombinedContext();
 
   const handleSliderChange = (event: Event, newValue: number | number[]) => {
     setPriceRange(newValue as number[]);
@@ -64,7 +64,7 @@ export default function Price() {
 
   return (
     <Box sx={{ width: 220 }}>
-      <Box sx={{ m: 3 }} />
+      <Box />
       <NavTitle title="Shop by Price" icons={false} />
       <AirbnbSlider
         slots={{ thumb: AirbnbThumbComponent }}

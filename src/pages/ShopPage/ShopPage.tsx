@@ -1,14 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Breadcrumbs from "../../components/pageProps/Breadcrumbs";
-import ProductBanner from "../../components/pageProps/shopPage/ProductBanner";
 import ShopSideNav from "../../components/pageProps/shopPage/ShopSideNav";
-import {
-  Button,
-  Container,
-  Pagination,
-  PaginationItem,
-  Stack,
-} from "@mui/material";
+import { Container, Pagination, PaginationItem, Stack } from "@mui/material";
 import ShopBanner from "./ShopBanner";
 import ProductApiService from "../../app/ApiServices/productApiService";
 import { useDispatch } from "react-redux";
@@ -18,25 +11,24 @@ import Products from "../../components/home/Products/Product";
 import { Product } from "../../types/product";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { useShopContext } from "../../components/pageProps/shopPage/useShopContext";
 import SellerApiService from "../../app/ApiServices/sellerApiService";
 import { actionDispatchHome, homeRetriever } from "../Home/useReduxHome";
 import { Seller } from "../../types/user";
 import HeaderBottom from "./../../components/home/Header/HeaderBottom";
+import { useCombinedContext } from "../../constants/useCombinedContext";
 
 const ShopPage = () => {
   const { allProducts } = useSelector(shopRetriever);
   const { setAllProducts, setChosenProduct } = actionDispatch(useDispatch());
-  const { targetSearchObj, setTargetSearchObj } = useShopContext();
+  const {
+    targetSearchObj,
+    setTargetSearchObj,
+    setBrandName,
+    handleBrandChange,
+    brandName,
+  } = useCombinedContext();
   const { setTopSellers } = actionDispatchHome(useDispatch());
   const { topSellers } = useSelector(homeRetriever);
-  const { updateTargetSearchObj } = useShopContext();
-  const [brandName, setBrandname] = useState<string>("");
-
-  const handleBrandChange = (value: string, category: string) => {
-    updateTargetSearchObj(value, category);
-    setBrandname(value);
-  };
 
   useEffect(() => {
     const productService = new ProductApiService();
@@ -75,6 +67,7 @@ const ShopPage = () => {
                 <button
                   onClick={() => {
                     handleBrandChange(brand?._id, "brand");
+                    setBrandName(brand?.mb_nick);
                   }}
                   key={brand?._id}
                   className=" bg-white hover:bg-blue-500 text-gray focus:cursor-default  hover:text-white focus:text-white focus:bg-blue-500 font-bold py-2 px-4 rounded "
@@ -89,7 +82,7 @@ const ShopPage = () => {
                   <Products
                     product={productItem}
                     disable={false}
-                    setBrandname={setBrandname}
+                    setBrandname={setBrandName}
                   />
                 );
               })}

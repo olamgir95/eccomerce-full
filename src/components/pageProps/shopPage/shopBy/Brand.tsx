@@ -4,12 +4,12 @@ import NavTitle from "./NavTitle";
 import { homeRetriever } from "../../../../pages/Home/useReduxHome";
 import { useSelector } from "react-redux";
 import { Seller } from "../../../../types/user";
-import { useShopContext } from "../useShopContext";
+import { useCombinedContext } from "../../../../constants/useCombinedContext";
 
 const Brand = () => {
   const [showBrands, setShowBrands] = useState(true);
   const { topSellers } = useSelector(homeRetriever);
-  const { updateTargetSearchObj } = useShopContext();
+  const { updateTargetSearchObj } = useCombinedContext();
 
   const handleBrandChange = (value: string, category: string) => {
     updateTargetSearchObj(value, category);

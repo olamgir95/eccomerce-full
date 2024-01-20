@@ -33,7 +33,9 @@ const Breadcrumbs = ({ prevLocation, title, brandName }: BreadcrumbsProps) => {
           </span>
         </p>
       </div>
-      <h1>{brandName}</h1>
+      <h1 className="text-5xl text-primeColor font-titleFont font-bold text-center w-full flex items-center pb-5 justify-center">
+        {brandName}
+      </h1>
     </Container>
   );
 };

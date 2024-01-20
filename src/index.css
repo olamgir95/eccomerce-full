@@ -15,14 +15,14 @@
 
 /* ============= NavLink active Start here ============== */
 nav .active li {
-  color: black;
+  color: orange;
   font-weight: 600;
-  text-decoration: 1px underline black;
+  text-decoration: 1px underline orange;
 }
 
 @media screen and (max-width: 665px) {
   nav .active li {
-    color: white;
+    color: orange;
     font-weight: 600;
     text-decoration: 1px underline white;
   }
@@ -32,3 +32,75 @@ nav .active li {
   display: none;
 }
 /* ============= NavLink active End here ================ */
+.home_banner .swiper {
+  @apply w-full h-[700px];
+}
+
+.home_banner .swiper-slide {
+  @apply text-center text-[18px] bg-white flex justify-center items-center;
+}
+
+.home_banner .swiper-slide img {
+  @apply block w-full h-full object-cover;
+  background-size: cover;
+  background-position: center;
+}
+
+.autoplay-progress {
+  @apply absolute right-4 bottom-4 z-10 w-12 h-12 flex items-center justify-center font-bold;
+  color: var(--swiper-theme-color);
+}
+
+.autoplay-progress svg {
+  @apply absolute left-0 top-0 w-full h-full  fill-none;
+  stroke: var(--swiper-theme-color);
+  stroke-dashoffset: calc(125.6 * (1 - var(--progress)));
+  stroke-dasharray: 125.6;
+  transform: rotate(-90deg);
+  stroke-width: 4px;
+}
+
+.product_features {
+  @apply text-[#767676] hover:text-primeColor text-sm font-normal
+   border-b-[1px] border-b-gray-200 hover:border-b-primeColor flex items-center 
+   justify-end gap-2 hover:cursor-pointer pb-1 duration-300 w-full;
+}
+
+.events_frame .swiper {
+  width: 100%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.events_frame .swiper-slide {
+  border-radius: 20px;
+  /* background-position: center;
+  background-size: cover; */
+  width: 440px;
+  height: 480px;
+}
+.events_frame .swiper-slide img {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.events_frame .swiper-slide img {
+  display: block;
+  width: 100%;
+}
+
+.verify_member {
+  @apply last:border-r-0 flex font-normal hover:font-bold w-full  
+  max-w-28 h-6 justify-center items-center px-2 text-base 
+  text-[#767676] hover:underline underline-offset-[4px] 
+  decoration-[1px] hover:text-orange-400  md:border-l-[2px]
+   border-l-gray-300 hoverEffect  first:border-l-0;
+}
+
+.non_verify_member {
+  @apply flex font-normal hover:font-bold w-full 
+  max-w-28 h-6 justify-center items-center px-2 text-base 
+text-[#767676] hover:underline underline-offset-[4px] 
+  decoration-[1px] hover:text-orange-400  md:border-l-[2px]
+ border-l-gray-300 hoverEffect  first:border-l-0;
+}
