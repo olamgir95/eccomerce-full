@@ -53,6 +53,8 @@ export default class ProductApiService {
 
   async getAllProducts(data: ProductSearchObj): Promise<Product[]> {
     try {
+      console.log("data", data);
+
       const url = "/products",
         result = await axios.post(this.path + url, data, {
           withCredentials: true,

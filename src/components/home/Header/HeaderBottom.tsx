@@ -1,4 +1,3 @@
-//@ts-nocheck
 import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { HiOutlineMenuAlt4 } from "react-icons/hi";
@@ -6,24 +5,33 @@ import { FaSearch, FaUser, FaCaretDown, FaShoppingCart } from "react-icons/fa";
 import Flex from "../../designLayouts/Flex";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { paginationItems } from "../../../constants";
+import { Badge, Container, IconButton } from "@mui/material";
+import {
+  actionDispatch,
+  shopRetriever,
+} from "../../../pages/ShopPage/useReduxShop";
+import { items } from "../../../constants/shopFilterCategories";
+import { useShopContext } from "../../pageProps/shopPage/useShopContext";
+import { Product } from "../../../types/product";
+import { serverApi } from "../../../lib/config";
+import ProductApiService from "../../../app/ApiServices/productApiService";
+import { useDispatch } from "react-redux";
 
-interface Filtered {
-  _id: number;
-  img: any;
-  productName: string;
-  price: string;
-  color: string;
-  badge: boolean;
-  des: string;
-}
-
-const HeaderBottom = () => {
-  const products = useSelector((state: any) => state.orebiReducer.products);
+const HeaderBottom = (props: any) => {
+  const { able } = props;
+  const { allProducts } = useSelector(shopRetriever);
   const [show, setShow] = useState<boolean>(false);
   const [showUser, setShowUser] = useState<boolean>(false);
   const navigate = useNavigate();
   const ref = useRef<HTMLDivElement>(null);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const { updateTargetSearchObj } = useShopContext();
+  const { setAllProducts, setChosenProduct } = actionDispatch(useDispatch());
+
+  const handleCategoryChange = (value: string, category: string) => {
+    updateTargetSearchObj(value, category);
+  };
 
   useEffect(() => {
     document.body.addEventListener("click", (e) => {
@@ -36,153 +44,194 @@ const HeaderBottom = () => {
   }, [show, ref]);
 
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [filteredProducts, setFilteredProducts] = useState<Filtered[]>([]);
-  const [showSearchBar, setShowSearchBar] = useState<boolean>(false);
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+  // const [showSearchBar, setShowSearchBar] = useState<boolean>(false);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
   };
 
   useEffect(() => {
-    const filtered = paginationItems.filter((item: Filtered) =>
-      item.productName.toLowerCase().includes(searchQuery.toLowerCase())
+    const productService = new ProductApiService();
+    productService
+      .getAllProducts({ order: "createdAt", page: 1, limit: 100 })
+      .then((data) => setAllProducts(data))
+      .catch((err) => console.log(err));
+  }, [searchQuery]);
+
+  useEffect(() => {
+    const filtered = allProducts.filter((item: Product) =>
+      item.product_name.toLowerCase().includes(searchQuery.toLowerCase())
     );
+
     setFilteredProducts(filtered);
-  }, [searchQuery, products]);
+  }, [searchQuery, allProducts]);
 
   return (
-    <div className="w-full bg-[#F5F5F3] relative">
-      <div className="max-w-container mx-auto">
-        <Flex className="flex flex-col lg:flex-row items-start lg:items-center justify-between w-full px-4 pb-4 lg:pb-0 h-full lg:h-24">
-          <div
-            onClick={() => setShow(!show)}
-            ref={ref}
-            className="flex h-14 cursor-pointer items-center gap-2 text-primeColor"
+    <div className="w-full bg-orangge relative">
+      <Container>
+        <div className="max-w-container mx-auto">
+          <Flex
+            className={
+              able
+                ? "justify-between flex flex-col lg:flex-row items-start lg:items-center w-full px-4 pb-4 lg:pb-0 h-full lg:h-24"
+                : "justify-center pt-10 flex flex-col lg:flex-row items-start lg:items-center w-full px-4 pb-4 lg:pb-0 h-full lg:h-24"
+            }
           >
-            <HiOutlineMenuAlt4 className="w-5 h-5" />
-            <p className="text-[14px] font-normal">Shop by Category</p>
-
-            {show && (
-              <motion.ul
-                initial={{ y: 30, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.5 }}
-                className="absolute top-36 z-50 bg-primeColor w-auto text-[#767676] h-auto p-4 pb-6"
-              >
-                <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                  Accessories
-                </li>
-                <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                  Furniture
-                </li>
-                <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                  Electronics
-                </li>
-                <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                  Clothes
-                </li>
-                <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400  hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                  Bags
-                </li>
-                <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400  hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                  Home appliances
-                </li>
-              </motion.ul>
-            )}
-          </div>
-          <div className="relative w-full lg:w-[600px] h-[50px] text-base text-primeColor bg-white flex items-center gap-2 justify-between px-6 rounded-xl">
-            <input
-              className="flex-1 h-full outline-none placeholder:text-[#C4C4C4] placeholder:text-[14px]"
-              type="text"
-              onChange={handleSearch}
-              value={searchQuery}
-              placeholder="Search your products here"
-            />
-            <FaSearch className="w-5 h-5" />
-            {searchQuery && (
+            {able && (
               <div
-                className={`w-full mx-auto h-96 bg-white top-16 absolute left-0 z-50 overflow-y-scroll shadow-2xl scrollbar-hide cursor-pointer`}
+                onClick={() => setShow(!show)}
+                ref={ref}
+                className="flex h-14 cursor-pointer transition-all items-center gap-2  text-primeColor"
               >
-                {searchQuery &&
-                  filteredProducts.map((item) => (
-                    <div
-                      onClick={() =>
-                        navigate(
-                          `/product/${(item.productName as string)
-                            .toLowerCase()
-                            .split(" ")
-                            .join("")}`,
-                          {
-                            state: {
-                              item: item,
-                            },
+                <HiOutlineMenuAlt4 className="w-5 h-5" />
+                <p className="text-[14px] font-normal hover:scale-110">
+                  Shop by Category
+                </p>
+
+                {show && (
+                  <motion.ul
+                    initial={{ y: 30, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.5 }}
+                    className="absolute top-24 z-50 bg-primeColor w-auto text-[#767676] h-auto p-4 pb-6"
+                  >
+                    {items?.map(({ _id, title }) => (
+                      <li
+                        key={_id}
+                        onClick={() => {
+                          handleCategoryChange(title, "collection");
+                          navigate("/shop");
+                        }}
+                        className="text-gray-400 px-4 py-1 capitalize border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer"
+                      >
+                        {title}
+                      </li>
+                    ))}
+                  </motion.ul>
+                )}
+              </div>
+            )}
+            <div className="relative w-full lg:w-[600px] h-[50px] text-base text-primeColor bg-white flex items-center gap-2 justify-between  rounded-3xl">
+              <div className="flex items-center w-full">
+                <input
+                  className="flex-1 h-[50px] rounded-3xl  w-[90%] outline-gray-300 outline outline-1 hover:outline-electricPurple placeholder:text-[#C4C4C4] placeholder:text-[14px] pl-2 "
+                  type="text"
+                  onChange={handleSearch}
+                  value={searchQuery}
+                  placeholder="Search your products here"
+                />
+                <div className="bg-gray-300 hover:bg-gray-400 h-[50px] cursor-pointer flex items-center justify-center w-[100px] absolute right-0 rounded-r-3xl">
+                  <FaSearch className="w-6 h-6 text-orange-400  hover:text-orangge absolute" />
+                </div>
+              </div>
+              {searchQuery && (
+                <div
+                  className={`w-full mx-auto p-2 h-96 scrollbar-none bg-white top-16 absolute left-0 z-50 overflow-y-scroll shadow-2xl  cursor-pointer`}
+                >
+                  {searchQuery &&
+                    filteredProducts?.map((product) => {
+                      const image_path = `${serverApi}/${product?.product_images[0]}`;
+
+                      return (
+                        <div
+                          onClick={() =>
+                            // navigate(
+                            //   `/product/${(product.product_name as string)
+                            //     .toLowerCase()
+                            //     .split(" ")
+                            //     .join("")}`,
+                            //   {
+                            //     state: {
+                            //       product: product,
+                            //     },
+                            //   }
+                            // ) &
+                            // setShowSearchBar(true) &
+                            setSearchQuery("")
                           }
-                        ) &
-                        setShowSearchBar(true) &
-                        setSearchQuery("")
-                      }
-                      key={item._id}
-                      className="max-w-[600px] h-28 bg-gray-100 mb-3 flex items-center gap-3"
-                    >
-                      <img className="w-24" src={item.img} alt="productImg" />
-                      <div className="flex flex-col gap-1">
-                        <p className="font-semibold text-lg">
-                          {item.productName}
-                        </p>
-                        <p className="text-xs">{item.des}</p>
-                        <p className="text-sm">
-                          Price:{" "}
-                          <span className="text-primeColor font-semibold">
-                            ${item.price}
-                          </span>
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-              </div>
-            )}
-          </div>
-          <div className="flex gap-4 mt-2 lg:mt-0 items-center pr-6 cursor-pointer relative">
-            <div onClick={() => setShowUser(!showUser)} className="flex">
-              <FaUser />
-              <FaCaretDown />
+                          key={product._id}
+                          className="max-w-[600px]  h-28 bg-gray-100 mb-3 flex items-center gap-3"
+                        >
+                          <img
+                            className="w-24"
+                            src={image_path}
+                            alt="productImg"
+                          />
+                          <div className="flex flex-col gap-1">
+                            <p className="font-semibold text-lg">
+                              {product.product_name}
+                            </p>
+                            <p className="text-xs max-h-12  overflow-hidden">
+                              {product.product_description}
+                            </p>
+                            <p className="text-sm">
+                              Price:
+                              <span className="text-primeColor font-semibold">
+                                ${product.product_price}
+                              </span>
+                            </p>
+                          </div>
+                        </div>
+                      );
+                    })}
+                </div>
+              )}
             </div>
-            {showUser && (
-              <motion.ul
-                initial={{ y: 30, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.5 }}
-                className="absolute top-6 left-0 z-50 bg-primeColor w-44 text-[#767676] h-auto p-4 pb-6"
-              >
-                <Link to="/signin">
-                  <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                    Login
-                  </li>
+            {able && (
+              <div className="flex gap-4 mt-2 lg:mt-0 items-center pr-6 cursor-pointer relative">
+                <div
+                  onClick={() => setShowUser(!showUser)}
+                  className="flex text-orange-400 hover:scale-110 items-center"
+                >
+                  <FaUser className="w-6 h-6" />
+                  <FaCaretDown />
+                </div>
+                {showUser && (
+                  <motion.ul
+                    initial={{ y: 30, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.5 }}
+                    className="absolute top-[68px] left-0 z-50 bg-primeColor w-44 text-[#767676] h-auto p-4 pb-6"
+                  >
+                    <Link to="/signin">
+                      <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
+                        Login
+                      </li>
+                    </Link>
+                    <Link onClick={() => setShowUser(false)} to="/signup">
+                      <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
+                        Sign Up
+                      </li>
+                    </Link>
+                    <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
+                      Profile
+                    </li>
+                  </motion.ul>
+                )}
+                <Link to="/cart" className="hover:scale-110">
+                  <IconButton
+                    aria-label="cart"
+                    id="basic-button"
+                    aria-controls={open ? "basic-menu" : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? "true" : undefined}
+                  >
+                    <Badge
+                      badgeContent={
+                        allProducts.length > 0 ? allProducts.length : 1
+                      }
+                      color="secondary"
+                    >
+                      <FaShoppingCart className="text-orange-400 w-6 h-6 relative" />
+                    </Badge>
+                  </IconButton>
                 </Link>
-                <Link onClick={() => setShowUser(false)} to="/signup">
-                  <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                    Sign Up
-                  </li>
-                </Link>
-                <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                  Profile
-                </li>
-                <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400  hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                  Others
-                </li>
-              </motion.ul>
-            )}
-            <Link to="/cart">
-              <div className="relative">
-                <FaShoppingCart />
-                <span className="absolute font-titleFont top-3 -right-2 text-xs w-4 h-4 flex items-center justify-center rounded-full bg-primeColor text-white">
-                  {products.length > 0 ? products.length : 0}
-                </span>
               </div>
-            </Link>
-          </div>
-        </Flex>
-      </div>
+            )}
+          </Flex>
+        </div>
+      </Container>
     </div>
   );
 };
