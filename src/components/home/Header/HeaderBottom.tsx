@@ -67,6 +67,10 @@ const HeaderBottom = (props: any) => {
     setFilteredProducts(filtered);
   }, [searchQuery, allProducts]);
 
+  const chosenProduct = (id: string) => {
+    navigate(`/product/${id}`);
+  };
+
   return (
     <div className="w-full bg-orangge relative">
       <Container>
@@ -135,23 +139,25 @@ const HeaderBottom = (props: any) => {
 
                       return (
                         <div
-                          onClick={() =>
-                            // navigate(
-                            //   `/product/${(product.product_name as string)
-                            //     .toLowerCase()
-                            //     .split(" ")
-                            //     .join("")}`,
-                            //   {
-                            //     state: {
-                            //       product: product,
-                            //     },
-                            //   }
-                            // ) &
-                            // setShowSearchBar(true) &
-                            setSearchQuery("")
-                          }
+                          // navigate(
+                          //   `/product/${(product.product_name as string)
+                          //     .toLowerCase()
+                          //     .split(" ")
+                          //     .join("")}`,
+                          //   {
+                          //     state: {
+                          //       product: product,
+                          //     },
+                          //   }
+                          // ) &
+                          // setShowSearchBar(true) &
+
                           key={product._id}
                           className="max-w-[600px]  h-28 bg-gray-100 mb-3 flex items-center gap-3"
+                          onClick={() => {
+                            chosenProduct(product?._id);
+                            setSearchQuery("");
+                          }}
                         >
                           <img
                             className="w-24"
