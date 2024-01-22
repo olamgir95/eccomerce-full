@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
 import { ProductSearchObj } from "../types/others";
+import useBasket from "./useBasket";
 
 interface CombinedContextProps {
   brandName: string;
@@ -12,6 +13,7 @@ interface CombinedContextProps {
     data?: { min?: number; max?: number }
   ) => void;
   setTargetSearchObj: React.Dispatch<React.SetStateAction<ProductSearchObj>>;
+  useBasket: ReturnType<typeof useBasket>;
 }
 
 const CombinedContext = createContext<CombinedContextProps | undefined>(
@@ -75,6 +77,8 @@ export const CombinedProvider: React.FC<CombinedProviderProps> = ({
     }
   };
 
+  const { onAdd, onRemove, onDelete, onDeleteAll, cartItems } = useBasket(); // Destructure useBasket
+
   const handleBrandChange = (value: string, category: string) => {
     updateTargetSearchObj(value, category);
   };
@@ -88,6 +92,7 @@ export const CombinedProvider: React.FC<CombinedProviderProps> = ({
         targetSearchObj,
         setTargetSearchObj,
         updateTargetSearchObj,
+        useBasket: { onAdd, onRemove, onDelete, onDeleteAll, cartItems },
       }}
     >
       {children}
