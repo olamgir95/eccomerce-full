@@ -1,7 +1,6 @@
 import Cookies from "universal-cookie";
 import { serverApi } from "../../lib/config";
 import { Member } from "../../types/user";
-
 const cookie = new Cookies();
 let member_data: any = null;
 
@@ -10,10 +9,11 @@ if (cookie.get("access_token")) {
     ? localStorage.getItem("member_data")
     : null;
   member_data = memberDataJson ? JSON.parse(memberDataJson) : null;
+  console.log("tekshir", member_data.mb_image);
   if (member_data) {
     member_data.mb_image = member_data.mb_image
       ? `${serverApi}/${member_data.mb_image}`.replace(/\\/g, "/")
-      : "/auth/default_user.svg";
+      : "/default_user.svg";
   }
 } else {
   localStorage.removeItem("member_data");

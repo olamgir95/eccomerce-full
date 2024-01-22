@@ -1,4 +1,10 @@
-import { Route, useLocation, Routes, useNavigate } from "react-router-dom";
+import {
+  Route,
+  useLocation,
+  Routes,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 import SignIn from "../pages/Account/SignIn";
 import SignUp from "../pages/Account/SignUp";
 import AOS, { AosOptions } from "aos";
@@ -7,6 +13,8 @@ import { useEffect } from "react";
 import "aos/dist/aos.css";
 import ScrollToTop from "./../constants/scrollToTop";
 import { CombinedProvider } from "../constants/useCombinedContext";
+import MemberPage from "../pages/MemberPage";
+import OtherPage from "../pages/MemberPage/OtherPage";
 
 interface CustomAosOptions extends AosOptions {
   offset: number;
@@ -17,6 +25,10 @@ interface CustomAosOptions extends AosOptions {
 
 function App() {
   const { pathname } = useLocation();
+  const [searchParams] = useSearchParams();
+  const chosen_mb_id = searchParams.get("mb_id") || null;
+  const chosen_art_id = searchParams.get("art_id") || null;
+  console.log("@idsssss", chosen_art_id, chosen_mb_id);
 
   useEffect(() => {
     const aosOptions: CustomAosOptions = {
@@ -44,6 +56,15 @@ function App() {
                 element={route.element}
               />
             ))}
+            <Route
+              path="/member-page/other"
+              element={
+                <OtherPage
+                  chosen_mb_id={chosen_mb_id}
+                  chosen_art_id={chosen_art_id}
+                />
+              }
+            />
           </Route>
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signin" element={<SignIn />} />
