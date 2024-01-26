@@ -11,7 +11,6 @@ import { verifyMemberData } from "../../app/ApiServices/verify";
 import { sweetErrorHandling } from "../../lib/sweetAlert";
 import assert from "assert";
 import { Definer } from "../../lib/Definer";
-import { Order } from "../../types/order";
 
 const Cart = (props: any) => {
   const { useBasket } = useCombinedContext();
@@ -19,7 +18,7 @@ const Cart = (props: any) => {
   const navigate = useNavigate();
   const totalPrice = cartItems?.reduce(
     (value: any, curValue: CartItem) =>
-      value + curValue?.price * curValue?.quantity,
+      value + (curValue?.sale_price ?? curValue?.price) * curValue?.quantity,
     0
   );
 
