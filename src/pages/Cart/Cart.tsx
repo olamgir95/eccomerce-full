@@ -1,26 +1,50 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Breadcrumbs from "../../components/pageProps/Breadcrumbs";
-// import { resetCart } from "../../redux/orebiSlice";
 import { emptyCart } from "../../assets/images/index";
-// import ItemCard from "./ItemCard";
 import { Container } from "@mui/material";
-import { shopRetriever } from "../ShopPage/useReduxShop";
 import ItemCard from "./ItemCard";
 import { useCombinedContext } from "../../constants/useCombinedContext";
 import { CartItem } from "../../types/others";
+import OrderApiService from "../../app/ApiServices/orderApiService";
+import { verifyMemberData } from "../../app/ApiServices/verify";
+import { sweetErrorHandling } from "../../lib/sweetAlert";
+import assert from "assert";
+import { Definer } from "../../lib/Definer";
+import { Order } from "../../types/order";
 
 const Cart = (props: any) => {
   const { useBasket } = useCombinedContext();
-  const { cartItems, onAdd, onRemove, onDelete, onDeleteAll } = useBasket;
-
+  const { cartItems, onDeleteAll } = useBasket;
+  const navigate = useNavigate();
   const totalPrice = cartItems?.reduce(
     (value: any, curValue: CartItem) =>
       value + curValue?.price * curValue?.quantity,
     0
   );
+
+  const processOrderHandler = async () => {
+    try {
+      assert.ok(verifyMemberData, Definer.auth_err1);
+      const order = new OrderApiService();
+      const order_id = await order.createOrder(cartItems);
+      onDeleteAll();
+
+      const data = { order_id: order_id, order_status: "process" };
+      let confirmation = window.confirm(
+        "Do you confirm your order for payment?"
+      );
+      if (confirmation) {
+        const orderServer = new OrderApiService();
+        await orderServer.updateStatusOfOrder(data).then();
+      }
+      navigate("/orders");
+    } catch (err: any) {
+      console.log(err.message);
+      sweetErrorHandling(err).then();
+    }
+  };
+
   return (
     <Container>
       <Breadcrumbs title="Cart" />
@@ -40,7 +64,7 @@ const Cart = (props: any) => {
 
           <button
             onClick={onDeleteAll}
-            className="py-2 px-10 bg-red-500 text-white font-semibold uppercase mb-4 hover:bg-red-700 duration-300"
+            className="py-2 px-10 bg-red-500 text-white rounded-md font-semibold uppercase mb-4 hover:bg-red-700 duration-300"
           >
             Reset cart
           </button>
@@ -52,39 +76,28 @@ const Cart = (props: any) => {
                 type="text"
                 placeholder="Coupon Number"
               />
-              <p className="text-sm mdl:text-base font-semibold">
+              <button className="text-sm bg-[#6f9a37] p-2 text-white rounded-sm hover:bg-[#86ba42] mdl:text-base font-semibold">
                 Apply Coupon
-              </p>
+              </button>
             </div>
-            <p className="text-lg font-semibold">Update Cart</p>
+            <button className="text-sm bg-[#48e13d] p-2 rounded-sm text-white hover:bg-[#43b752] mdl:text-base font-semibold">
+              Update Cart
+            </button>
           </div>
           <div className="max-w-7xl gap-4 flex justify-end mt-4">
             <div className="w-96 flex flex-col gap-4">
-              <h1 className="text-2xl font-semibold text-right">Cart totals</h1>
               <div>
-                <p className="flex items-center justify-between border-[1px] border-gray-400 border-b-0 py-1.5 text-lg px-4 font-medium">
-                  Subtotal
-                  <span className="font-semibold tracking-wide font-titleFont">
-                    ${totalPrice ?? 0}
-                  </span>
-                </p>
-                <p className="flex items-center justify-between border-[1px] border-gray-400 border-b-0 py-1.5 text-lg px-4 font-medium">
-                  Shipping Charge
-                  <span className="font-semibold tracking-wide font-titleFont">
-                    $0
-                  </span>
-                </p>
                 <p className="flex items-center justify-between border-[1px] border-gray-400 py-1.5 text-lg px-4 font-medium">
-                  Total
+                  Total:
                   <span className="font-bold tracking-wide text-lg font-titleFont">
                     ${totalPrice ?? 0}
                   </span>
                 </p>
               </div>
               <div className="flex justify-end">
-                <Link to="/paymentgateway">
-                  <button className="w-52 h-10 bg-primeColor text-white hover:bg-black duration-300">
-                    Proceed to Checkout
+                <Link to="" onClick={processOrderHandler}>
+                  <button className="w-52 h-10 rounded bg-primeColor text-base mdl:text-lg text-white hover:bg-black duration-300">
+                    Order
                   </button>
                 </Link>
               </div>
@@ -111,7 +124,7 @@ const Cart = (props: any) => {
             </h1>
             <p className="text-sm text-center px-10 -mt-2">
               Your Shopping cart lives to serve. Give it purpose - fill it with
-              books, electronics, videos, etc. and make it happy.
+              beds sofas, armchairs, chairs, etc. and make it happy.
             </p>
             <Link to="/shop">
               <button className="bg-primeColor rounded-md cursor-pointer hover:bg-black active:bg-gray-900 px-8 py-2 font-titleFont font-semibold text-lg text-gray-200 hover:text-white duration-300">

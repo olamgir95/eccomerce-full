@@ -1,0 +1,312 @@
+.order_page {
+  width: 100%;
+  height: auto;
+  background: whitesmoke;
+  padding-bottom: 50px;
+}
+
+.order_page .order_container {
+  display: flex;
+  flex-direction: row;
+  height: auto;
+  justify-content: center;
+  gap: 0;
+  padding-top: 50px;
+}
+.order_page .order_left {
+  width: 70%;
+  height: auto;
+  margin: 0 55px;
+}
+
+.order_left .order_nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.order_left .order_table {
+  border-bottom: 1px solid #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 800px;
+  padding: 20px;
+  margin-left: 24px;
+}
+
+.order_container .order_main_content .total_price_box {
+  border-radius: 5px;
+  border-top: 1px solid #000;
+  width: 800px;
+  height: 41px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 10px 10px 40px;
+}
+
+.order_container .order_main_content .total_price_box button {
+  color: #fff;
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  text-transform: lowercase;
+  border-radius: 10px;
+  height: 36px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25),
+    0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+}
+
+.order_container .order_main_content .total_price_box .boxTotal {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  color: #000;
+
+  text-align: center;
+  font-family: Commissioner;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 36px;
+}
+
+.order_container .order_main_box {
+  margin: 10px 0;
+  padding: 5px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  width: 800px;
+  max-height: 284px;
+  border-radius: 16px;
+  background: #fff;
+  border: 1px solid darkorchid;
+}
+
+.order_container .order_main_box .order_box_item {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: #000;
+  gap: 30px;
+  width: 800px;
+  margin-top: 5px;
+  margin-left: 40px;
+  font-family: Commissioner;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 36px;
+  margin-bottom: 15px;
+}
+
+.order_container .order_main_box .order_box_item div:first-child {
+  display: flex;
+  flex: 2 1;
+  gap: 20px;
+  align-items: center;
+  width: 100%;
+}
+
+.order_container .order_main_box .order_box_item .order_dish_img {
+  width: 50px;
+  height: 47px;
+  flex-shrink: 0;
+  border-radius: 29px;
+  background: lightgray 50% / cover no-repeat;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.order_container .order_main_box .order_box_item .price_box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+  margin-left: 70px;
+  flex: 2;
+}
+.order_container .order_main_box .order_box_item .price_box button,
+[type="button"] {
+  background: none;
+}
+
+.order_container .order_main_box .order_box_item .price_box p:last-child {
+  margin-left: 10px;
+}
+
+.order_page .order_right {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  margin-top: 35px;
+  margin-right: 24px;
+}
+
+.order_right .order_info_box {
+  padding: 21px 67px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 372px;
+  height: 308px;
+  flex-shrink: 0;
+  border-radius: 16px;
+  background: #fff;
+  border: 1px solid darkorchid;
+}
+
+.order_page .css-heg063-MuiTabs-flexContainer {
+  display: flex;
+  justify-content: flex-start;
+  gap: 140px;
+}
+
+.order_right .info_box_item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.order_info_box .order_user_img {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 117px;
+  height: 112px;
+}
+.order_info_box .order_user_img img:first-child {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  border-radius: 37px;
+}
+
+.order_right .info_box_item .order_user_img .svg {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  bottom: 0;
+  right: 0;
+}
+
+.order_right .info_box_item .order_user_info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.order_user_info .name {
+  color: #08090d;
+
+  font-family: Commissioner;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 36px;
+}
+
+.order_page .order_user_info .user_prof {
+  color: #a1a1a1;
+  margin-bottom: 40px;
+  font-family: Commissioner;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 36px;
+}
+.order_info_box .location {
+  width: 255px;
+  display: flex;
+  justify-content: flex-start;
+  color: #000;
+  margin-top: 10px;
+  font-family: DM Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.order_right .pay_container {
+  padding: 30px 20px 20px 20px;
+  margin-top: 15px;
+  width: 372px;
+  flex-shrink: 0;
+  border-radius: 16px;
+  background: #fff;
+  border: 1px solid darkorchid;
+}
+
+.order_right .order_pay {
+  color: #434141;
+  font-family: Commissioner;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 36px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.order_pay div {
+  border-radius: 5px;
+  background: #f5f5f5;
+  padding: 7px;
+  display: flex;
+  align-items: center;
+}
+
+.order_pay .card_number {
+  width: 332px;
+  height: 40px;
+}
+.order_pay .card_name {
+  width: 332px;
+  height: 40px;
+}
+
+.order_pay .card_date {
+  width: 162px;
+  height: 40px;
+}
+
+.pay_container .pay_brands {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 35px;
+  gap: 14px;
+}
+
+.pay_brands div {
+  position: relative;
+  width: 38px;
+  height: 25px;
+  margin-left: -8px;
+}
+
+.pay_brands div svg:last-child {
+  position: absolute;
+  right: 7px;
+  top: 7px;
+}
+
+.order_page .time {
+  color: #000;
+  display: flex;
+  align-items: center;
+  font-family: Inter;
+  text-align: center;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin: 0 5px;
+}
