@@ -83,7 +83,6 @@ const MemberFollowings = (props: any) => {
 
   const visitMemberHandler = (mb_id: string) => {
     navigate(`/member-page/other?mb_id=${mb_id}`);
-    document.location.reload();
   };
 
   return (
@@ -91,7 +90,7 @@ const MemberFollowings = (props: any) => {
       {memberFollowings.map((following) => {
         const image = following?.follow_member_data?.mb_image
           ? `${serverApi}/${following.follow_member_data.mb_image}`
-          : "/community/follow.png";
+          : "follow.png";
         return (
           <Box className="follow_box">
             <Avatar
@@ -137,7 +136,7 @@ const MemberFollowings = (props: any) => {
                 }
                 onClick={(e) => unSubscribeHandler(e, following?.follow_id)}
               >
-                Bekor Qilish
+                Unfollow
               </Button>
             )}
           </Box>

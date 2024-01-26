@@ -214,7 +214,7 @@ const OtherPage = (props: any) => {
                     <span className="name">
                       {chosenMember?.mb_nick.toLocaleUpperCase()}
                     </span>
-                    <span className="user_prof">
+                    <span className="user_prof capitalize">
                       {chosenMember?.mb_type.toLowerCase()}
                     </span>
                   </div>
@@ -320,7 +320,7 @@ const OtherPage = (props: any) => {
             <Stack className="my_page_left">
               <Box className="box_left">
                 <TabPanel value="1">
-                  <Box className="menu_name"> Maqolalar</Box>
+                  <Box className="menu_name">All Articles</Box>
                   <Box className="menu_content">
                     <MemberPosts
                       chosenMemberArticles={chosenMemberArticles}
@@ -375,7 +375,7 @@ const OtherPage = (props: any) => {
                   </Box>
                 </TabPanel>
                 <TabPanel value="4">
-                  <Box className="menu_name">Tanlangan Maqola</Box>
+                  <Box className="menu_name">Chosen Article</Box>
                   <Box className="menu_content">
                     <TViewer chosenSingleArticle={chosenSingleArticle} />
                   </Box>

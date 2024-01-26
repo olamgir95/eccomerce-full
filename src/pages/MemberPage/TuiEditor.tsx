@@ -10,7 +10,6 @@ import {
 } from "@mui/material";
 import Typography from "@mui/joy/Typography";
 import { Editor } from "@toast-ui/react-editor";
-import "@toast-ui/editor/dist/toastui-editor.css";
 import CommunityApiService from "../../app/ApiServices/communityApiService";
 import { serverApi } from "../../lib/config";
 import assert from "assert";
@@ -20,6 +19,7 @@ import {
   sweetTopSmallSuccessAlert,
 } from "../../lib/sweetAlert";
 import { ArticleInput } from "../../types/Article";
+import "@toast-ui/editor/dist/toastui-editor.css";
 
 const TuiEditor = (props: any) => {
   const { setValue, setArticlesRebuild } = props;
@@ -103,7 +103,7 @@ const TuiEditor = (props: any) => {
   };
 
   return (
-    <Stack className="writing_article">
+    <Stack className="writing_article mui-component">
       <Stack className="header_sec">
         <Box className="form_category">
           <Typography className="category">Category</Typography>

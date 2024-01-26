@@ -1,6 +1,5 @@
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import { Box, Checkbox, Link, Stack } from "@mui/material";
-import React from "react";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import { Article } from "../../types/Article";
 import { serverApi } from "../../lib/config";
@@ -8,20 +7,20 @@ import dayjs from "dayjs";
 import assert from "assert";
 import { verifyMemberData } from "../../app/ApiServices/verify";
 import { Definer } from "../../lib/Definer";
-import {
-  sweetErrorHandling,
-  sweetTopSmallSuccessAlert,
-} from "../../lib/sweetAlert";
+import { sweetErrorHandling } from "../../lib/sweetAlert";
 import MemberApiService from "../../app/ApiServices/memberApiService";
+import "dayjs/locale/en";
+import relativeTime from "dayjs/plugin/relativeTime";
+import { useNavigate } from "react-router-dom";
 
 const MemberPosts = (props: any) => {
   const {
-    chosenMemberBoArticles,
+    chosenMemberArticles,
     renderChosenArticleHandler,
     setArticlesRebuild,
   } = props;
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
-
+  const navigate = useNavigate();
   const targetLikeHandler = async (e: any) => {
     try {
       e.stopPropagation();
@@ -30,10 +29,9 @@ const MemberPosts = (props: any) => {
       const id = e.target.id,
         like_result: any = await memberService.memberLikeTarget({
           like_ref_id: id,
-          group_type: "community",
+          group_type: "article",
         });
       assert.ok(like_result, Definer.general_err1);
-      await sweetTopSmallSuccessAlert("success", 700, false);
       setArticlesRebuild(new Date());
     } catch (err: any) {
       console.log("targetLikeTop, ERROR", err);
@@ -41,15 +39,16 @@ const MemberPosts = (props: any) => {
     }
   };
 
+  dayjs.locale("en");
+  dayjs.extend(relativeTime);
+
   return (
     <Stack className="post_content">
-      {chosenMemberBoArticles?.map((article: Article) => {
+      {chosenMemberArticles?.map((article: Article) => {
         const image = article?.art_image
           ? `${serverApi}/${article?.art_image}`
-          : "/community/default.svg";
-        const formattedDate = dayjs(article?.createdAt).format(
-          "YYYY-MM-DD HH:mm"
-        );
+          : "default.svg";
+        const formattedDate = dayjs(article?.createdAt).fromNow();
         return (
           <Link
             className="all_article_box"
@@ -60,12 +59,18 @@ const MemberPosts = (props: any) => {
               <img src={image} alt="" />
             </Box>
             <Box className="all_article_container">
-              <Box className="user_prof">
+              <Box
+                className="user_prof cursor-pointer"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  navigate(`/member-page/other?mb_id=${article?.mb_id}`);
+                }}
+              >
                 <img
                   src={
                     article?.member_data?.mb_image
                       ? `${serverApi}/${article.member_data.mb_image}`
-                      : "restaurant/user_per.png"
+                      : "user.png"
                   }
                   alt=""
                 />

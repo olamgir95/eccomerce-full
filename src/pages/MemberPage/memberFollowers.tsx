@@ -71,6 +71,21 @@ const MemberFollowers = (props: any) => {
       sweetErrorHandling(err).then();
     }
   };
+  const unSubscribeHandler = async (e: any, id: string) => {
+    try {
+      e.stopPropagation();
+      assert.ok(verifyMemberData, Definer.auth_err1);
+
+      const followingService = new FollowApiService();
+      await followingService.unsubscribe(id);
+
+      setFollowRebuild(!followRebuild);
+      await sweetTopSmallSuccessAlert("unsubscribed successfully", 700, false);
+    } catch (err: any) {
+      console.log(err);
+      sweetErrorHandling(err).then();
+    }
+  };
 
   const handlePaginationChange = (
     event: ChangeEvent<unknown>,
@@ -82,7 +97,6 @@ const MemberFollowers = (props: any) => {
 
   const visitMemberHandler = (mb_id: string) => {
     navigate(`/member-page/other?mb_id=${mb_id}`);
-    document.location.reload();
   };
 
   return (
@@ -90,7 +104,7 @@ const MemberFollowers = (props: any) => {
       {memberFollowers.map((follower) => {
         const image = follower?.subscriber_member_data?.mb_image
           ? `${serverApi}/${follower.subscriber_member_data.mb_image}`
-          : "/community/follow.png";
+          : "follow.png";
         return (
           <Box className="follow_box font-titleFont">
             <Avatar
@@ -116,7 +130,9 @@ const MemberFollowers = (props: any) => {
                 <Button
                   className="following_already"
                   variant="contained"
-                  disabled
+                  onClick={(e) =>
+                    unSubscribeHandler(e, follower?.subscriber_id)
+                  }
                 >
                   Following
                 </Button>

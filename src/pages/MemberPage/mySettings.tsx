@@ -117,28 +117,27 @@ const MySettings = (prop: any) => {
           <input
             onChange={handleAddressChange}
             type="text"
-            defaultValue={verifyMemberData?.mb_address ?? "manzil kiritilmagan"}
+            defaultValue={verifyMemberData?.mb_address ?? "No address entered."}
             name="mb_address"
           />
         </Box>
       </Box>
       <Box className="add_info">
-        <label htmlFor="">Malumot</label>
+        <label htmlFor="">Description</label>
         <textarea
           onChange={handleDescriptionChange}
           cols={30}
           name="mb_description"
           id=""
-          defaultValue={verifyMemberData?.mb_description ?? "mavjud emas"}
+          defaultValue={verifyMemberData?.mb_description ?? "No data"}
         ></textarea>
       </Box>
       <Box className="save_btn">
         <Button
-          variant="contained"
-          color="primary"
+          className=" bg-green-500 text-white text-base hover:bg-green-600"
           onClick={handleSubmitButton}
         >
-          Saqlash
+          Save
         </Button>
       </Box>
     </Stack>

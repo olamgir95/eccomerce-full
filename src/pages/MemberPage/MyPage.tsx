@@ -2,7 +2,6 @@ import {
   Box,
   Container,
   Stack,
-  // Tab,
   Pagination,
   PaginationItem,
   Button,
@@ -18,12 +17,8 @@ import Tab from "@mui/material/Tab";
 import {
   ArticleOutlined,
   Facebook,
-  FollowTheSignsRounded,
   Groups2Outlined,
-  Groups2Rounded,
-  GroupsOutlined,
   Instagram,
-  Man4Sharp,
   PersonAddOutlined,
   Settings,
   Telegram,
@@ -84,7 +79,7 @@ const MyPage = (props: any) => {
   // Initializations
   const [value, setValue] = useState("1");
   const [memberArticleSearchObj, setMemberArticleSearchObj] =
-    useState<SearchMemberArticlesObj>({ mb_id: "none", page: 1, limit: 4 });
+    useState<SearchMemberArticlesObj>({ mb_id: "none", page: 1, limit: 3 });
   const [articlesRebuild, setArticlesRebuild] = useState<Date>(new Date());
   const [followRebuild, setFollowRebuild] = useState<boolean>(false);
 
@@ -309,13 +304,13 @@ const MyPage = (props: any) => {
                   </Box>
                 </TabPanel>
                 <TabPanel value={"5"}>
-                  <Box className="menu_name">Tanlangan Maqola</Box>
+                  <Box className="menu_name">Chosen Article </Box>
                   <Box className="menu_content">
                     <TViewer chosenSingleArticle={chosenSingleArticle} />
                   </Box>
                 </TabPanel>
                 <TabPanel value={"6"}>
-                  <Box className="menu_name">Ma'lumotlarni o'zgartirish</Box>
+                  <Box className="menu_name">Change information</Box>
                   <Box className="menu_content">
                     <MySettings />
                   </Box>

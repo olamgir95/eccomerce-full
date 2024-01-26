@@ -4,15 +4,12 @@ import React, { useRef } from "react";
 import "@toast-ui/editor/dist/toastui-editor.css";
 
 const TViewer = (props: any) => {
-  const { chosenSingleBoArticle } = props;
+  const { chosenSingleArticle } = props;
   const editorRef = useRef(null);
 
   return (
     <Stack className="tviewer">
-      <Viewer
-        ref={editorRef}
-        initialValue={chosenSingleBoArticle?.art_content}
-      />
+      <Viewer ref={editorRef} initialValue={chosenSingleArticle?.art_content} />
     </Stack>
   );
 };
