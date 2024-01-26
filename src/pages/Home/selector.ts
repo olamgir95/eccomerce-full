@@ -13,9 +13,9 @@ export const retrieveNewProducts = createSelector(
   (HomePage) => HomePage.newProducts
 );
 
-export const retrieveTrendProducts = createSelector(
+export const retrieveSaleProducts = createSelector(
   selectHomePage,
-  (HomePage) => HomePage.trendProducts
+  (HomePage) => HomePage.saleProducts
 );
 
 export const retrieveNewEvents = createSelector(
