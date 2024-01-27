@@ -1,4 +1,4 @@
-import { Box, Container, Stack } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import Card from "@mui/joy/Card";
 import CardCover from "@mui/joy/CardCover";
 import CardContent from "@mui/joy/CardContent";
@@ -10,10 +10,7 @@ import { CardOverflow, IconButton } from "@mui/joy";
 import { homeRetriever } from "../../../pages/Home/useReduxHome";
 import { useSelector } from "react-redux";
 import { Seller } from "../../../types/user";
-import {
-  sweetErrorHandling,
-  sweetTopSmallSuccessAlert,
-} from "../../../lib/sweetAlert";
+import { sweetErrorHandling } from "../../../lib/sweetAlert";
 import assert from "assert";
 import { Definer } from "../../../lib/Definer";
 import MemberApiService from "../../../app/ApiServices/memberApiService";

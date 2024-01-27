@@ -75,7 +75,7 @@ const Header = () => {
                   initial={{ y: 30, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.5 }}
-                  className="flex items-center w-auto z-50 p-0 gap-1"
+                  className="flex items-center w-full  z-50 p-0 gap-3"
                 >
                   <>
                     {navBarList?.map(({ _id, title, link }: NavBarItem) => {
@@ -101,7 +101,9 @@ const Header = () => {
                           to={link}
                           state={{ data: location.pathname.split("/")[1] }}
                         >
-                          <li className="text-center w-24">{title}</li>
+                          <li className="text-center w-28 lg:text-[18px] pl-2 ">
+                            {title}
+                          </li>
                         </NavLink>
                       );
                     })}

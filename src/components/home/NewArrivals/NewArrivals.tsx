@@ -8,7 +8,7 @@ import { Product } from "../../../types/product";
 import { settings } from "./SliderSetting";
 import Products from "../Products/Product";
 
-const NewArrivals = () => {
+const NewArrivals = (props: any) => {
   const { newProducts } = useSelector(homeRetriever);
 
   return (
@@ -17,7 +17,13 @@ const NewArrivals = () => {
         <Heading heading="New Arrivals" />
         <Slider {...settings}>
           {newProducts?.map((productItem: Product) => {
-            return <Products product={productItem} disable={false} />;
+            return (
+              <Products
+                setProductRebuild={props.setProductRebuild}
+                product={productItem}
+                filter={"new"}
+              />
+            );
           })}
         </Slider>
         <div className="flex justify-center">

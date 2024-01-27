@@ -27,7 +27,7 @@ const HeaderBottom = (props: any) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const { updateTargetSearchObj } = useCombinedContext();
-  const { setAllProducts, setChosenProduct } = actionDispatch(useDispatch());
+  const { setAllProducts } = actionDispatch(useDispatch());
 
   const handleCategoryChange = (value: string, category: string) => {
     updateTargetSearchObj(value, category);
@@ -45,7 +45,6 @@ const HeaderBottom = (props: any) => {
 
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
-  // const [showSearchBar, setShowSearchBar] = useState<boolean>(false);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -88,8 +87,8 @@ const HeaderBottom = (props: any) => {
                 ref={ref}
                 className="flex h-14 cursor-pointer transition-all items-center gap-2  text-primeColor"
               >
-                <HiOutlineMenuAlt4 className="w-5 h-5" />
-                <p className="text-[14px] font-normal hover:scale-110">
+                <HiOutlineMenuAlt4 className="w-5 h-5 menu" />
+                <p className="text-[14px] category font-normal hover:text-orange-600 hover:menu  hover:menu-text-orange-600 ">
                   Shop by Category
                 </p>
 
@@ -139,19 +138,6 @@ const HeaderBottom = (props: any) => {
 
                       return (
                         <div
-                          // navigate(
-                          //   `/product/${(product.product_name as string)
-                          //     .toLowerCase()
-                          //     .split(" ")
-                          //     .join("")}`,
-                          //   {
-                          //     state: {
-                          //       product: product,
-                          //     },
-                          //   }
-                          // ) &
-                          // setShowSearchBar(true) &
-
                           key={product._id}
                           className="max-w-[600px]  h-28 bg-gray-100 mb-3 flex items-center gap-3"
                           onClick={() => {
