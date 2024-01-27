@@ -4,6 +4,7 @@ import { ShopPageState } from "../../types/screen";
 const initialState: ShopPageState = {
   allProducts: [],
   chosenProduct: null,
+  saleProducts: [],
 };
 
 const ShopPageSlice = createSlice({
@@ -16,9 +17,13 @@ const ShopPageSlice = createSlice({
     setChosenProduct: (state, action) => {
       state.chosenProduct = action.payload;
     },
+    setSaleProducts: (state, action) => {
+      state.saleProducts = action.payload;
+    },
   },
 });
 
-export const { setAllProducts, setChosenProduct } = ShopPageSlice.actions;
+export const { setAllProducts, setChosenProduct, setSaleProducts } =
+  ShopPageSlice.actions;
 
 export const ShopPageReducer = ShopPageSlice.reducer;

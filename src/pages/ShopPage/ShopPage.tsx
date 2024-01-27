@@ -18,8 +18,9 @@ import HeaderBottom from "./../../components/home/Header/HeaderBottom";
 import { useCombinedContext } from "../../constants/useCombinedContext";
 
 const ShopPage = () => {
+  const [productRebuild, setProductRebuild] = useState<Date>(new Date());
   const { allProducts } = useSelector(shopRetriever);
-  const { setAllProducts, setChosenProduct } = actionDispatch(useDispatch());
+  const { setAllProducts } = actionDispatch(useDispatch());
   const {
     targetSearchObj,
     setTargetSearchObj,
@@ -29,6 +30,7 @@ const ShopPage = () => {
   } = useCombinedContext();
   const { setTopSellers } = actionDispatchHome(useDispatch());
   const { topSellers } = useSelector(homeRetriever);
+  const { filter, handleNewSaleChange } = useCombinedContext();
 
   useEffect(() => {
     const productService = new ProductApiService();
@@ -44,7 +46,7 @@ const ShopPage = () => {
         setTopSellers(data);
       })
       .catch((err) => console.log(err));
-  }, [targetSearchObj, brandName]);
+  }, [targetSearchObj, brandName, productRebuild, filter]);
 
   const handlePaginationChange = (event: any, value: number) => {
     targetSearchObj.page = value;
@@ -70,19 +72,35 @@ const ShopPage = () => {
                     setBrandName(brand?.mb_nick);
                   }}
                   key={brand?._id}
-                  className=" bg-white hover:bg-blue-500 text-gray focus:cursor-default  hover:text-white focus:text-white focus:bg-blue-500 font-bold py-2 px-4 rounded "
+                  className=" bg-white border-solid border-violet-500 border hover:text-violet-500 text-gray 
+                  focus:cursor-default   focus:text-violet-600 focus:font-bold  font-bold py-2 px-4 rounded "
                 >
                   {brand?.mb_nick}
                 </button>
               ))}
+              <div className="flex gap-5">
+                <button
+                  onClick={() => handleNewSaleChange("", "sale")}
+                  className=" bg-white border-solid border-blue-500 border hover:text-blue-500 text-gray *:focus:cursor-default   focus:text-blue-600 focus:font-bold  font-bold py-1 px-3 rounded "
+                >
+                  Sale Products
+                </button>
+                <button
+                  onClick={() => handleNewSaleChange("", "new")}
+                  className=" bg-white border-solid border-blue-500 border hover:text-blue-500 text-gray focus:cursor-default   focus:text-blue-600 focus:font-bold  font-bold py-1 px-3 rounded "
+                >
+                  New Arrivals
+                </button>
+              </div>
             </div>
             <div className="flex flex-wrap items-center justify-evenly">
-              {allProducts?.map((productItem: Product) => {
+              {allProducts.slice(0, 12)?.map((productItem: Product) => {
                 return (
                   <Products
                     product={productItem}
                     disable={false}
-                    setBrandname={setBrandName}
+                    setProductRebuild={setProductRebuild}
+                    filter={filter}
                   />
                 );
               })}
