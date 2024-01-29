@@ -20,12 +20,16 @@ import { serverApi } from "../../lib/config";
 import ProductsOnSale from "../../components/pageProps/productDetails/ProductsOnSale";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import CommentExampleComment from "./../../components/Comment/Comment";
+import CommentApiService from "../../app/ApiServices/commentApiService";
+import { actionDispatchPr } from "./useReduxPrDetail";
 
 const ProductDetails = () => {
   let { id } = useParams<{ id: string }>();
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
   const [productRebuild, setProductRebuild] = useState<Date>(new Date());
   const { setChosenProduct, setSaleProducts } = actionDispatch(useDispatch());
+  const { setComments } = actionDispatchPr(useDispatch());
   const { chosenProduct } = useSelector(shopRetriever);
 
   const productRelatedProcess = async () => {
@@ -40,6 +44,7 @@ const ProductDetails = () => {
 
   useEffect(() => {
     const productService = new ProductApiService();
+    const commentService = new CommentApiService();
     productService
       .getSaleProducts({
         order: "sale",
@@ -50,6 +55,14 @@ const ProductDetails = () => {
         setSaleProducts(data);
       })
       .catch((err) => console.log(err));
+
+    commentService
+      .getAllComments(id)
+      .then((data) => {
+        setComments(data);
+      })
+      .catch((err) => console.log(err));
+
     productRelatedProcess().then();
   }, [productRebuild]);
 
@@ -131,6 +144,7 @@ const ProductDetails = () => {
             <ProductInfo productInfo={chosenProduct} />
           </div>
         </div>
+        <CommentExampleComment setProductRebuild={setProductRebuild} id={id} />
       </Container>
     </div>
   );

@@ -1,3 +1,4 @@
+import { CommentReply } from "./others";
 import { MeLiked } from "./user";
 
 export interface Product {
@@ -6,6 +7,7 @@ export interface Product {
   product_collection: string;
   product_status: string;
   product_price: number;
+  sale_price: number;
   product_discount?: number;
   product_left_cnt: number;
   product_size?: string;
@@ -14,8 +16,10 @@ export interface Product {
   product_images: string[];
   seller_mb_id: string;
   product_views?: number;
-  product_likes?: number;
+  product_likes: number;
   createdAt: Date;
   updatedAt: Date;
   me_liked: MeLiked[];
+  product_comments: Comment[];
+  comment_replies: CommentReply[];
 }

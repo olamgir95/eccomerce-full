@@ -12,79 +12,30 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
+import faqData from "../../constants/faqData";
+import ruleData from "../../constants/ruleData";
 
 export function HelpPage() {
   const [value, setValue] = useState("1");
-
-  const faqData = [
-    {
-      question: "How to make a payment",
-      answer: "You can make a payment using PayMe, through click applications.",
-    },
-    {
-      question: "Add your share for site development",
-      answer:
-        "Certainly, I would like to contribute to the development of the site.",
-    },
-    {
-      question: "How to make a payment",
-      answer: "You can make a payment using PayMe, through click applications.",
-    },
-    {
-      question:
-        "To place orders on the site, and to use live chats, registration is required.",
-      answer:
-        "The use of explicit words during live chat is strictly prohibited.",
-    },
-    {
-      question: "How to make a payment",
-      answer: "You can make a payment using PayMe, through click applications.",
-    },
-    {
-      question: "How to make a payment",
-      answer: "You can make a payment using PayMe, through click applications.",
-    },
-    {
-      question: "How to make a payment",
-      answer: "You can make a payment using PayMe, through click applications.",
-    },
-    {
-      question: "Add your share for site development",
-      answer:
-        "Certainly, I would like to contribute to the development of the site.",
-    },
-    {
-      question: "How to make a payment",
-      answer: "You can make a payment using PayMe, through click applications.",
-    },
-    {
-      question: "How to make a payment",
-      answer: "You can make a payment using PayMe, through click applications.",
-    },
-    {
-      question: "Add your share for site development",
-      answer:
-        "Certainly, I would like to contribute to the development of the site.",
-    },
-  ];
-
-  const rules = [
-    `To place orders on the site, registration is required for using live chats.`,
-    `The use of explicit words during live chat is strictly prohibited.`,
-    `To place orders on the site, registration is required for using live chats.`,
-    `Comply with all requirements as your activities are under the supervision of our admins.`,
-  ];
 
   const handleChange = (event: any, newValue: string) => {
     setValue(newValue);
   };
 
   return (
-    <div className="help_page" data-aos="zoom-in">
-      <Container className="help_container">
+    <div data-aos="zoom-in">
+      <Container className="help_page">
         <TabContext value={value}>
           <Box className="help_menu">
-            <Box className="divider">
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "100px",
+                fontWeight: 600,
+              }}
+            >
               <TabList
                 onChange={handleChange}
                 aria-label="lab API tabs example"
@@ -97,14 +48,25 @@ export function HelpPage() {
           </Box>
           <Stack>
             <Stack className="help_main_content">
-              <TabPanel value={"1"}>
-                <Stack className="rules_box">
-                  {rules?.map((rule, index) => (
-                    <p key={index}>{rule}</p>
+              <TabPanel value={"1"} sx={{ height: 590 }}>
+                <Stack className="accordion_menu">
+                  {ruleData?.map((item, index) => (
+                    <Accordion key={index}>
+                      <AccordionSummary
+                        expandIcon={<ExpandMore />}
+                        aria-controls="panel-content"
+                        id="panel-header"
+                      >
+                        <Typography>{item.title}</Typography>
+                      </AccordionSummary>
+                      <AccordionDetails>
+                        <Typography>{item.description}</Typography>
+                      </AccordionDetails>
+                    </Accordion>
                   ))}
                 </Stack>
               </TabPanel>
-              <TabPanel value="2">
+              <TabPanel value="2" sx={{ height: 590 }}>
                 <Stack className="accordion_menu">
                   {faqData?.map((item, index) => (
                     <Accordion key={index}>
@@ -122,39 +84,73 @@ export function HelpPage() {
                   ))}
                 </Stack>
               </TabPanel>
-              <TabPanel value="3">
-                <Stack className="admin_letter_container">
-                  <Box className="admin_letter_frame">
-                    <span>Send Message to Admin</span>
-                    <p>
+              <TabPanel value="3" sx={{ height: 590 }}>
+                <div className="w-full max-w-2xl mx-auto p-10 bg-white border border-gray-300 rounded-lg shadow-md">
+                  <div className="mb-4">
+                    <span className="text-black text-2xl font-normal">
+                      Send Message to Admin
+                    </span>
+                    <p className="text-gray-600 mt-1">
                       Hello! To send a message to the admin, please fill out the
                       form below!
                     </p>
-                  </Box>
-                  <form action="#" method="POST" className="letter_form">
-                    <div className="input_letter_box">
-                      <label htmlFor="name">Name</label>
-                      <input type="text" name="mb_nick" placeholder="Name" />
+                  </div>
+
+                  <form action="" method="POST" className="space-y-3">
+                    <div className="flex flex-col">
+                      <label
+                        htmlFor="name"
+                        className="text-purple-800 font-bold"
+                      >
+                        Name
+                      </label>
+                      <input
+                        type="text"
+                        name="mb_nick"
+                        placeholder="Name"
+                        className="mt-2 px-4 py-2 border border-purple-800 rounded-lg"
+                      />
                     </div>
-                    <div className="input_letter_box">
-                      <label htmlFor="email">Email Address</label>
+
+                    <div className="flex flex-col">
+                      <label
+                        htmlFor="email"
+                        className="text-purple-800 font-bold"
+                      >
+                        Email Address
+                      </label>
                       <input
                         type="email"
                         name="mb_mail"
                         placeholder="Email Address"
+                        className="mt-2 px-4 py-2 border border-purple-800 rounded-lg"
                       />
                     </div>
-                    <div className="input_letter_box">
-                      <label htmlFor="subject">Message</label>
-                      <textarea name="mb_msg" placeholder="Message"></textarea>
+
+                    <div className="flex flex-col">
+                      <label
+                        htmlFor="subject"
+                        className="text-purple-800 font-bold"
+                      >
+                        Message
+                      </label>
+                      <textarea
+                        name="mb_msg"
+                        placeholder="Message"
+                        className="mt-2 px-4 py-2 border border-purple-800 rounded-lg"
+                      ></textarea>
+                    </div>
+
+                    <div className="text-right">
+                      <button
+                        type="submit"
+                        className="px-6 py-1 bg-purple text-white rounded-lg hover:bg-vividPink uppercase"
+                      >
+                        Send
+                      </button>
                     </div>
                   </form>
-                  <Box className="send_btn">
-                    <Button variant="contained" type="submit">
-                      Send
-                    </Button>
-                  </Box>
-                </Stack>
+                </div>
               </TabPanel>
             </Stack>
           </Stack>

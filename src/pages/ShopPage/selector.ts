@@ -5,12 +5,12 @@ const selectShopPage = (state: AppRootState) => state.shopPage;
 
 export const retrieveAllProducts = createSelector(
   selectShopPage,
-  (ShopPage) => ShopPage.allProducts
+  (shopPage) => shopPage.allProducts
 );
 
 export const retrieveChosenProduct = createSelector(
   selectShopPage,
-  (ShopPage) => ShopPage.chosenProduct
+  (shopPage) => shopPage.chosenProduct
 );
 
 export const retrieveSaleProducts = createSelector(

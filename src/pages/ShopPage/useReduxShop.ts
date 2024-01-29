@@ -19,7 +19,6 @@ export const shopRetriever = createSelector(
   retrieveAllProducts,
   retrieveChosenProduct,
   retrieveSaleProducts,
-
   (allProducts, chosenProduct, saleProducts) => ({
     allProducts,
     chosenProduct,

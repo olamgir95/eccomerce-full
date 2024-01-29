@@ -44,27 +44,33 @@ export function CommunityPage(props: any) {
       .getTargetArticles(searchArticleObj)
       .then((data) => setTargetArticles(data))
       .catch((err) => console.log(err));
-  }, [searchArticleObj, articlesRebuild]);
+  }, [searchArticleObj, articlesRebuild, value]);
 
   // Handler
   const handleChange = (event: SyntheticEvent, newValue: string) => {
     searchArticleObj.page = 1;
     switch (newValue) {
       case "1":
+        searchArticleObj.order = "";
         searchArticleObj.bo_id = "all";
         break;
       case "2":
         searchArticleObj.order = "art_likes";
+        searchArticleObj.bo_id = "all";
+
         break;
       case "3":
         searchArticleObj.bo_id = "evaluation";
+        searchArticleObj.order = "";
+
         break;
       case "4":
         searchArticleObj.bo_id = "story";
+        searchArticleObj.order = "";
+
         break;
     }
     setSearchArticleObj({ ...searchArticleObj });
-
     setValue(newValue);
   };
 

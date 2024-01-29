@@ -4,7 +4,7 @@ import NavTitle from "./NavTitle";
 import { homeRetriever } from "../../../../pages/Home/useReduxHome";
 import { useSelector } from "react-redux";
 import { Seller } from "../../../../types/user";
-import { useCombinedContext } from "../../../../constants/useCombinedContext";
+import { useCombinedContext } from "../../../../context/useCombinedContext";
 
 const Brand = () => {
   const [showBrands, setShowBrands] = useState(true);

@@ -19,7 +19,7 @@ import { verifyMemberData } from "../../../app/ApiServices/verify";
 import { serverApi } from "../../../lib/config";
 import { useNavigate } from "react-router-dom";
 import { MdOutlineLocationOn } from "react-icons/md";
-import { useCombinedContext } from "../../../constants/useCombinedContext";
+import { useCombinedContext } from "../../../context/useCombinedContext";
 
 export const TopBrands = () => {
   const { topSellers } = useSelector(homeRetriever);

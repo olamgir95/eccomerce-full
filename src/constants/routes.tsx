@@ -4,28 +4,30 @@ import Header from "../components/home/Header/Header";
 import { Outlet } from "react-router-dom";
 import { CommunityPage } from "../pages/CommunityPage";
 import ProductDetails from "../pages/ProductDetails/ProductDetails";
-import { Payment } from "@mui/icons-material";
 import Cart from "../pages/Cart/Cart";
 import Footer from "../components/home/Footer/Footer";
 import { HelpPage } from "../pages/Help/Help";
-import { MemberPage } from "../pages/MemberPgae";
 import SpecialCase from "../components/SpecialCase/SpecialCase";
+import MyPage from "../pages/MemberPage/MyPage";
+import { OrdersPage } from "../pages/OrdersPage";
+import CommunityChats from "../components/CommunityChat/communityChats";
 
 export const routes = [
   { path: "/", element: <Home /> },
   { path: "/community", element: <CommunityPage /> },
   { path: "/shop", element: <ShopPage /> },
   { path: "/help", element: <HelpPage /> },
-  { path: "/product/:_id", element: <ProductDetails /> },
-  { path: "/paymentgateway", element: <Payment /> },
+  { path: "/product/:id", element: <ProductDetails /> },
+  { path: "/orders", element: <OrdersPage /> },
   { path: "/cart", element: <Cart /> },
-  { path: "/member-page", element: <MemberPage /> },
+  { path: "/member-page", element: <MyPage /> },
 ];
 
 const Layout = () => {
   return (
-    <div className="custom-scroll-container">
+    <div className="custom-scroll-container font-bodyFont">
       <Header />
+      <CommunityChats />
       <SpecialCase />
       <Outlet />
       <Footer />

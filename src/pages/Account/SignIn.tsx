@@ -8,6 +8,7 @@ import {
   sweetTopSmallSuccessAlert,
 } from "../../lib/sweetAlert";
 import MemberApiService from "../../app/ApiServices/memberApiService";
+import BackButton from "./../../components/designLayouts/buttons/BackButton";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -51,8 +52,9 @@ const SignIn = () => {
       const memberApiService = new MemberApiService();
       await memberApiService.loginRequest(login_data);
 
-      await sweetTopSmallSuccessAlert("Log in successfully", 700, true);
+      await sweetTopSmallSuccessAlert("Log in successfully", 500, true);
       navigate("/");
+      // window.location.reload();
       return true;
     } catch (err) {
       console.log(err);
@@ -133,11 +135,12 @@ const SignIn = () => {
           </div>
         </div>
       </div>
-      <div className="w-full lgl:w-1/2 h-full">
+      <div className="w-full lgl:w-1/2 ">
         <form className="w-full lgl:w-[450px] h-screen flex  justify-center">
           <div className="px-6 py-4 w-full h-[90%] flex flex-col justify-center overflow-y-scroll scrollbar-thin scrollbar-thumb-primeColor">
-            <h1 className="font-titleFont underline underline-offset-4 decoration-[1px] font-semibold text-3xl mdl:text-4xl mb-4">
+            <h1 className="font-sans underline underline-offset-4 decoration-[1px] font-semibold text-3xl mdl:text-4xl mb-4">
               Sign in
+              <BackButton onClick={() => navigate("/")} />
             </h1>
             <div className="flex flex-col gap-3">
               {/* client name */}

@@ -37,7 +37,12 @@ const ShopBanner = () => {
   };
 
   return (
-    <div className="site-outer">
+    <div
+      className="site-outer"
+      data-aos="flip-left"
+      data-aos-easing="ease-out-cubic"
+      data-aos-duration="2000"
+    >
       <div className="site-inner">
         <section className="container-fluid">
           <div className="row">

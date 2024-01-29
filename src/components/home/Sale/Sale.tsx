@@ -31,7 +31,7 @@ const Sale = (props: any) => {
   }, [productRebuild]);
 
   return (
-    <div className="w-full pb-20">
+    <div className="w-full pb-20" data-aos="zoom-out-left">
       <Container>
         <Heading heading="Our Best Discounts" />
         <div className="w-full grid grid-cols-1 md:grid-cols-2 lgl:grid-cols-3 xl:grid-cols-4 gap-4">

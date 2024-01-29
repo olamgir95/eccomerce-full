@@ -11,7 +11,7 @@ const light = {
     type: "light",
     background: {
       default: "#f4f6f8",
-      paper: common.white,
+      // paper: common.white,
     },
     primary: {
       contrastText: "#ffffff",

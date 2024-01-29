@@ -1,44 +1,51 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { CartItem } from "../types/others";
-import { Product } from "../types/product";
+import { verifyMemberData } from "../app/ApiServices/verify";
+import assert from "assert";
+import { Definer } from "../lib/Definer";
+import { sweetErrorHandling } from "../lib/sweetAlert";
 
 const useBasket = () => {
   const cartJson: string | null = localStorage.getItem("cart_data");
   const currentCart = cartJson ? JSON.parse(cartJson) : [];
   const [cartItems, setCartItems] = useState<CartItem[]>(currentCart);
 
-  const onAdd = (product: any) => {
-    console.log("product", product);
+  const onAdd = async (product: any) => {
+    try {
+      assert.ok(verifyMemberData, Definer.auth_err1);
 
-    const exist: any = cartItems?.find(
-      (item: CartItem) => item?._id === product?._id
-    );
-    console.log("exist", exist);
-
-    if (exist) {
-      const cart_updated = cartItems?.map((item: CartItem) =>
-        item._id === product._id
-          ? { ...exist, quantity: exist.quantity + 1 }
-          : item
+      const exist: any = cartItems?.find(
+        (item: CartItem) => item?._id === product?._id
       );
-      setCartItems(cart_updated);
-      localStorage.setItem("cart_data", JSON.stringify(cart_updated));
-      console.log("cart", cartItems);
-    } else {
-      const new_item: CartItem = {
-        _id: product._id,
-        quantity: 1,
-        price: product.product_price,
-        image: product?.product_images[0],
-        name: product.product_name,
-      };
-      console.log("cartitems", cartItems);
 
-      const cart_updated = [...cartItems, { ...new_item }];
-      console.log("new", cart_updated);
+      if (exist) {
+        const cart_updated = cartItems?.map((item: CartItem) =>
+          item._id === product._id
+            ? { ...exist, quantity: exist.quantity + 1 }
+            : item
+        );
+        setCartItems(cart_updated);
+        localStorage.setItem("cart_data", JSON.stringify(cart_updated));
+      } else {
+        const new_item: CartItem = {
+          _id: product._id,
+          quantity: 1,
+          price: product.product_price,
+          sale_price: product.sale_price,
+          image: product?.product_images[0],
+          name: product.product_name,
+        };
+        console.log("cartitems", new_item);
 
-      setCartItems(cart_updated);
-      localStorage.setItem("cart_data", JSON.stringify(cart_updated));
+        const cart_updated = [...cartItems, { ...new_item }];
+        console.log("cartUpted", cart_updated);
+
+        setCartItems(cart_updated);
+        localStorage.setItem("cart_data", JSON.stringify(cart_updated));
+      }
+    } catch (err: any) {
+      console.log(err.message);
+      sweetErrorHandling(err).then();
     }
   };
   console.log("new", cartItems);

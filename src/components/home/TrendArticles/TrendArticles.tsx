@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -6,7 +5,7 @@ import { homeRetriever } from "../../../pages/Home/useReduxHome";
 import { Article } from "../../../types/Article";
 import { serverApi } from "../../../lib/config";
 import { Box, Container } from "@mui/system";
-import { Checkbox } from "@mui/material";
+import { Button, Checkbox, Stack } from "@mui/material";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import assert from "assert";
@@ -23,6 +22,15 @@ import { settings } from "./sliderSetting";
 import "dayjs/locale/en";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { useNavigate } from "react-router-dom";
+import {
+  AspectRatio,
+  Avatar,
+  Card,
+  CssVarsProvider,
+  IconButton,
+  Typography,
+} from "@mui/joy";
+import "../../../pages/CommunityPage/community.css";
 
 const TrendArticles = (props: any) => {
   dayjs.locale("en");
@@ -33,6 +41,7 @@ const TrendArticles = (props: any) => {
   const { setArticlesRebuild } = props;
   const targetLikeHandler = async (e: any) => {
     try {
+      e.stopPropagation();
       assert.ok(verifyMemberData, Definer.auth_err1);
       const memberService = new MemberApiService();
       const id = e.target.id,
@@ -67,84 +76,149 @@ const TrendArticles = (props: any) => {
         <div data-aos="zoom-in">
           <Slider {...settings}>
             {trendArticles?.map((article: Article) => {
-              const image = article?.art_image
+              const userImage = article?.art_image
                 ? `${serverApi}/${article?.member_data?.mb_image}`
                 : "user.png";
+              const artImage = article?.art_image
+                ? `${serverApi}/${article?.art_image}`
+                : "default.svg";
               const formattedDate = dayjs(article?.createdAt).fromNow();
 
               return (
                 <div className="my-6">
                   <div
                     key={article?._id}
-                    className="flex flex-col gap-4 shadow-lg py-8 px-6
+                    className="flex flex-col gap-4 shadow-lg 
                      mx-4 rounded-xl dark:bg-gray-800 bg-primary/10
                      max-w-[480px] h-[390px] relative"
-                    onClick={() =>
-                      navigate(
-                        `/member-page/other?mb_id=${article?.mb_id}&art_id=${article?._id}`
-                      )
-                    }
                   >
-                    <div className="evaluation font-semibold font-serif">
-                      <p>{article?.art_subject}</p>
-                    </div>
-                    <div className="mb-4">
-                      <img
-                        src={image}
-                        alt=""
-                        className="rounded-full bg-contain w-24 h-24 cursor-pointer"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          navigate(
-                            `/member-page/other?mb_id=${article?.mb_id}`
-                          );
+                    <CssVarsProvider>
+                      <Card
+                        variant="plain"
+                        sx={{
+                          width: "100%",
+                          height: 390,
+                          bgcolor: "initial",
+                          p: 0,
                         }}
-                      />
-                    </div>
-                    <p
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        navigate(`/member-page/other?mb_id=${article?.mb_id}`);
-                      }}
-                      className="cursor-pointer"
-                    >
-                      <h1 className="text-xl font-bold text-black/80 dark:text-light">
-                        {article?.member_data?.mb_nick}
-                      </h1>
-                    </p>
-                    <div className="flex flex-col items-center gap-4">
-                      <div className="space-y-3">
-                        <p className="text-xs text-left text-gray-500 h-20">
-                          {article?.art_content}
-                        </p>
-                      </div>
-                    </div>
-                    <p className="text-black/20 text-9xl font-serif absolute top-0 right-0">
-                      ,,
-                    </p>
-                    <div className="flex justify-between items-center">
-                      <p>{formattedDate}</p>
-                      <p className="evaluation_text">
+                      >
+                        <Box sx={{ position: "relative" }}>
+                          <AspectRatio className=" rounded-b-none h-[280px]">
+                            <img
+                              src={artImage}
+                              srcSet={artImage}
+                              loading="lazy"
+                              alt={article?.art_subject}
+                              className="cursor-pointer w-full  bg-center bg-fill"
+                            />
+                          </AspectRatio>
+                        </Box>
+                        <Box
+                          sx={{
+                            display: "flex",
+                            gap: 1,
+                            alignItems: "center",
+                            paddingX: 2,
+                            mt: -4,
+                          }}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            navigate(
+                              `/member-page/other?mb_id=${article?.mb_id}`
+                            );
+                          }}
+                          className="cursor-pointer"
+                        >
+                          <Avatar
+                            className="w-12 h-12 art_user_img"
+                            src={userImage}
+                          />
+                          <Typography
+                            sx={{
+                              fontSize: "md",
+                              textTransform: "capitalize",
+                              fontWeight: "lg",
+                              display: "flex",
+                              flexDirection: "column",
+                            }}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              navigate(
+                                `/member-page/other?mb_id=${article?.mb_id}`
+                              );
+                            }}
+                            className="cursor-pointer"
+                          >
+                            {article?.member_data?.mb_nick}
+                            <span className=" text-gray-600 italic ">
+                              {article?.bo_id}
+                            </span>
+                          </Typography>
+                        </Box>
+                        <Box
+                          sx={{
+                            display: "flex",
+                            flexWrap: "wrap",
+                            justifyContent: "space-between",
+                            gap: 8,
+                            px: "16px",
+                          }}
+                        >
+                          <Typography
+                            sx={{
+                              fontSize: "md",
+                              textTransform: "capitalize",
+                              fontWeight: "lg",
+                            }}
+                          ></Typography>
+                          <span className="-mt-16">{formattedDate}</span>
+                        </Box>
+                        <Box className="mt-0 items-center px-4 flex justify-between gap-6">
+                          <Typography
+                            level="h2"
+                            noWrap
+                            className={
+                              "text-base text-primeColor font-titleFont font-medium"
+                            }
+                          >
+                            {article?.art_subject}
+                          </Typography>
+                          <IconButton
+                            className="text-blue-400"
+                            onClick={() =>
+                              navigate(
+                                `/member-page/other?mb_id=${article?.mb_id}&art_id=${article?._id}`
+                              )
+                            }
+                          >
+                            Read More
+                          </IconButton>
+                        </Box>
+                      </Card>
+                    </CssVarsProvider>
+                    <Stack className="view">
+                      <Box className="evaluation_text">
+                        <span className="-mr-1">{article?.art_likes}</span>
                         <Checkbox
                           {...label}
+                          onChange={targetLikeHandler}
                           icon={<FavoriteBorder />}
                           checkedIcon={<Favorite style={{ fill: "red" }} />}
                           id={article?._id}
-                          onClick={targetLikeHandler}
                           checked={
                             article?.me_liked &&
                             article?.me_liked[0]?.my_favorite
                               ? true
                               : false
                           }
+                          sx={{ cursor: "pointer" }}
                         />
-                        <span className="ml-1">{article?.art_likes}</span>
-                      </p>
-                      <div className=" flex gap-1">
+                      </Box>
+                      <Box className="eye" onClick={(e) => e.stopPropagation()}>
+                        <span>{article?.art_views}</span>
                         <RemoveRedEyeIcon />
-                        <span className="ml-1">{article?.art_views}</span>
-                      </div>
-                    </div>
+                      </Box>
+                    </Stack>
                   </div>
                 </div>
               );

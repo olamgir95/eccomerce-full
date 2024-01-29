@@ -64,7 +64,7 @@ const Home = () => {
         bo_id: "all",
         page: 1,
         limit: 5,
-        order: "art_views",
+        order: "art_likes",
       })
       .then((data) => setTrendArticles(data))
       .catch((err) => console.log(err));

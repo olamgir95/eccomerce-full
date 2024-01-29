@@ -9,17 +9,13 @@ if (cookie.get("access_token")) {
     ? localStorage.getItem("member_data")
     : null;
   member_data = memberDataJson ? JSON.parse(memberDataJson) : null;
-  console.log("tekshir", member_data.mb_image);
   if (member_data) {
     member_data.mb_image = member_data.mb_image
       ? `${serverApi}/${member_data.mb_image}`.replace(/\\/g, "/")
-      : "/default_user.svg";
+      : "user.png";
   }
 } else {
   localStorage.removeItem("member_data");
 }
-
-console.log("== verify ==");
-console.log(member_data);
 
 export const verifyMemberData: Member = member_data ?? null;

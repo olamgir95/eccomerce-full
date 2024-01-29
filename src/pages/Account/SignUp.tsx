@@ -8,6 +8,7 @@ import {
   sweetErrorHandling,
   sweetTopSmallSuccessAlert,
 } from "../../lib/sweetAlert";
+import BackButton from "../../components/designLayouts/buttons/BackButton";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -137,7 +138,10 @@ const SignUp = () => {
             </p>
           </div>
           <div className="flex items-center justify-between mt-10">
-            <p className="text-sm font-titleFont font-semibold text-gray-300 hover:text-white cursor-pointer duration-300">
+            <p
+              onClick={() => navigate("/")}
+              className="text-sm font-titleFont font-semibold text-gray-300 hover:text-white cursor-pointer duration-300"
+            >
               © Shopsy
             </p>
             <p className="text-sm font-titleFont font-semibold text-gray-300 hover:text-white cursor-pointer duration-300">
@@ -152,11 +156,12 @@ const SignUp = () => {
           </div>
         </div>
       </div>
-      <div className="w-full lgl:w-[500px] h-full flex flex-col justify-center">
+      <div className="w-full lgl:w-[500px] h-full -mt-32 flex flex-col justify-center">
         <form className="w-full mt-32 lgl:w-[500px] h-screen flex items-center justify-center">
-          <div className="px-6 py-4 w-full h-[96%] flex flex-col justify-start overflow-y-scroll scrollbar-thin scrollbar-thumb-primeColor">
-            <h1 className="font-titleFont underline underline-offset-4 decoration-[1px] font-semibold text-2xl mdl:text-3xl mb-4">
+          <div className="px-6 py-4 w-full h-[96%] flex flex-col justify-center overflow-y-scroll scrollbar-thin scrollbar-thumb-primeColor">
+            <h1 className="font-sans underline underline-offset-4 decoration-[1px] font-semibold text-2xl mdl:text-4xl mb-4">
               Create your account
+              <BackButton onClick={() => navigate("/")} />
             </h1>
             <div className="flex flex-col gap-3">
               {/* client name */}

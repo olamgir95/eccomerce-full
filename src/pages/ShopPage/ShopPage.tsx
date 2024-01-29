@@ -15,7 +15,7 @@ import SellerApiService from "../../app/ApiServices/sellerApiService";
 import { actionDispatchHome, homeRetriever } from "../Home/useReduxHome";
 import { Seller } from "../../types/user";
 import HeaderBottom from "./../../components/home/Header/HeaderBottom";
-import { useCombinedContext } from "../../constants/useCombinedContext";
+import { useCombinedContext } from "../../context/useCombinedContext";
 
 const ShopPage = () => {
   const [productRebuild, setProductRebuild] = useState<Date>(new Date());
@@ -65,27 +65,36 @@ const ShopPage = () => {
           </div>
           <div className="w-full mdl:w-[80%] lgl:w-[75%] h-full flex flex-col gap-10">
             <div className="flex  items-center gap-3">
-              {topSellers?.map((brand: Seller) => (
-                <button
-                  onClick={() => {
-                    handleBrandChange(brand?._id, "brand");
-                    setBrandName(brand?.mb_nick);
-                  }}
-                  key={brand?._id}
-                  className=" bg-white border-solid border-violet-500 border hover:text-violet-500 text-gray 
+              {topSellers?.map((brand: Seller, index) => {
+                const delay = 200 * index;
+                return (
+                  <button
+                    onClick={() => {
+                      handleBrandChange(brand?._id, "brand");
+                      setBrandName(brand?.mb_nick);
+                    }}
+                    data-aos="zoom-in-left"
+                    data-aos-delay={delay}
+                    key={brand?._id}
+                    className=" bg-white border-solid border-violet-500 border hover:text-violet-500 text-gray 
                   focus:cursor-default   focus:text-violet-600 focus:font-bold  font-bold py-2 px-4 rounded "
-                >
-                  {brand?.mb_nick}
-                </button>
-              ))}
+                  >
+                    {brand?.mb_nick}
+                  </button>
+                );
+              })}
               <div className="flex gap-5">
                 <button
+                  data-aos="zoom-in-left"
+                  data-aos-delay={1200}
                   onClick={() => handleNewSaleChange("", "sale")}
                   className=" bg-white border-solid border-blue-500 border hover:text-blue-500 text-gray *:focus:cursor-default   focus:text-blue-600 focus:font-bold  font-bold py-1 px-3 rounded "
                 >
                   Sale Products
                 </button>
                 <button
+                  data-aos="zoom-in-left"
+                  data-aos-delay={1400}
                   onClick={() => handleNewSaleChange("", "new")}
                   className=" bg-white border-solid border-blue-500 border hover:text-blue-500 text-gray focus:cursor-default   focus:text-blue-600 focus:font-bold  font-bold py-1 px-3 rounded "
                 >

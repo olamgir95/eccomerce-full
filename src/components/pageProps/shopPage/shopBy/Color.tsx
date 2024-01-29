@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import NavTitle from "./NavTitle";
 import { colors } from "../../../../constants/shopFilterCategories";
-import { useCombinedContext } from "../../../../constants/useCombinedContext";
+import { useCombinedContext } from "../../../../context/useCombinedContext";
 
 const Color = () => {
   const [showColors, setShowColors] = useState(true);
@@ -13,7 +13,7 @@ const Color = () => {
   };
 
   return (
-    <div>
+    <div data-aos="zoom-in-down" data-aos-delay={600}>
       <div
         onClick={() => setShowColors(!showColors)}
         className="cursor-pointer transition-all"

@@ -3,7 +3,7 @@ import NavTitle from "./NavTitle";
 import { motion } from "framer-motion";
 import { items } from "../../../../constants/shopFilterCategories";
 import { Box, Stack } from "@mui/material";
-import { useCombinedContext } from "../../../../constants/useCombinedContext";
+import { useCombinedContext } from "../../../../context/useCombinedContext";
 
 const Category = () => {
   const [showCategory, setShowCategory] = useState(true);
@@ -14,7 +14,7 @@ const Category = () => {
   };
 
   return (
-    <Stack>
+    <Stack data-aos="zoom-in-down" data-aos-delay={300}>
       <Box
         onClick={() => setShowCategory(!showCategory)}
         className="cursor-pointer transition-all"

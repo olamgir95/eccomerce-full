@@ -1,6 +1,6 @@
 import { Box, Container, Stack } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectCoverflow, Pagination } from "swiper/modules";
+import { Autoplay, EffectCoverflow, Pagination } from "swiper/modules";
 import { homeRetriever } from "../Home/useReduxHome";
 import { useSelector } from "react-redux";
 import { serverApi } from "../../lib/config";
@@ -19,7 +19,7 @@ export default function Events() {
   const { newEvents } = useSelector(homeRetriever);
 
   return (
-    <div className="events_frame">
+    <div className="events_frame" data-aos="zoom-in">
       <Container sx={{ overflow: "hidden" }}>
         <Stack className="events_main">
           <Box className="events_text">
@@ -34,6 +34,7 @@ export default function Events() {
             effect={"coverflow"}
             grabCursor={true}
             centeredSlides={true}
+            autoplay={true}
             slidesPerView={"auto"}
             coverflowEffect={{
               rotate: 50,
@@ -43,7 +44,7 @@ export default function Events() {
               slideShadows: true,
             }}
             pagination={false}
-            modules={[EffectCoverflow, Pagination]}
+            modules={[EffectCoverflow, Pagination, Autoplay]}
             className="mySwiper"
           >
             {newEvents?.map((event: Event) => {
@@ -55,18 +56,18 @@ export default function Events() {
               return (
                 <SwiperSlide
                   key={event._id}
-                  className="events_info_frame w-96 h-96 relative"
+                  className="events_info_frame w-[420px] h-[440px] relative"
                 >
                   <img
                     src={image_path}
-                    className="w-full h-1/2  object-cover rounded-10"
+                    className="w-full h-[43%]  object-cover rounded-10"
                     alt=""
                   />
-                  <div className=" bottom-5  transform  p-2 h-[224px] rounded-b-2xl bg-white shadow-lg rounded-8">
+                  <div className="  transform  p-2 h-[54.5%] rounded-b-2xl bg-white shadow-lg rounded-8">
                     <div className="w-full flex flex-row justify-between items-center">
                       <div className="flex flex-col">
                         <div className="event_title_speaker">
-                          <strong className=" -mt-1">
+                          <strong className=" -mt-1 ">
                             {event.event_title}
                           </strong>
                           <div className="event_organizator">
@@ -77,7 +78,7 @@ export default function Events() {
                             </p>
                           </div>
                         </div>
-                        <p className="text_desc text-sm text-gray-500 mt-1">
+                        <p className="text_desc text-[13px] text-gray-500 mt-1 ">
                           {event.event_description}
                         </p>
                         <div className="flex mt-2 text-sm justify-between">

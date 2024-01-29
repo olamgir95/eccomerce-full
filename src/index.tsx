@@ -10,6 +10,7 @@ import { store } from "./redux/store";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./index.css";
+import { SocketContext, socket } from "./context/socket";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -17,9 +18,11 @@ ReactDOM.render(
       <StyledEngineProvider injectFirst>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <Router>
-            <App />
-          </Router>
+          <SocketContext.Provider value={socket}>
+            <Router>
+              <App />
+            </Router>
+          </SocketContext.Provider>
         </ThemeProvider>
       </StyledEngineProvider>
     </Provider>

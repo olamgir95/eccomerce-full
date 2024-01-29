@@ -5,8 +5,8 @@ export const settings = {
   speed: 500,
   slidesToScroll: 1,
   slidesToShow: 4,
-  nextArrow: <SampleNextArrow />,
-  prevArrow: <SamplePrevArrow />,
+  nextArrow: <SampleNextArrow data-aos="fade-right" />,
+  prevArrow: <SamplePrevArrow data-aos="fade-left" />,
   infinite: true,
   responsive: [
     {

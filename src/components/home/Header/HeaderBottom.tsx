@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, ChangeEvent } from "react";
 import { motion } from "framer-motion";
 import { HiOutlineMenuAlt4 } from "react-icons/hi";
 import { FaSearch, FaUser, FaCaretDown, FaShoppingCart } from "react-icons/fa";
@@ -15,7 +15,7 @@ import { Product } from "../../../types/product";
 import { serverApi } from "../../../lib/config";
 import ProductApiService from "../../../app/ApiServices/productApiService";
 import { useDispatch } from "react-redux";
-import { useCombinedContext } from "../../../constants/useCombinedContext";
+import { useCombinedContext } from "../../../context/useCombinedContext";
 
 const HeaderBottom = (props: any) => {
   const { able } = props;
@@ -24,8 +24,8 @@ const HeaderBottom = (props: any) => {
   const [showUser, setShowUser] = useState<boolean>(false);
   const navigate = useNavigate();
   const ref = useRef<HTMLDivElement>(null);
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
+  // const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  // const open = Boolean(anchorEl);
   const { updateTargetSearchObj } = useCombinedContext();
   const { setAllProducts } = actionDispatch(useDispatch());
 
@@ -46,7 +46,28 @@ const HeaderBottom = (props: any) => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
 
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        inputRef.current &&
+        !(event.target as Node).contains(inputRef.current)
+      ) {
+        setShowUser(false);
+        setSearchQuery("");
+      }
+    };
+
+    window.document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      window.document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [inputRef]);
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setShowUser(true);
     setSearchQuery(e.target.value);
   };
 
@@ -71,7 +92,10 @@ const HeaderBottom = (props: any) => {
   };
 
   return (
-    <div className="w-full bg-orangge relative">
+    <div
+      onClick={() => setShowUser(false)}
+      className="w-full bg-orangge relative"
+    >
       <Container>
         <div className="max-w-container mx-auto">
           <Flex
@@ -85,6 +109,8 @@ const HeaderBottom = (props: any) => {
               <div
                 onClick={() => setShow(!show)}
                 ref={ref}
+                data-aos="zoom-in-right"
+                data-aos-delay={300}
                 className="flex h-14 cursor-pointer transition-all items-center gap-2  text-primeColor"
               >
                 <HiOutlineMenuAlt4 className="w-5 h-5 menu" />
@@ -115,12 +141,17 @@ const HeaderBottom = (props: any) => {
                 )}
               </div>
             )}
-            <div className="relative w-full lg:w-[600px] h-[50px] text-base text-primeColor bg-white flex items-center gap-2 justify-between  rounded-3xl">
+            <div
+              data-aos="zoom-in-left"
+              data-aos-delay={300}
+              className="relative w-full lg:w-[600px] h-[50px] text-base text-primeColor bg-white flex items-center gap-2 justify-between  rounded-3xl"
+            >
               <div className="flex items-center w-full">
                 <input
                   className="flex-1 h-[50px] rounded-3xl  w-[90%] outline-gray-300 outline outline-1 hover:outline-electricPurple placeholder:text-[#C4C4C4] placeholder:text-[14px] pl-2 "
                   type="text"
-                  onChange={handleSearch}
+                  ref={inputRef}
+                  onChange={handleInputChange}
                   value={searchQuery}
                   placeholder="Search your products here"
                 />
@@ -128,11 +159,12 @@ const HeaderBottom = (props: any) => {
                   <FaSearch className="w-6 h-6 text-orange-400  hover:text-orangge absolute" />
                 </div>
               </div>
-              {searchQuery && (
+              {showUser && searchQuery && (
                 <div
                   className={`w-full mx-auto p-2 h-96 scrollbar-none bg-white top-16 absolute left-0 z-50 overflow-y-scroll shadow-2xl  cursor-pointer`}
                 >
-                  {searchQuery &&
+                  {showUser &&
+                    searchQuery &&
                     filteredProducts?.map((product) => {
                       const image_path = `${serverApi}/${product?.product_images[0]}`;
 
@@ -170,57 +202,6 @@ const HeaderBottom = (props: any) => {
                 </div>
               )}
             </div>
-            {able && (
-              <div className="flex gap-4 mt-2 lg:mt-0 items-center pr-6 cursor-pointer relative">
-                <div
-                  onClick={() => setShowUser(!showUser)}
-                  className="flex text-orange-400 hover:scale-110 items-center"
-                >
-                  <FaUser className="w-6 h-6" />
-                  <FaCaretDown />
-                </div>
-                {showUser && (
-                  <motion.ul
-                    initial={{ y: 30, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 0.5 }}
-                    className="absolute top-[68px] left-0 z-50 bg-primeColor w-44 text-[#767676] h-auto p-4 pb-6"
-                  >
-                    <Link to="/signin">
-                      <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                        Login
-                      </li>
-                    </Link>
-                    <Link onClick={() => setShowUser(false)} to="/signup">
-                      <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                        Sign Up
-                      </li>
-                    </Link>
-                    <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                      Profile
-                    </li>
-                  </motion.ul>
-                )}
-                <Link to="/cart" className="hover:scale-110">
-                  <IconButton
-                    aria-label="cart"
-                    id="basic-button"
-                    aria-controls={open ? "basic-menu" : undefined}
-                    aria-haspopup="true"
-                    aria-expanded={open ? "true" : undefined}
-                  >
-                    <Badge
-                      badgeContent={
-                        allProducts.length > 0 ? allProducts.length : 1
-                      }
-                      color="secondary"
-                    >
-                      <FaShoppingCart className="text-orange-400 w-6 h-6 relative" />
-                    </Badge>
-                  </IconButton>
-                </Link>
-              </div>
-            )}
           </Flex>
         </div>
       </Container>

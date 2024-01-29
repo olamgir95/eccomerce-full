@@ -11,7 +11,7 @@ export default class ProductApiService {
     this.path = serverApi;
   }
 
-  async getTrendProducts(data: ProductSearchObj): Promise<Product[]> {
+  async getSaleProducts(data: ProductSearchObj): Promise<Product[]> {
     try {
       console.log(serverApi);
 
@@ -71,11 +71,9 @@ export default class ProductApiService {
     }
   }
 
-  async getChosenProduct(id: string): Promise<Product> {
+  async getChosenProduct(id: string | undefined): Promise<Product> {
     try {
-      console.log(serverApi);
-
-      const url = `/products/${id}`,
+      const url = `/product/${id}`,
         result = await axios.get(this.path + url, {
           withCredentials: true,
         });
@@ -85,7 +83,7 @@ export default class ProductApiService {
       const product: Product = result.data.data;
       return product;
     } catch (err: any) {
-      console.log(`ERROR ::: getTargetProducts ${err.message}`);
+      console.log(`ERROR ::: getChosenProduct ${err.message}`);
 
       throw err;
     }

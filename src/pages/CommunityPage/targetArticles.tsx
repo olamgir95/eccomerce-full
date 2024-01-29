@@ -55,7 +55,7 @@ const TargetArticles = (props: any) => {
 
   return (
     <Stack className="articles_wrapper">
-      {targetArticles?.map((article: Article) => {
+      {targetArticles?.map((article: Article, index) => {
         const artImage = article?.art_image
           ? `${serverApi}/${article?.art_image}`
           : "default.svg";
@@ -63,7 +63,7 @@ const TargetArticles = (props: any) => {
           ? `${serverApi}/${article?.member_data?.mb_image}`
           : "/default.avif";
         const formattedDate = dayjs(article?.createdAt).fromNow();
-
+        const delay = 200 * index;
         return (
           <Link
             key={article?._id}
@@ -72,6 +72,8 @@ const TargetArticles = (props: any) => {
           >
             <CssVarsProvider>
               <Card
+                data-aos="zoom-out-left"
+                data-aos-delay={delay}
                 variant="plain"
                 sx={{
                   width: 360,
@@ -80,7 +82,7 @@ const TargetArticles = (props: any) => {
                 }}
               >
                 <Box sx={{ position: "relative" }}>
-                  <AspectRatio ratio="4/3">
+                  <AspectRatio ratio="4/3" className="rounded-none">
                     <figure>
                       <img
                         src={artImage}
@@ -146,9 +148,9 @@ const TargetArticles = (props: any) => {
                 </Box>
               </Card>
             </CssVarsProvider>
-            <Stack className="views">
+            <Stack className="view">
               <Box className="evaluation_text">
-                <span>{article?.art_likes}</span>
+                <span className="-mr-1">{article?.art_likes}</span>
                 <Checkbox
                   {...label}
                   onChange={targetLikeHandler}

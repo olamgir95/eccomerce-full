@@ -4,7 +4,7 @@ import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import NavTitle from "./NavTitle";
-import { useCombinedContext } from "../../../../constants/useCombinedContext";
+import { useCombinedContext } from "../../../../context/useCombinedContext";
 
 const AirbnbSlider = styled(Slider)(({ theme }) => ({
   color: "#3a8589",
@@ -63,7 +63,7 @@ export default function Price() {
   };
 
   return (
-    <Box sx={{ width: 220 }}>
+    <Box sx={{ width: 220 }} data-aos="zoom-in-down" data-aos-delay={900}>
       <Box />
       <NavTitle title="Shop by Price" icons={false} />
       <AirbnbSlider

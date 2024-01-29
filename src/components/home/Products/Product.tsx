@@ -9,7 +9,7 @@ import { verifyMemberData } from "../../../app/ApiServices/verify";
 import { Definer } from "../../../lib/Definer";
 import MemberApiService from "../../../app/ApiServices/memberApiService";
 import { sweetErrorHandling } from "../../../lib/sweetAlert";
-import { useCombinedContext } from "../../../constants/useCombinedContext";
+import { useCombinedContext } from "../../../context/useCombinedContext";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import { CssVarsProvider, IconButton } from "@mui/joy";
 
@@ -44,6 +44,8 @@ const Products = (props: any) => {
   const image_path = `${serverApi}/${product?.product_images[0]}`;
   return (
     <div
+      data-aos="fade-up"
+      data-aos-delay={props.delay}
       onClick={() => chosenProduct(product?._id)}
       className={
         pathname === "/"
