@@ -35,7 +35,7 @@ export default function Events() {
             grabCursor={true}
             centeredSlides={true}
             autoplay={true}
-            slidesPerView={"auto"}
+            slidesPerView={window.innerWidth < 667 ? 1 : "auto"}
             coverflowEffect={{
               rotate: 50,
               stretch: 0,
@@ -56,7 +56,7 @@ export default function Events() {
               return (
                 <SwiperSlide
                   key={event._id}
-                  className="events_info_frame w-[420px] h-[440px] relative"
+                  className="events_info_frame w-[350px] md:w-[420px] h-[440px] relative"
                 >
                   <img
                     src={image_path}

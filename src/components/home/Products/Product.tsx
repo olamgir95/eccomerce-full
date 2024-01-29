@@ -171,7 +171,7 @@ const Products = (props: any) => {
         </div>
       </div>
       {product?.sale_price && (
-        <div className="absolute top-5 text-vividPink  font-semibold right-3 flex gap-1">
+        <div className="absolute top-5 text-vividPink  font-semibold md:right-3 right-7 flex gap-1">
           15% <MdOutlineLabelImportant className="text-red-600 text-2xl" />
         </div>
       )}

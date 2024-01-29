@@ -1,7 +1,7 @@
 import Home from "../pages/Home/Home";
 import ShopPage from "../pages/ShopPage/ShopPage";
 import Header from "../components/home/Header/Header";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { CommunityPage } from "../pages/CommunityPage";
 import ProductDetails from "../pages/ProductDetails/ProductDetails";
 import Cart from "../pages/Cart/Cart";
@@ -11,6 +11,7 @@ import SpecialCase from "../components/SpecialCase/SpecialCase";
 import MyPage from "../pages/MemberPage/MyPage";
 import { OrdersPage } from "../pages/OrdersPage";
 import CommunityChats from "../components/CommunityChat/communityChats";
+import useWindowSize from "../constants/useWindowResize";
 
 export const routes = [
   { path: "/", element: <Home /> },
@@ -24,12 +25,20 @@ export const routes = [
 ];
 
 const Layout = () => {
+  const { pathname } = useLocation();
+  const [width] = useWindowSize();
   return (
     <div className="custom-scroll-container font-bodyFont">
       <Header />
       <CommunityChats />
       <SpecialCase />
-      <Outlet />
+      {width < 667 && pathname !== "/" ? (
+        <h1 className="my-40 text-center text-black font-bold">
+          Mobile version is developing <br /> Please use our desktop version.
+        </h1>
+      ) : (
+        <Outlet />
+      )}
       <Footer />
     </div>
   );

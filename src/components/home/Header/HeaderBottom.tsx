@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect, ChangeEvent } from "react";
 import { motion } from "framer-motion";
 import { HiOutlineMenuAlt4 } from "react-icons/hi";
-import { FaSearch, FaUser, FaCaretDown, FaShoppingCart } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
 import Flex from "../../designLayouts/Flex";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Badge, Container, IconButton } from "@mui/material";
+import { Container } from "@mui/material";
 import {
   actionDispatch,
   shopRetriever,
@@ -24,8 +24,7 @@ const HeaderBottom = (props: any) => {
   const [showUser, setShowUser] = useState<boolean>(false);
   const navigate = useNavigate();
   const ref = useRef<HTMLDivElement>(null);
-  // const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  // const open = Boolean(anchorEl);
+
   const { updateTargetSearchObj } = useCombinedContext();
   const { setAllProducts } = actionDispatch(useDispatch());
 

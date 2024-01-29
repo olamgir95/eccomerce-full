@@ -23,25 +23,6 @@ const BannerImg = {
   width: "100%",
 };
 
-const FooterLinks = [
-  {
-    title: "Home",
-    link: "/#",
-  },
-  {
-    title: "Help",
-    link: "/#help",
-  },
-  {
-    title: "Contact",
-    link: "/#contact",
-  },
-  {
-    title: "Blog",
-    link: "/#blog",
-  },
-];
-
 const Footer = () => {
   const { pathname } = useLocation();
   console.log("pathnaME", pathname);
@@ -60,7 +41,7 @@ const Footer = () => {
   return (
     <div style={BannerImg} className="text-white pt-10 ">
       <div data-aos="zoom-in" className="container custom-scroll-container ">
-        <div className="grid grid-cols-4 pb-44 pt-5 px-10">
+        <div className="md:grid grid-cols-4 pb-44 pt-5 px-10">
           <div className="py-8 px-4 col-span-2">
             <h1 className="sm:text-3xl text-xl font-bold sm:text-left text-justify mb-3 flex items-center gap-3">
               <img src={footerLogo} alt="" className="max-w-[50px]" />

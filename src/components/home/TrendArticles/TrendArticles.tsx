@@ -178,13 +178,13 @@ const TrendArticles = (props: any) => {
                             level="h2"
                             noWrap
                             className={
-                              "text-base text-primeColor font-titleFont font-medium"
+                              " text-primeColor font-titleFont lg:text-base text-sm  font-medium"
                             }
                           >
                             {article?.art_subject}
                           </Typography>
                           <IconButton
-                            className="text-blue-400"
+                            className="text-blue-400 lg:text-base text-sm "
                             onClick={() =>
                               navigate(
                                 `/member-page/other?mb_id=${article?.mb_id}&art_id=${article?._id}`

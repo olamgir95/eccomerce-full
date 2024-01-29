@@ -1,10 +1,8 @@
-import React, { MouseEvent, useEffect, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
-import { MdClose } from "react-icons/md";
 import { HiMenuAlt2 } from "react-icons/hi";
 import { motion } from "framer-motion";
 import headerLogo from "../../../assets/images/logo.png";
-import Image from "../../designLayouts/Image";
 import Flex from "../../designLayouts/Flex";
 import { Container, ListItemIcon, Menu, MenuItem } from "@mui/material";
 import { NavBarItem } from "../../../types/navbar";
@@ -16,7 +14,8 @@ import {
   sweetTopSmallSuccessAlert,
 } from "../../../lib/sweetAlert";
 import { Definer } from "../../../lib/Definer";
-import { LogoutOutlined } from "@mui/icons-material";
+import { Close, LogoutOutlined } from "@mui/icons-material";
+import useWindowSize from "../../../constants/useWindowResize";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -25,6 +24,7 @@ const Header = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const location = useLocation();
+  const [width] = useWindowSize();
   useEffect(() => {
     let ResponsiveMenu = () => {
       if (window.innerWidth < 667) {
@@ -70,12 +70,12 @@ const Header = () => {
               </h1>
             </Link>
             <div>
-              {showMenu && (
+              {showMenu && width > 667 && (
                 <motion.ul
                   initial={{ y: 30, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.5 }}
-                  className="flex items-center w-full  z-50 p-0 gap-3"
+                  className="flex items-center w-full  p-0 gap-3"
                 >
                   <>
                     {navBarList?.map(({ _id, title, link }: NavBarItem) => {
@@ -177,10 +177,10 @@ const Header = () => {
               )}
               <HiMenuAlt2
                 onClick={() => setSidenav(!sidenav)}
-                className="inline-block md:hidden cursor-pointer w-8 h-6 absolute top-6 right-4"
+                className="inline-block md:hidden cursor-pointer transition-all w-8 h-6 absolute top-6 right-4"
               />
               {sidenav && (
-                <div className="fixed top-0 left-0 w-full h-screen bg-black text-gray-200 bg-opacity-80 z-50">
+                <div className="fixed transition-all top-0 left-0 w-[667px] h-screen bg-black text-gray-200 bg-opacity-80 z-50">
                   <motion.div
                     initial={{ x: -300, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
@@ -208,6 +208,10 @@ const Header = () => {
                           </li>
                         ))}
                       </ul>
+                      <Close
+                        className="absolute left-[55%] text-2xl"
+                        onClick={() => setSidenav(false)}
+                      />
                     </div>
                   </motion.div>
                 </div>
