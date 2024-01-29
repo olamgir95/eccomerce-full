@@ -52,7 +52,7 @@ import {
 import { Definer } from "../../lib/Definer";
 import FollowApiService from "../../app/ApiServices/followApiService";
 import assert from "assert";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { serverApi } from "../../lib/config";
 
 //redux slice
@@ -79,8 +79,7 @@ const MemberRetriever = createSelector(
 const OtherPage = (props: any) => {
   const navigate = useNavigate();
   const { chosen_mb_id, chosen_art_id } = props;
-  console.log("chosen", chosen_mb_id);
-  console.log("chosen", chosen_art_id);
+  const { pathname } = useLocation();
 
   const { setChosenMember, setChosenMemberArticles, setChosenSingleArticle } =
     actionDispatch(useDispatch());
@@ -113,7 +112,7 @@ const OtherPage = (props: any) => {
       .getMemberCommunityArticles(memberArticleSearchObj)
       .then((data) => setChosenMemberArticles(data))
       .catch((err) => console.log(err));
-  }, [memberArticleSearchObj, chosen_mb_id, articlesRebuild]);
+  }, [memberArticleSearchObj, chosen_mb_id, articlesRebuild, pathname]);
 
   useEffect(() => {
     if (chosen_mb_id === verifyMemberData?._id) {
@@ -126,7 +125,7 @@ const OtherPage = (props: any) => {
       .getChosenMember(memberArticleSearchObj?.mb_id)
       .then((data) => setChosenMember(data))
       .catch((err) => console.log(err));
-  }, [verifyMemberData, chosen_mb_id, followRebuild]);
+  }, [verifyMemberData, chosen_mb_id, followRebuild, pathname]);
 
   // Handler
   const handleChange = (event: any, newValue: string) => {
@@ -202,11 +201,6 @@ const OtherPage = (props: any) => {
                           ? `${serverApi}/${chosenMember?.mb_image}`
                           : "/download.png"
                       }
-                      alt=""
-                    />
-                    <img
-                      className="svg"
-                      src="/restaurant/user_per.png"
                       alt=""
                     />
                   </div>

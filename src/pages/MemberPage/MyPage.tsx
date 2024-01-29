@@ -49,7 +49,7 @@ import { Article, SearchMemberArticlesObj } from "../../types/Article";
 import { verifyMemberData } from "../../app/ApiServices/verify";
 import MemberApiService from "../../app/ApiServices/memberApiService";
 import { sweetErrorHandling, sweetFailureProvider } from "../../lib/sweetAlert";
-import userPng from "../../assets/images/user_per.png";
+
 //redux slice
 const actionDispatch = (dispatch: Dispatch) => ({
   setChosenMember: (data: Member) => dispatch(setChosenMember(data)),
@@ -143,12 +143,9 @@ const MyPage = (props: any) => {
                 <Box className="info_box_item">
                   <div className="order_user_img">
                     <img src={verifyMemberData?.mb_image} alt="" />
-                    <img className="svg" src={userPng} alt="" />
                   </div>
                   <div className="order_user_info">
-                    <span className="name">
-                      {chosenMember?.mb_nick.toLocaleUpperCase()}
-                    </span>
+                    <span className="name">{chosenMember?.mb_nick}</span>
                     <span className="user_prof capitalize">
                       {chosenMember?.mb_type.toLowerCase()}
                     </span>
@@ -206,7 +203,7 @@ const MyPage = (props: any) => {
                         onClick={() => setValue("1")}
                       >
                         <ArticleOutlined color="primary" />
-                        <span> All Articles</span>
+                        <span> My Articles</span>
                       </div>
                     )}
                   />

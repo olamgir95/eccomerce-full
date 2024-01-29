@@ -115,7 +115,6 @@ const TuiEditor = (props: any) => {
               onChange={changeCategoryHandler}
             >
               <MenuItem value="">Choose Category</MenuItem>
-              <MenuItem value={"celebrity"}>Celebrity</MenuItem>
               <MenuItem value={"evaluation"}>Review Furniture</MenuItem>
               <MenuItem value={"story"}>Story</MenuItem>
             </Select>

@@ -47,7 +47,7 @@ const MemberPosts = (props: any) => {
       {chosenMemberArticles?.map((article: Article) => {
         const image = article?.art_image
           ? `${serverApi}/${article?.art_image}`
-          : "default.svg";
+          : "/default.svg";
         const formattedDate = dayjs(article?.createdAt).fromNow();
         return (
           <Link

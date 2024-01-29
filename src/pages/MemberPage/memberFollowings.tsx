@@ -83,10 +83,11 @@ const MemberFollowings = (props: any) => {
 
   const visitMemberHandler = (mb_id: string) => {
     navigate(`/member-page/other?mb_id=${mb_id}`);
+    window.location.reload();
   };
 
   return (
-    <Stack className="follower_content">
+    <Stack className="follower_content font-titleFont">
       {memberFollowings.map((following) => {
         const image = following?.follow_member_data?.mb_image
           ? `${serverApi}/${following.follow_member_data.mb_image}`
@@ -96,7 +97,7 @@ const MemberFollowings = (props: any) => {
             <Avatar
               alt=""
               src={image}
-              className="follower_img"
+              className="follower_img object-fill"
               onClick={() => visitMemberHandler(following?.follow_id)}
             />
             <Box className="user_prof">
@@ -112,7 +113,7 @@ const MemberFollowings = (props: any) => {
             </Box>
             {props.actions_enabled && (
               <Button
-                className="following_cancel"
+                className="following_cancel text-sm font-sans"
                 variant="contained"
                 startIcon={
                   <svg

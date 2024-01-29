@@ -1,20 +1,14 @@
-import {
-  Route,
-  useLocation,
-  Routes,
-  useNavigate,
-  useSearchParams,
-} from "react-router-dom";
+import { Route, useLocation, Routes, useSearchParams } from "react-router-dom";
 import SignIn from "../pages/Account/SignIn";
 import SignUp from "../pages/Account/SignUp";
 import AOS, { AosOptions } from "aos";
 import Layout, { routes } from "../constants/routes";
 import { useEffect } from "react";
-import "aos/dist/aos.css";
 import ScrollToTop from "./../constants/scrollToTop";
-import { CombinedProvider } from "../constants/useCombinedContext";
-import MemberPage from "../pages/MemberPage";
+import { CombinedProvider } from "../context/useCombinedContext";
 import OtherPage from "../pages/MemberPage/OtherPage";
+import "aos/dist/aos.css";
+import "@toast-ui/editor/dist/toastui-editor.css";
 
 interface CustomAosOptions extends AosOptions {
   offset: number;
@@ -28,7 +22,6 @@ function App() {
   const [searchParams] = useSearchParams();
   const chosen_mb_id = searchParams.get("mb_id") || null;
   const chosen_art_id = searchParams.get("art_id") || null;
-  console.log("@idsssss", chosen_art_id, chosen_mb_id);
 
   useEffect(() => {
     const aosOptions: CustomAosOptions = {

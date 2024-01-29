@@ -49,7 +49,7 @@ const MySettings = (prop: any) => {
       const file = e.target.files[0];
       const fileType = file["type"],
         validTypes = ["image/jpg", "image/jpeg", "image/png"];
-      assert.ok(file && validTypes.includes(fileType), Definer.input_img);
+      // assert.ok(file && validTypes.includes(fileType), Definer.input_img);
       memberUpdate.mb_image = file;
       setMemberUpdate({ ...memberUpdate });
       setFile(URL.createObjectURL(file));

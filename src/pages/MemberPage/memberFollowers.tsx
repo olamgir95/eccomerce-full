@@ -97,6 +97,7 @@ const MemberFollowers = (props: any) => {
 
   const visitMemberHandler = (mb_id: string) => {
     navigate(`/member-page/other?mb_id=${mb_id}`);
+    window.location.reload();
   };
 
   return (
@@ -110,7 +111,7 @@ const MemberFollowers = (props: any) => {
             <Avatar
               alt=""
               src={image}
-              className="follower_img"
+              className="follower_img object-fill"
               onClick={() => visitMemberHandler(follower?.subscriber_id)}
             />
             <Box className="user_prof">

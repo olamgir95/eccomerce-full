@@ -1,3 +1,5 @@
+import { MeLiked, Member } from "./user";
+
 export interface SearchObj {
   page: number;
   limit: number;
@@ -25,6 +27,7 @@ export interface CartItem {
   _id: string;
   quantity: number;
   price: number;
+  sale_price: number | undefined;
   image: string;
   name: string;
 }
@@ -47,4 +50,28 @@ export interface ChatInfoUsers {
 export interface NewMessageProps {
   data: ChatMessage;
   key: number;
+}
+
+export interface Comment {
+  _id: string;
+  comment_content: string;
+  comment_group: string;
+  comment_likes: number;
+  comment_owner: Member;
+  comment_ref_id: string;
+  comment_stars: number;
+  me_liked: MeLiked[];
+  mb_id: string;
+  comment_replies: CommentReply;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface CommentReply {
+  _id: string;
+  reply_comment_id: string;
+  reply_content: string;
+  reply_owner: Member;
+  createdAt: Date;
+  updatedAt: Date;
 }
