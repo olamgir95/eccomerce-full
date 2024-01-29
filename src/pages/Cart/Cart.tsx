@@ -4,7 +4,7 @@ import Breadcrumbs from "../../components/pageProps/Breadcrumbs";
 import { emptyCart } from "../../assets/images/index";
 import { Container } from "@mui/material";
 import ItemCard from "./ItemCard";
-import { useCombinedContext } from "../../constants/useCombinedContext";
+import { useCombinedContext } from "../../context/useCombinedContext";
 import { CartItem } from "../../types/others";
 import OrderApiService from "../../app/ApiServices/orderApiService";
 import { verifyMemberData } from "../../app/ApiServices/verify";

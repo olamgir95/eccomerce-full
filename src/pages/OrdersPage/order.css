@@ -84,7 +84,7 @@
   align-items: center;
   justify-content: start;
   width: 800px;
-  max-height: 284px;
+  max-height: fit-content;
   border-radius: 16px;
   background: #fff;
   border: 1px solid darkorchid;
@@ -203,8 +203,8 @@
 }
 
 .order_user_info .name {
+  margin: 10px 0;
   color: #08090d;
-
   font-family: Commissioner;
   font-size: 28px;
   font-style: normal;
@@ -219,14 +219,12 @@
   font-size: 20px;
   font-style: normal;
   font-weight: 500;
-  line-height: 36px;
 }
 .order_info_box .location {
   width: 255px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   color: #000;
-  margin-top: 10px;
   font-family: DM Sans;
   font-size: 16px;
   font-style: normal;
@@ -235,7 +233,7 @@
 }
 
 .order_right .pay_container {
-  padding: 30px 20px 20px 20px;
+  padding: 30px 15px 20px 15px;
   margin-top: 15px;
   width: 372px;
   flex-shrink: 0;
@@ -253,7 +251,7 @@
   line-height: 36px;
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 15px;
 }
 .order_pay div {
   border-radius: 5px;
@@ -273,7 +271,7 @@
 }
 
 .order_pay .card_date {
-  width: 162px;
+  width: 158px;
   height: 40px;
 }
 

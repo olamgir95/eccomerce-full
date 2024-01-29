@@ -80,15 +80,7 @@ export function OrdersPage(props: any) {
           <Box className="order_info_box">
             <Box className="info_box_item">
               <div className="order_user_img">
-                <img
-                  src={
-                    props.verifyMemberData?.mb_image
-                      ? props.verifyMemberData?.mb_image
-                      : "/auth/default_user.svg"
-                  }
-                  alt=""
-                />
-                <img className="svg" src="/restaurant/user_per.png" alt="" />
+                <img src={verifyMemberData?.mb_image ?? "user.png"} alt="" />
               </div>
               <div className="order_user_info">
                 <span className="name">{verifyMemberData?.mb_nick}</span>

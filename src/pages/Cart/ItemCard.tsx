@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import useBasket from "../../constants/useBasket";
 import { serverApi } from "../../lib/config";
 import { CartItem } from "../../types/others";
-import { useCombinedContext } from "../../constants/useCombinedContext";
+import { useCombinedContext } from "../../context/useCombinedContext";
 
 const ItemCard = ({ item }: any) => {
   const { useBasket } = useCombinedContext();
