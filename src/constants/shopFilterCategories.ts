@@ -23,7 +23,7 @@ export const items = [
   },
   {
     _id: 995,
-    title: "wardrobe",
+    title: "wardrob",
   },
 ];
 

@@ -13,6 +13,7 @@ import "aos/dist/aos.css";
 import { useLocation } from "react-router-dom";
 import { navBarList } from "../../../constants/navbar";
 import { verifyMemberData } from "../../../app/ApiServices/verify";
+import { Container } from "@mui/material";
 
 const BannerImg = {
   backgroundImage: `url(${Banner})`,
@@ -40,7 +41,10 @@ const Footer = () => {
 
   return (
     <div style={BannerImg} className="text-white pt-10 ">
-      <div data-aos="zoom-in" className="container custom-scroll-container ">
+      <Container
+        data-aos="zoom-in"
+        className="container custom-scroll-container "
+      >
         <div className="md:grid grid-cols-4 pb-44 pt-5 px-10">
           <div className="py-8 px-4 col-span-2">
             <h1 className="sm:text-3xl text-xl font-bold sm:text-left text-justify mb-3 flex items-center gap-3">
@@ -122,7 +126,7 @@ const Footer = () => {
         <p className="text-end text-gray-700">
           ©2024 shopsy. All rights reserved
         </p>
-      </div>
+      </Container>
     </div>
   );
 };

@@ -63,7 +63,7 @@ export default function Price() {
   };
 
   return (
-    <Box sx={{ width: 220 }} data-aos="zoom-in-down" data-aos-delay={900}>
+    <Box sx={{ width: 220 }} data-aos="zoom-in-down" data-aos-delay={600}>
       <Box />
       <NavTitle title="Shop by Price" icons={false} />
       <AirbnbSlider

@@ -47,7 +47,7 @@ const FinishedOrders = (props: any) => {
                         <p className="title_dish">{product?.product_name}</p>
                       </Box>
                       <Box className="price_box">
-                        <p>${item?.item_price}</p>
+                        <p>${product?.sale_price ?? item.item_price}</p>
                         <svg
                           width="18"
                           height="17"
@@ -78,7 +78,9 @@ const FinishedOrders = (props: any) => {
                           />
                         </svg>
                         <p className="price">
-                          ${item?.item_quantity * item?.item_price}
+                          ${" "}
+                          {item?.item_quantity *
+                            (product?.sale_price ?? item?.item_price)}
                         </p>
                       </Box>
                     </Box>

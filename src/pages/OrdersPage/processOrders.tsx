@@ -39,8 +39,6 @@ const ProcessOrders = (props: any) => {
 
   const deleteOrderHandler = async (event: any) => {
     try {
-      console.log("id", event.target.value);
-
       const order_id = event.target.value;
       const data = { order_id: order_id, order_status: "deleted" };
 
@@ -71,6 +69,7 @@ const ProcessOrders = (props: any) => {
                   const product: Product = order.product_data.filter(
                     (vl) => vl._id === item.product_id
                   )[0];
+
                   const image = `${serverApi}/${product?.product_images[0]}`;
                   return (
                     <Box className="order_box_item" key={index}>
@@ -79,7 +78,7 @@ const ProcessOrders = (props: any) => {
                         <p className="title_dish">{product?.product_name}</p>
                       </Box>
                       <Box className="price_box">
-                        <p>${item.item_price}</p>
+                        <p>${product?.sale_price ?? item.item_price}</p>
                         <svg
                           width="18"
                           height="17"
@@ -110,7 +109,9 @@ const ProcessOrders = (props: any) => {
                           />
                         </svg>
                         <p className="price">
-                          ${item?.item_quantity * item?.item_price}
+                          $
+                          {item?.item_quantity *
+                            (product?.sale_price ?? item?.item_price)}
                         </p>
                       </Box>
                     </Box>

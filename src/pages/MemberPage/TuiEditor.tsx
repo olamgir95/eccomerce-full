@@ -66,12 +66,10 @@ const TuiEditor = (props: any) => {
   const changeTitleHandler = (e: any) => {
     communityArticleData.art_subject = e.target.value;
     setCommunityArticleData({ ...communityArticleData });
-    console.log("test", communityArticleData.art_subject);
   };
 
   const handleRegisterButton = async () => {
     try {
-      console.log("communityArticleData", communityArticleData);
       const editor: any = editorRef.current;
       const art_content = editor?.getInstance().getHTML();
       communityArticleData.art_content = art_content;
@@ -95,7 +93,6 @@ const TuiEditor = (props: any) => {
   const addImageHook = {
     addImageBlobHook: async (image: any, callback: any) => {
       const uploadImageURL = await uploadImage(image);
-      console.log("uploadimage", uploadImageURL);
       callback(uploadImageURL);
 
       return false;

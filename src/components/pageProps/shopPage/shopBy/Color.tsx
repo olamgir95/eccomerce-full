@@ -13,7 +13,7 @@ const Color = () => {
   };
 
   return (
-    <div data-aos="zoom-in-down" data-aos-delay={600}>
+    <div data-aos="zoom-in-down" data-aos-delay={400}>
       <div
         onClick={() => setShowColors(!showColors)}
         className="cursor-pointer transition-all"

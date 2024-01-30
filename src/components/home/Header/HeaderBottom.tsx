@@ -160,7 +160,7 @@ const HeaderBottom = (props: any) => {
               </div>
               {showUser && searchQuery && (
                 <div
-                  className={`w-full mx-auto p-2 h-96 scrollbar-none bg-white top-16 absolute left-0 z-50 overflow-y-scroll shadow-2xl  cursor-pointer`}
+                  className={`w-full mx-auto z-50 p-2 h-96 scrollbar-none bg-white top-16 absolute left-0 z-50 overflow-y-scroll shadow-2xl  cursor-pointer`}
                 >
                   {showUser &&
                     searchQuery &&

@@ -39,7 +39,6 @@ const Header = () => {
 
   const handleLogOutClick = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
-    console.log(anchorEl);
   };
   const handleCloseLogOut = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(null);

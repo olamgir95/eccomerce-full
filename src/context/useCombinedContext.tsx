@@ -70,6 +70,7 @@ export const CombinedProvider: React.FC<CombinedProviderProps> = ({
       targetSearchObj.product_color = "";
       targetSearchObj.seller_mb_id = value;
       targetSearchObj.page = 1;
+      targetSearchObj.order = "createdAt";
     }
     setFilter("");
     if (category === "sale") {

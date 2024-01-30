@@ -14,7 +14,7 @@ const Category = () => {
   };
 
   return (
-    <Stack data-aos="zoom-in-down" data-aos-delay={300}>
+    <Stack data-aos="zoom-in-down" data-aos-delay={200}>
       <Box
         onClick={() => setShowCategory(!showCategory)}
         className="cursor-pointer transition-all"
