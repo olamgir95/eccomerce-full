@@ -1,8 +1,10 @@
 #!/bin/bash
 
 #PRODUCTION
+git checkout master
 git reset  --hard
 git pull origin master
+yarn global add serve
 npm i yarn -g
 yarn
 yarn run build
