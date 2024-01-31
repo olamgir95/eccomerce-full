@@ -5,6 +5,7 @@ git checkout master
 git reset  --hard
 git pull origin master
 yarn global add serve
+yarn global add pm2
 npm i yarn -g
 yarn
 yarn run build
