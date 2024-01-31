@@ -1,5 +1,5 @@
 {
-  "name": "furniture-frontend",
+  "name": "shopsy-react",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -40,6 +40,7 @@
     "eslint": "^8.56.0",
     "framer-motion": "^8.0.2",
     "jshint-summary": "^0.4.0",
+    "npm": "^7.24.0",
     "postcss": "^8.4.33",
     "postcss-loader": "^7.3.4",
     "react": "^18.2.0",
@@ -89,7 +90,6 @@
     ]
   },
   "devDependencies": {
-    "@types/babel__traverse": "^7.20.5",
     "eslint-config-react-app": "^7.0.1"
   }
 }

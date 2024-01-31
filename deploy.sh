@@ -1,15 +1,15 @@
 #!/bin/bash
 
 #PRODUCTION
-git checkout master
-git reset  --hard
-git pull origin master
+# git checkout master
+# git reset  --hard
+# git pull origin master
+npm i yarn -g
 yarn global add serve
 yarn global add pm2
-npm i yarn -g
 yarn
 yarn run build
-pm2 start "yarn run start:prod" --name=Shopsy-react
+ pm2 start "yarn start:prod" --name=SHOPSY-REACT
 
 #DEVELOPMENT
 # npm i yarn -g
