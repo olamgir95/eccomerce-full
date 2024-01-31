@@ -58,7 +58,7 @@ const Header = () => {
   };
 
   return (
-    <div className="w-full h-20 bg-white sticky top-0 z-50 border-b-[1px] border-b-gray-200">
+    <div className="w-full h-20 bg-white sticky top-0 z-[51] border-b-[1px] border-b-gray-200">
       <Container>
         <nav className="h-full px-4 max-w-container mx-auto relative">
           <Flex className="flex items-center justify-between h-full">

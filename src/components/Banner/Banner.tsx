@@ -8,7 +8,6 @@ import {
   bannerImgTwo5,
   bannerImgTwo6,
 } from "../../assets/images";
-import Image from "../designLayouts/Image";
 import { Swiper, SwiperProps, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
@@ -18,11 +17,9 @@ import "swiper/css/navigation";
 
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
-import { useNavigate } from "react-router-dom";
 import SwiperSlideComponent from "./SwiperSlide";
 
 const Banner = () => {
-  const navigate = useNavigate();
   const progressCircle = useRef<SVGSVGElement>(null);
   const progressContent = useRef<HTMLSpanElement>(null);
 

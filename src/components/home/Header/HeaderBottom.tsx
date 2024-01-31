@@ -93,7 +93,8 @@ const HeaderBottom = (props: any) => {
   return (
     <div
       onClick={() => setShowUser(false)}
-      className="w-full bg-orangge relative"
+      className="w-full bg-orangge relative z-50"
+      data-aos="zoom-in-right"
     >
       <Container>
         <div className="max-w-container mx-auto">
@@ -108,7 +109,6 @@ const HeaderBottom = (props: any) => {
               <div
                 onClick={() => setShow(!show)}
                 ref={ref}
-                data-aos="zoom-in-right"
                 data-aos-delay={300}
                 className="flex h-14 cursor-pointer transition-all items-center gap-2  text-primeColor"
               >
@@ -160,7 +160,7 @@ const HeaderBottom = (props: any) => {
               </div>
               {showUser && searchQuery && (
                 <div
-                  className={`w-full mx-auto z-50 p-2 h-96 scrollbar-none bg-white top-16 absolute left-0 z-50 overflow-y-scroll shadow-2xl  cursor-pointer`}
+                  className={`w-full mx-auto  p-2 h-96 scrollbar-none z-50 bg-white top-16 absolute left-0  overflow-y-scroll shadow-2xl  cursor-pointer`}
                 >
                   {showUser &&
                     searchQuery &&

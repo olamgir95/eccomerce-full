@@ -78,7 +78,7 @@ export const TopBrands = () => {
                     data-aos-delay={delay}
                     sx={{
                       minHeight: 430,
-                      maxWidth: 290,
+                      maxWidth: 301,
                       width: "100%",
                       cursor: "pointer",
                     }}

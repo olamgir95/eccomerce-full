@@ -6,7 +6,9 @@
 
 body {
   overflow-y: scroll !important;
+  overflow-x: none !important;
   padding: 0 !important;
+  margin: 0 !important;
 }
 
 @layer components {

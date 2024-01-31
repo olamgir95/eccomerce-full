@@ -14,10 +14,11 @@ import { BsPersonBadge } from "react-icons/bs";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
+import useWindowSize from "../../constants/useWindowResize";
 
 export default function Events() {
   const { newEvents } = useSelector(homeRetriever);
-
+  const [width] = useWindowSize();
   return (
     <div className="events_frame" data-aos="zoom-in">
       <Container sx={{ overflow: "hidden" }}>
@@ -35,7 +36,7 @@ export default function Events() {
             grabCursor={true}
             centeredSlides={true}
             autoplay={true}
-            slidesPerView={window.innerWidth < 667 ? 1 : "auto"}
+            slidesPerView={width < 667 ? 1 : 3}
             coverflowEffect={{
               rotate: 50,
               stretch: 0,

@@ -1,4 +1,3 @@
-import React, { FC } from "react";
 import Image from "../designLayouts/Image";
 import { useNavigate } from "react-router-dom";
 
@@ -8,7 +7,7 @@ const SwiperSlideComponent = (props: any) => {
     <>
       <Image className="h-full w-full object-cover" imgSrc={props.image} />
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-        <h1 className="text-3xl mt-40 font-semibold mb-[30px] lg:text-[64px] lg:leading-tight w-[300px] lg:max-w-[888px] backdrop-blur-[2px] text-primary   ">
+        <h1 className="text-3xl mt-40 font-semibold mb-[30px] lg:text-[64px] lg:leading-tight md:w-full w-[300px] lg:max-w-[888px] backdrop-blur-[2px] text-primary   ">
           Creative Home Simpify your Furniture
         </h1>
 

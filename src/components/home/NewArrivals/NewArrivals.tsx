@@ -12,7 +12,7 @@ const NewArrivals = (props: any) => {
   const { newProducts } = useSelector(homeRetriever);
 
   return (
-    <div className="w-full pb-16">
+    <div className="pb-16 ">
       <Container>
         <Heading heading="New Arrivals" />
         <Slider {...settings}>
