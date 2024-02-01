@@ -1,10 +1,9 @@
 #!/bin/bash
 
 #PRODUCTION
-# git checkout master
-# git reset  --hard
-# git pull origin master
-npm i yarn -g
+git checkout master
+git reset  --hard
+git pull origin master
 yarn global add serve
 yarn global add pm2
 yarn
