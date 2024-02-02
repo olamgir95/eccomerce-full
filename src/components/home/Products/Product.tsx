@@ -119,6 +119,7 @@ const Products = (props: any) => {
                       transform: "translateY(50%)",
                       color: "rgba(0,0,0,0.4)",
                     }}
+                    className="product_like_btn"
                   >
                     {product?.me_liked[0]?.my_favorite ? (
                       <Favorite

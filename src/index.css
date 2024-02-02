@@ -58,20 +58,6 @@ nav .active li {
   background-position: center;
 }
 
-.autoplay-progress {
-  @apply absolute right-4 bottom-4 z-10 w-12 h-12 flex items-center justify-center font-bold;
-  color: var(--swiper-theme-color);
-}
-
-.autoplay-progress svg {
-  @apply absolute left-0 top-0 w-full h-full  fill-none;
-  stroke: var(--swiper-theme-color);
-  stroke-dashoffset: calc(125.6 * (1 - var(--progress)));
-  stroke-dasharray: 125.6;
-  transform: rotate(-90deg);
-  stroke-width: 4px;
-}
-
 .product_features {
   @apply text-[#767676] hover:text-primeColor text-sm font-normal
    border-b-[1px] border-b-gray-200 hover:border-b-primeColor flex items-center 
@@ -830,13 +816,13 @@ flex justify-between items-end;
   border-radius: 30px 0px 0px 30px;
 }
 
-.product_features .css-16glyp2-JoyIconButton-root {
+.product_features .product_like_btn {
   /* position: relative; */
   bottom: 15px;
   right: -8px;
 }
 
-.product_features .css-16glyp2-JoyIconButton-root:hover {
+.product_features .product_like_btn:hover {
   background-color: transparent;
 }
 
