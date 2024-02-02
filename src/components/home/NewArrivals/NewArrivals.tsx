@@ -12,8 +12,8 @@ const NewArrivals = (props: any) => {
   const { newProducts } = useSelector(homeRetriever);
 
   return (
-    <div className="pb-16 ">
-      <Container>
+    <div className=" w-full pb-16">
+      <Container className="">
         <Heading heading="New Arrivals" />
         <Slider {...settings}>
           {newProducts?.map((productItem: Product, index) => {

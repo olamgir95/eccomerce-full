@@ -8,9 +8,9 @@ yarn global add serve
 yarn global add pm2
 yarn
 yarn run build
- pm2 start "yarn start:prod" --name=SHOPSY-REACT
+ pm2 start "yarn start:prod" --name=FurniShop-REACT
 
 #DEVELOPMENT
 # npm i yarn -g
 # yarn 
-# pm2 start "yarn run start" --name=Shopsy-react
+# pm2 start "yarn run start" --name=FurniShop-react

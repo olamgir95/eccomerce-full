@@ -49,7 +49,7 @@ const Footer = () => {
           <div className="py-8 px-4 col-span-2">
             <h1 className="sm:text-3xl text-xl font-bold sm:text-left text-justify mb-3 flex items-center gap-3">
               <img src={footerLogo} alt="" className="max-w-[50px]" />
-              Shopsy
+              FurniShop
             </h1>
             <div className="grid grid-cols-2 gap-5 items-start text-sm font-bold">
               {feature.map((vl, index) => {
@@ -124,7 +124,7 @@ const Footer = () => {
           </div>
         </div>
         <p className="text-end text-gray-700">
-          ©2024 shopsy. All rights reserved
+          ©2024 FurniShop. All rights reserved
         </p>
       </Container>
     </div>

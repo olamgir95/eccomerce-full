@@ -89,7 +89,7 @@ const SignUp = () => {
           <Link to="/">
             <h1 className="sm:text-3xl text-xl font-bold sm:text-left text-justify mb-3 flex items-center gap-3">
               <img src={logoLight} alt="" className="max-w-[50px]" />
-              Shopsy
+              FurniShop
             </h1>
           </Link>
           <div className="flex flex-col gap-1 -mt-1">
@@ -104,7 +104,7 @@ const SignUp = () => {
             </span>
             <p className="text-base text-gray-300">
               <span className="text-white font-semibold font-titleFont">
-                Get started fast with Shopsy
+                Get started fast with FurniShop
               </span>
               <br />
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab omnis
@@ -117,7 +117,7 @@ const SignUp = () => {
             </span>
             <p className="text-base text-gray-300">
               <span className="text-white font-semibold font-titleFont">
-                Access all Shopsy services
+                Access all FurniShop services
               </span>
               <br />
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab omnis
@@ -142,7 +142,7 @@ const SignUp = () => {
               onClick={() => navigate("/")}
               className="text-sm font-titleFont font-semibold text-gray-300 hover:text-white cursor-pointer duration-300"
             >
-              © Shopsy
+              © FurniShop
             </p>
             <p className="text-sm font-titleFont font-semibold text-gray-300 hover:text-white cursor-pointer duration-300">
               Terms
@@ -223,9 +223,9 @@ const SignUp = () => {
                   type="checkbox"
                 />
                 <p className="text-sm text-primeColor">
-                  I agree to the Shopsy
-                  <span className="text-blue-500">Terms of Service </span>and
-                  <span className="text-blue-500">Privacy Policy</span>.
+                  I agree to the FurniShop
+                  <span className="text-blue-500"> Terms of Service </span> and
+                  <span className="text-blue-500"> Privacy Policy</span>.
                 </p>
               </div>
               <button

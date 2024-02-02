@@ -5,7 +5,7 @@ import { homeRetriever } from "../../../pages/Home/useReduxHome";
 import { Article } from "../../../types/Article";
 import { serverApi } from "../../../lib/config";
 import { Box, Container } from "@mui/system";
-import { Button, Checkbox, Stack } from "@mui/material";
+import { Checkbox, Stack } from "@mui/material";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import assert from "assert";
@@ -62,13 +62,16 @@ const TrendArticles = (props: any) => {
     <div className="py-10 mb-10">
       <Container>
         <div className="text-center mb-10 max-w-[600px] mx-auto">
-          <p data-aos="fade-up" className="text-sm text-primary">
+          <p data-aos="fade-up" className="lg:text-base text-sm text-primary">
             What our customers are saying
           </p>
-          <h1 data-aos="fade-up" className=" my-2 text-3xl font-bold">
+          <h1
+            data-aos="fade-up"
+            className=" my-2 text-2xl lg:text-4xl font-bold"
+          >
             Testimonials
           </h1>
-          <p data-aos="fade-up" className="text-xs text-gray-400">
+          <p data-aos="fade-up" className="lg:text-base text-sm text-gray-400">
             A space where customers share their experiences and feedback about
             your products and services
           </p>

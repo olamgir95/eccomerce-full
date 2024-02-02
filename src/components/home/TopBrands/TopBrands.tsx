@@ -52,142 +52,140 @@ export const TopBrands = () => {
   };
 
   return (
-    <div className="mt-14 mb-12">
-      <Container>
+    <div className="mt-14 mb-12  flex items-center justify-center">
+      <Container className="mx-0 flex flex-col w- h-full">
         <div className="text-center mb-10 max-w-[600px] mx-auto">
-          <p data-aos="fade-up" className="text-sm text-primary">
+          <p data-aos="fade-up" className="lg:text-base text-sm text-primary">
             Top Selling Brands for you
           </p>
-          <h1 data-aos="fade-up" className="text-3xl font-bold">
+          <h1 data-aos="fade-up" className="lg:text-4xl text-2xl font-bold">
             Our Brands
           </h1>
-          <p data-aos="fade-up" className="text-xs text-gray-400">
+          <p data-aos="fade-up" className="lg:text-base text-sm text-gray-400">
             Best Luxury Furniture Brands Worth Spending Your Money
           </p>
         </div>
 
-        <div>
-          <div className="flex flex-wrap w-full place-items-center items-center justify-center gap-4">
-            {topSellers?.map((seller: Seller, index: number) => {
-              const imag_path = `${serverApi}/${seller?.mb_image}`;
-              const delay = 200 * index;
-              return (
-                <CssVarsProvider key={seller?._id}>
-                  <Card
-                    data-aos="fade-up"
-                    data-aos-delay={delay}
+        {/* <div> */}
+        <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1  w-full place-items-center items-center justify-center gap-4">
+          {topSellers?.map((seller: Seller, index: number) => {
+            const imag_path = `${serverApi}/${seller?.mb_image}`;
+            const delay = 200 * index;
+            return (
+              <CssVarsProvider key={seller?._id}>
+                <Card
+                  data-aos="fade-up"
+                  data-aos-delay={delay}
+                  sx={{
+                    minHeight: 430,
+                    width: 301,
+                    // width: "100%",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => {
+                    handleBrandChange(seller?._id, "brand");
+                    setBrandName(seller?.mb_nick);
+                    navigate("/shop");
+                  }}
+                >
+                  <CardCover>
+                    <img
+                      src={imag_path}
+                      loading="lazy"
+                      alt=""
+                      className="bg-cover bg-center"
+                    />
+                  </CardCover>
+                  <CardCover
                     sx={{
-                      minHeight: 430,
-                      maxWidth: 301,
-                      width: "100%",
-                      cursor: "pointer",
+                      background:
+                        "linear-gradient(to top, rgba(0,0,0,0.4), rgba(0,0,0,0) 200px), linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0) 300px)",
                     }}
-                    onClick={() => {
-                      handleBrandChange(seller?._id, "brand");
-                      setBrandName(seller?.mb_nick);
-                      navigate("/shop");
+                  />
+                  <CardContent sx={{ justifyContent: "flex-end" }}>
+                    <Typography level="h2" textColor="#fff" mb={1}>
+                      {seller?.mb_nick}
+                    </Typography>
+                    <Typography
+                      startDecorator={<MdOutlineLocationOn />}
+                      textColor="neutral.300"
+                    >
+                      {seller?.mb_address}
+                    </Typography>
+                  </CardContent>
+                  <CardOverflow
+                    sx={{
+                      display: "flex",
+                      flexDirection: "row",
+                      gap: 1.5,
+                      py: 1.5,
+                      px: "var(--Card-padding)",
+                      borderTop: "1px solid",
                     }}
                   >
-                    <CardCover>
-                      <img
-                        src={imag_path}
-                        loading="lazy"
-                        alt=""
-                        className="bg-cover bg-center"
-                      />
-                    </CardCover>
-                    <CardCover
+                    <IconButton
+                      aria-label="Like ninimal photography"
+                      size="md"
+                      variant="solid"
+                      color="neutral"
                       sx={{
-                        background:
-                          "linear-gradient(to top, rgba(0,0,0,0.4), rgba(0,0,0,0) 200px), linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0) 300px)",
+                        position: "absolute",
+                        zIndex: 2,
+                        borderRadius: "50%",
+                        right: "1rem",
+                        bottom: 45,
+                        transform: "translateY(50%)",
+                        color: "rgba(0,0,0,0.4)",
                       }}
-                    />
-                    <CardContent sx={{ justifyContent: "flex-end" }}>
-                      <Typography level="h2" textColor="#fff" mb={1}>
-                        {seller?.mb_nick}
-                      </Typography>
-                      <Typography
-                        startDecorator={<MdOutlineLocationOn />}
-                        textColor="neutral.300"
-                      >
-                        {seller?.mb_address}
-                      </Typography>
-                    </CardContent>
-                    <CardOverflow
-                      sx={{
-                        display: "flex",
-                        flexDirection: "row",
-                        gap: 1.5,
-                        py: 1.5,
-                        px: "var(--Card-padding)",
-                        borderTop: "1px solid",
+                      onClick={(e) => {
+                        e.stopPropagation();
                       }}
                     >
-                      <IconButton
-                        aria-label="Like ninimal photography"
-                        size="md"
-                        variant="solid"
-                        color="neutral"
-                        sx={{
-                          position: "absolute",
-                          zIndex: 2,
-                          borderRadius: "50%",
-                          right: "1rem",
-                          bottom: 45,
-                          transform: "translateY(50%)",
-                          color: "rgba(0,0,0,0.4)",
+                      <Favorite
+                        style={{
+                          fill: seller?.me_liked[0]?.my_favorite
+                            ? "red"
+                            : "white",
                         }}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                        }}
+                        onClick={(e) => targetLikeTop(e, seller?._id)}
+                      />
+                    </IconButton>
+                    <Typography
+                      sx={{
+                        fontWeight: "md",
+                        color: "neutral.300",
+                        alignItems: "center",
+                        display: "flex",
+                      }}
+                    >
+                      {seller?.mb_views}
+                      <VisibilityIcon
+                        sx={{ fontSize: 20, marginLeft: "5px" }}
+                      />
+                    </Typography>
+                    <Box sx={{ width: 2, bgcolor: "divider" }} />
+                    <Typography
+                      sx={{
+                        fontWeight: "md",
+                        color: "neutral.300",
+                        alignItems: "center",
+                        display: "flex",
+                      }}
+                    >
+                      <div
+                        ref={(element) => (refs.current[seller?._id] = element)}
+                        className="mr-1"
                       >
-                        <Favorite
-                          style={{
-                            fill: seller?.me_liked[0]?.my_favorite
-                              ? "red"
-                              : "white",
-                          }}
-                          onClick={(e) => targetLikeTop(e, seller?._id)}
-                        />
-                      </IconButton>
-                      <Typography
-                        sx={{
-                          fontWeight: "md",
-                          color: "neutral.300",
-                          alignItems: "center",
-                          display: "flex",
-                        }}
-                      >
-                        {seller?.mb_views}
-                        <VisibilityIcon
-                          sx={{ fontSize: 20, marginLeft: "5px" }}
-                        />
-                      </Typography>
-                      <Box sx={{ width: 2, bgcolor: "divider" }} />
-                      <Typography
-                        sx={{
-                          fontWeight: "md",
-                          color: "neutral.300",
-                          alignItems: "center",
-                          display: "flex",
-                        }}
-                      >
-                        <div
-                          ref={(element) =>
-                            (refs.current[seller?._id] = element)
-                          }
-                          className="mr-1"
-                        >
-                          {seller?.mb_likes}
-                        </div>
-                        {seller?.mb_likes > 1 ? "likes" : "like"}
-                      </Typography>
-                    </CardOverflow>
-                  </Card>
-                </CssVarsProvider>
-              );
-            })}
-          </div>
+                        {seller?.mb_likes}
+                      </div>
+                      {seller?.mb_likes > 1 ? "likes" : "like"}
+                    </Typography>
+                  </CardOverflow>
+                </Card>
+              </CssVarsProvider>
+            );
+          })}
+          {/* </div> */}
         </div>
       </Container>
     </div>

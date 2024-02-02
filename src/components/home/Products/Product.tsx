@@ -53,7 +53,7 @@ const Products = (props: any) => {
           : "w-full max-w-[290px] relative group px-2"
       }
     >
-      <div className="max-w-80 max-h-80 relative overflow-hidden rounded-2xl">
+      <div className="max-w-80  max-h-80 relative overflow-hidden rounded-2xl">
         <div>
           <Image
             className={

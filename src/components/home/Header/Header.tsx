@@ -63,9 +63,13 @@ const Header = () => {
         <nav className="h-full px-4 max-w-container mx-auto relative">
           <Flex className="flex items-center justify-between h-full">
             <Link to="/">
-              <h1 className="sm:text-3xl text-xl font-bold text-orange-500 sm:text-left text-center mb-3 flex items-center gap-3">
-                <img src={headerLogo} alt="" className="max-w-[50px]" />
-                Shopsy
+              <h1 className="lg:text-3xl text-xl font-bold text-orange-500 sm:text-left text-center mb-3 flex items-center lg:gap-3 gap-1">
+                <img
+                  src={headerLogo}
+                  alt=""
+                  className=" lg:w-full w-7 max-w-[50px]"
+                />
+                FurniShop
               </h1>
             </Link>
             <div>
@@ -189,7 +193,7 @@ const Header = () => {
                     <div className="w-full h-full bg-primeColor p-6">
                       <h1 className="sm:text-3xl text-xl font-bold sm:text-left text-justify mb-3 flex items-center gap-3">
                         <img src={headerLogo} alt="" className="max-w-[50px]" />
-                        Shopsy
+                        FurniShop
                       </h1>
                       <ul className="text-gray-200 flex flex-col gap-2">
                         {navBarList?.map((item: any) => (
