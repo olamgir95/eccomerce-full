@@ -76,7 +76,7 @@ const Home = () => {
       <Banner />
       <BannerBottom />
       <TopBrands />
-      <NewArrivals setProductRebuild={setArticlesRebuild} />
+      <NewArrivals />
       <Sale />
       <Events />
       <TrendArticles setArticlesRebuild={setArticlesRebuild} />
