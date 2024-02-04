@@ -82,13 +82,19 @@ const MemberPosts = (props: any) => {
               </Box>
               <Box className="views">
                 <p>{formattedDate}</p>
-                <p className="evaluation_text">
+                <p
+                  className="evaluation_text"
+                  onClick={(e) => e.stopPropagation()}
+                >
                   <Checkbox
                     {...label}
                     icon={<FavoriteBorder />}
                     checkedIcon={<Favorite style={{ fill: "red" }} />}
                     id={article?._id}
-                    onClick={targetLikeHandler}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      targetLikeHandler(e);
+                    }}
                     checked={
                       article?.me_liked && article?.me_liked[0]?.my_favorite
                         ? true

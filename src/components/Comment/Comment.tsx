@@ -159,7 +159,7 @@ const CommentExampleComment = (props: any) => {
         <div className="comment_cover">
           {comments?.map((comment: any) => {
             const image_url = comment?.comment_owner
-              ? `${comment?.comment_owner.mb_image}`
+              ? `${comment?.comment_owner?.mb_image}`
               : "user.png";
             const formattedCreatedAt = dayjs(comment?.createdAt).fromNow();
 
@@ -368,7 +368,7 @@ const CommentExampleComment = (props: any) => {
 
           <div className="action_btn">
             <button onClick={createComment} className="comment_btn">
-              Submit REview
+              Submit Review
             </button>
           </div>
         </Box>

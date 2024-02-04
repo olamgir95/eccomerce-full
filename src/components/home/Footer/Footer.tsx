@@ -51,10 +51,10 @@ const Footer = () => {
               <img src={footerLogo} alt="" className="max-w-[50px]" />
               FurniShop
             </h1>
-            <div className="grid grid-cols-2 gap-5 items-start text-sm font-bold">
+            <div className="grid grid-cols-2 gap-5 items-start text-sm">
               {feature.map((vl, index) => {
                 return (
-                  <p className="" key={index}>
+                  <p className="text-sm md:text-base" key={index}>
                     {vl}
                   </p>
                 );

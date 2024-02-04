@@ -100,7 +100,7 @@
 
 .community_page .article_main .all_article_box .css-9ae35a-JoyAvatar-img,
 .art_user_img .css-9ae35a-JoyAvatar-img {
-  object-fit: fill;
+  object-fit: fill !important;
 }
 
 .community_page .all_article_box .css-hyw0yv-JoyCard-root {
@@ -182,7 +182,7 @@
 .view .evaluation_text,
 .view .eye {
   position: absolute;
-  right: 55px;
+  right: 59px;
   bottom: 68px;
   color: gray;
 }

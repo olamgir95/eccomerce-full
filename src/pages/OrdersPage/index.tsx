@@ -53,7 +53,7 @@ export function OrdersPage(props: any) {
   return (
     <div className="order_page">
       <Container className="order_container" maxWidth="lg">
-        <Stack className="order_left">
+        <Stack className="order_left" data-aos="zoom-in-left">
           <TabContext value={value}>
             <Box className="order_nav_frame">
               <Box className="order_table">
@@ -76,7 +76,7 @@ export function OrdersPage(props: any) {
             </Stack>
           </TabContext>
         </Stack>
-        <Stack className="order_right">
+        <Stack className="order_right" data-aos="zoom-in-right">
           <Box className="order_info_box">
             <Box className="info_box_item">
               <div className="order_user_img">

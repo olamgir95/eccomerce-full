@@ -135,7 +135,7 @@ const MyPage = (props: any) => {
       <Container className="my_page_container">
         <TabContext value={value}>
           <Stack className="my_page_frame">
-            <Stack className="my_page_right">
+            <Stack className="my_page_right" data-aos="zoom-in-left">
               <Box className="order_info_box">
                 <a onClick={() => setValue("6")} className="settings_btn">
                   <Settings color="primary" />
@@ -234,7 +234,7 @@ const MyPage = (props: any) => {
                 </Tabs>
               </Box>
             </Stack>
-            <Stack className="my_page_left">
+            <Stack className="my_page_left" data-aos="zoom-in-right">
               <Box className="box_left">
                 <TabPanel value={"1"}>
                   <Box className="menu_name">My Articles</Box>
@@ -260,7 +260,7 @@ const MyPage = (props: any) => {
                                 next: ArrowForwardIcon,
                               }}
                               {...item}
-                              color="secondary"
+                              color="primary"
                             />
                           )}
                           onChange={handlePaginationChange}

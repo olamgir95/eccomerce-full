@@ -191,7 +191,7 @@ const OtherPage = (props: any) => {
       <Container className="my_page_container">
         <TabContext value={value}>
           <Stack className="my_page_frame">
-            <Stack className="my_page_right">
+            <Stack className="my_page_right" data-aos="zoom-in-left">
               <Box className="order_info_box">
                 <Box className="info_box_item">
                   <div className="order_user_img">
@@ -205,9 +205,7 @@ const OtherPage = (props: any) => {
                     />
                   </div>
                   <div className="order_user_info">
-                    <span className="name">
-                      {chosenMember?.mb_nick.toLocaleUpperCase()}
-                    </span>
+                    <span className="name">{chosenMember?.mb_nick}</span>
                     <span className="user_prof capitalize">
                       {chosenMember?.mb_type.toLowerCase()}
                     </span>
@@ -226,7 +224,7 @@ const OtherPage = (props: any) => {
                 <p className="user_media_box">
                   {chosenMember?.mb_description
                     ? chosenMember?.mb_description
-                    : "Qo'shimcha ma'lumot kititilmagan"}
+                    : "No additional information!"}
                 </p>
                 <Box className="maqola_yoz_sec">
                   <TabList
@@ -311,7 +309,7 @@ const OtherPage = (props: any) => {
                 </Tabs>
               </Box>
             </Stack>
-            <Stack className="my_page_left">
+            <Stack className="my_page_left" data-aos="zoom-in-right">
               <Box className="box_left">
                 <TabPanel value="1">
                   <Box className="menu_name">All Articles</Box>
@@ -337,7 +335,7 @@ const OtherPage = (props: any) => {
                                 next: ArrowForwardIcon,
                               }}
                               {...item}
-                              color="secondary"
+                              color="primary"
                             />
                           )}
                           onChange={handlePaginationChange}

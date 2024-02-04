@@ -157,7 +157,7 @@ const MemberFollowings = (props: any) => {
                   next: ArrowForwardIcon,
                 }}
                 {...item}
-                color="secondary"
+                color="primary"
               />
             )}
             onChange={handlePaginationChange}

@@ -19,7 +19,7 @@ const Breadcrumbs = ({ prevLocation, title, brandName }: BreadcrumbsProps) => {
   return (
     <Container sx={{ display: "flex", flexDirection: "row" }}>
       <div className="w-full py-10 xl:py-10 flex flex-col gap-3">
-        <h1 className="text-5xl text-primeColor font-titleFont font-bold">
+        <h1 className="text-4xl text-primeColor font-titleFont font-bold">
           {title}
         </h1>
         <p className="text-sm font-normal text-lightText capitalize flex items-center">
@@ -33,7 +33,7 @@ const Breadcrumbs = ({ prevLocation, title, brandName }: BreadcrumbsProps) => {
           </span>
         </p>
       </div>
-      <h1 className="text-5xl text-primeColor font-titleFont font-bold text-center w-full flex items-center pb-5 justify-center">
+      <h1 className="text-4xl text-primeColor font-titleFont font-bold text-center w-full flex items-center pb-5 justify-center">
         {brandName}
       </h1>
     </Container>

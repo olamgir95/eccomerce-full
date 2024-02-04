@@ -126,7 +126,7 @@ export function CommunityPage(props: any) {
                           next: ArrowForwardIcon,
                         }}
                         {...item}
-                        color="secondary"
+                        color="primary"
                       />
                     )}
                     onChange={handlePagination}

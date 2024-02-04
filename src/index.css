@@ -323,8 +323,10 @@ flex justify-between items-end;
   border-radius: 10px;
   border: 1px solid #0288d1;
   background: #0288d1;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25),
-    0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+}
+
+.maqola_yoz_sec button:hover {
+  transform: scale(1.05);
 }
 
 .maqola_yoz_sec .btn_cancel {
@@ -403,7 +405,7 @@ flex justify-between items-end;
   border-radius: 30px;
   background: #182226;
   height: 175px;
-  padding: 10px 0 5px 0;
+  padding: 6px 0 5px 0;
   cursor: pointer;
 }
 .all_article_box .all_article_container .user_prof {
@@ -433,7 +435,6 @@ flex justify-between items-end;
   display: flex;
   flex-direction: column;
   margin-top: 15px;
-  gap: 10px;
 }
 
 .all_article_container .evaluation span {
@@ -465,8 +466,8 @@ flex justify-between items-end;
   justify-content: flex-end;
   align-items: center;
   text-align: center;
-  gap: 10px;
-  padding-right: 14px;
+  gap: 15px;
+  padding-right: 24px;
   color: #ffffff;
 }
 
@@ -517,7 +518,6 @@ flex justify-between items-end;
   );
   box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.15),
     3px 2px 9px 0px rgba(255, 255, 255, 0.25) inset;
-  width: 821.42px;
   height: 140px;
 }
 
@@ -811,9 +811,10 @@ flex justify-between items-end;
 }
 
 .post_content .all_article_img img {
-  width: 157px;
-  height: 155px;
+  width: 170px;
+  height: 150px;
   border-radius: 30px 0px 0px 30px;
+  margin-left: 10px;
 }
 
 .product_features .product_like_btn {
