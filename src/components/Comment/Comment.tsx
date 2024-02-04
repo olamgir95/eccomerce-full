@@ -160,7 +160,7 @@ const CommentExampleComment = (props: any) => {
           {comments?.map((comment: any) => {
             const image_url = comment?.comment_owner
               ? `${comment?.comment_owner?.mb_image}`
-              : "user.png";
+              : "/user.png";
             const formattedCreatedAt = dayjs(comment?.createdAt).fromNow();
 
             userHasCommented = comments?.some(

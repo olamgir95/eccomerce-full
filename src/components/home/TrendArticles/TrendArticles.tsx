@@ -81,10 +81,10 @@ const TrendArticles = (props: any) => {
             {trendArticles?.map((article: Article) => {
               const userImage = article?.art_image
                 ? `${serverApi}/${article?.member_data?.mb_image}`
-                : "user.png";
+                : "/user.png";
               const artImage = article?.art_image
                 ? `${serverApi}/${article?.art_image}`
-                : "default.svg";
+                : "/default.svg";
               const formattedDate = dayjs(article?.createdAt).fromNow();
 
               return (

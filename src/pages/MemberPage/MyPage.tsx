@@ -137,7 +137,10 @@ const MyPage = (props: any) => {
           <Stack className="my_page_frame">
             <Stack className="my_page_right" data-aos="zoom-in-left">
               <Box className="order_info_box">
-                <a onClick={() => setValue("6")} className="settings_btn">
+                <a
+                  onClick={() => setValue("6")}
+                  className="settings_btn cursor-pointer"
+                >
                   <Settings color="primary" />
                 </a>
                 <Box className="info_box_item">

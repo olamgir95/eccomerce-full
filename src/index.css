@@ -9,6 +9,7 @@ body {
   overflow-x: hidden !important;
   padding: 0 !important;
   margin: 0 !important;
+  position: relative;
 }
 
 @layer components {
@@ -45,7 +46,7 @@ nav .active li {
 }
 /* ============= NavLink active End here ================ */
 .home_banner .swiper {
-  @apply w-full h-[700px];
+  @apply w-full md:h-[700px] h-[400px];
 }
 
 .home_banner .swiper-slide {
@@ -144,8 +145,8 @@ flex justify-between items-end;
   @apply pt-16 pb-20 text-lg leading-loose;
 }
 
-.help_page .css-1aquho2-MuiTabs-indicator {
-  width: 90px;
+.help_page .MuiTabs-indicator {
+  width: 90px !important;
 }
 
 .member_page {
@@ -323,10 +324,6 @@ flex justify-between items-end;
   border-radius: 10px;
   border: 1px solid #0288d1;
   background: #0288d1;
-}
-
-.maqola_yoz_sec button:hover {
-  transform: scale(1.05);
 }
 
 .maqola_yoz_sec .btn_cancel {

@@ -47,7 +47,7 @@ export function HelpPage() {
           </Box>
           <Stack>
             <Stack className="help_main_content">
-              <TabPanel value={"1"} sx={{ height: 590 }}>
+              <TabPanel value={"1"}>
                 <Stack className="accordion_menu">
                   {ruleData?.map((item, index) => (
                     <Accordion key={index}>
@@ -65,7 +65,7 @@ export function HelpPage() {
                   ))}
                 </Stack>
               </TabPanel>
-              <TabPanel value="2" sx={{ height: 590 }}>
+              <TabPanel value="2">
                 <Stack className="accordion_menu">
                   {faqData?.map((item, index) => (
                     <Accordion key={index}>
@@ -83,7 +83,7 @@ export function HelpPage() {
                   ))}
                 </Stack>
               </TabPanel>
-              <TabPanel value="3" sx={{ height: 590 }}>
+              <TabPanel value="3">
                 <div className="w-full max-w-2xl mx-auto p-10 bg-white border border-gray-300 rounded-lg shadow-md">
                   <div className="mb-4">
                     <span className="text-black text-2xl font-normal">

@@ -70,7 +70,7 @@ const MemberPosts = (props: any) => {
                   src={
                     article?.member_data?.mb_image
                       ? `${serverApi}/${article.member_data.mb_image}`
-                      : "user.png"
+                      : "/user.png"
                   }
                   alt=""
                 />

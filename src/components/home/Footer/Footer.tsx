@@ -1,5 +1,5 @@
 import React from "react";
-import footerLogo from "../../../assets/images/logo.png";
+import footerLogo from "../../../assets/images/logo.svg";
 import Banner from "../../../assets/images/footer-pattern.jpg";
 import {
   FaFacebook,
@@ -47,8 +47,8 @@ const Footer = () => {
       >
         <div className="md:grid grid-cols-4 pb-44 pt-5 px-10">
           <div className="py-8 px-4 col-span-2">
-            <h1 className="sm:text-3xl text-xl font-bold sm:text-left text-justify mb-3 flex items-center gap-3">
-              <img src={footerLogo} alt="" className="max-w-[50px]" />
+            <h1 className="sm:text-3xl text-xl text-orange-500 font-bold sm:text-left text-justify mb-3 flex items-center gap-3">
+              <img src={footerLogo} alt="" className="max-w-[40px]" />
               FurniShop
             </h1>
             <div className="grid grid-cols-2 gap-5 items-start text-sm">

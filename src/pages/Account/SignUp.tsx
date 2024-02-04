@@ -1,7 +1,7 @@
 import { ChangeEvent, MouseEvent, useState } from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
-import logoLight from "../../assets/images/logo.png";
+import logoLight from "../../assets/images/logo.svg";
 import { TextField } from "@mui/material";
 import MemberApiService from "../../app/ApiServices/memberApiService";
 import {
@@ -87,7 +87,7 @@ const SignUp = () => {
       <div className="w-1/2 hidden lgl:inline-flex h-full text-white">
         <div className="w-[450px] h-full bg-primeColor px-10 flex flex-col gap-6 justify-center">
           <Link to="/">
-            <h1 className="sm:text-3xl text-xl font-bold sm:text-left text-justify mb-3 flex items-center gap-3">
+            <h1 className="sm:text-3xl text-xl align-middle text-orange-500 font-bold sm:text-left text-justify mb-3 flex items-center gap-3">
               <img src={logoLight} alt="" className="max-w-[50px]" />
               FurniShop
             </h1>

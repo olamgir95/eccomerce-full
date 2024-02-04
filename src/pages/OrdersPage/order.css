@@ -167,6 +167,10 @@
   gap: 140px;
 }
 
+.order_page .MuiTabs-indicator {
+  width: 110px !important;
+}
+
 .order_right .info_box_item {
   display: flex;
   flex-direction: column;

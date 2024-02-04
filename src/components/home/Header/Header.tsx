@@ -2,7 +2,7 @@ import { MouseEvent, useEffect, useState } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { HiMenuAlt2 } from "react-icons/hi";
 import { motion } from "framer-motion";
-import headerLogo from "../../../assets/images/logo.png";
+import headerLogo from "../../../assets/images/logo.svg";
 import Flex from "../../designLayouts/Flex";
 import { Container, ListItemIcon, Menu, MenuItem } from "@mui/material";
 import { NavBarItem } from "../../../types/navbar";
@@ -67,7 +67,7 @@ const Header = () => {
                 <img
                   src={headerLogo}
                   alt=""
-                  className=" lg:w-full w-7 max-w-[50px]"
+                  className=" lg:w-full w-7 max-w-[40px]"
                 />
                 FurniShop
               </h1>
