@@ -9,7 +9,7 @@ body {
   overflow-x: hidden !important;
   padding: 0 !important;
   margin: 0 !important;
-  position: relative;
+  position: relative !important;
 }
 
 @layer components {
@@ -87,19 +87,19 @@ nav .active li {
 }
 
 .verify_member {
-  @apply last:border-r-0 flex font-normal hover:font-bold w-full  
+  @apply flex font-normal hover:font-bold w-full  
   max-w-28 h-6 justify-center items-center px-2 text-base 
   text-[#767676] hover:underline underline-offset-[4px] 
-  decoration-[1px] hover:text-orange-400  md:border-l-[2px]
-   border-l-gray-300 hoverEffect  first:border-l-0;
+  decoration-[1px] hover:text-orange-400  
+    hoverEffect;
 }
 
 .non_verify_member {
   @apply flex font-normal hover:font-bold w-full 
   max-w-28 h-6 justify-center items-center px-2 text-base 
 text-[#767676] hover:underline underline-offset-[4px] 
-  decoration-[1px] hover:text-orange-400  md:border-l-[2px]
- border-l-gray-300 hoverEffect  first:border-l-0;
+  decoration-[1px] hover:text-orange-400  
+  hoverEffect;
 }
 
 .product_detail {

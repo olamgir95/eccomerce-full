@@ -160,7 +160,7 @@ const CommunityChats = () => {
   }, [open]);
 
   return (
-    <div>
+    <div className="relative">
       <Button
         className={open ? "bg-red-500 chat_btn " : "chat_btn bg-[#007665]"}
         onClick={() => setOpen(!open)}

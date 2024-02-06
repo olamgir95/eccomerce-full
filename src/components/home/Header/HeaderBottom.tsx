@@ -47,26 +47,6 @@ const HeaderBottom = (props: any) => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
 
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        inputRef.current &&
-        !(event.target as Node).contains(inputRef.current)
-      ) {
-        setShowUser(false);
-        setSearchQuery("");
-      }
-    };
-
-    window.document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      window.document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [inputRef]);
-
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setShowUser(true);
     setSearchQuery(e.target.value);
@@ -152,7 +132,6 @@ const HeaderBottom = (props: any) => {
                   <input
                     className="flex-1 h-[50px] rounded-3xl  w-[90%] outline-gray-300 outline outline-1 hover:outline-electricPurple placeholder:text-[#C4C4C4] placeholder:text-[14px] pl-2 "
                     type="text"
-                    ref={inputRef}
                     onChange={handleInputChange}
                     value={searchQuery}
                     placeholder="Search your products here"

@@ -82,7 +82,10 @@ const Header = () => {
                 >
                   <>
                     {navBarList?.map(({ _id, title, link }: NavBarItem) => {
-                      if (!verifyMemberData && title === "My page") {
+                      if (
+                        (!verifyMemberData && title === "My page") ||
+                        (!verifyMemberData && title === "Order")
+                      ) {
                         return null;
                       }
 

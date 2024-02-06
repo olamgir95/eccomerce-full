@@ -55,12 +55,6 @@ const SignUp = () => {
       if (isNaN(Number(phone))) {
         setErrPhone("Please enter only number for phone number");
       }
-
-      if (clientName && password && password.length >= 4) {
-        setClientName("");
-        setPhone("");
-        setPassword("");
-      }
     }
 
     try {
@@ -78,7 +72,6 @@ const SignUp = () => {
       return true;
     } catch (err) {
       console.log(err);
-
       sweetErrorHandling(err).then();
     }
   };

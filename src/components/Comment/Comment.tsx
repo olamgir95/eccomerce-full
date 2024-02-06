@@ -284,7 +284,7 @@ const CommentExampleComment = (props: any) => {
                         {comment?.comment_replies?.map((reply: any) => {
                           const reply_image = reply?.reply_owner?.mb_image
                             ? reply?.reply_owner?.mb_image
-                            : "default.svg";
+                            : "/default.svg";
 
                           const formattedCreatedAt = dayjs(
                             reply?.createdAt
