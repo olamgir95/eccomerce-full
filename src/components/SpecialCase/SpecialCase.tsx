@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { RiShoppingCart2Fill } from "react-icons/ri";
 import { MdSwitchAccount } from "react-icons/md";
 import { useCombinedContext } from "../../context/useCombinedContext";

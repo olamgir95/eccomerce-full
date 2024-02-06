@@ -9,7 +9,6 @@ body {
   overflow-x: hidden !important;
   padding: 0 !important;
   margin: 0 !important;
-  position: relative !important;
 }
 
 @layer components {
@@ -46,7 +45,7 @@ nav .active li {
 }
 /* ============= NavLink active End here ================ */
 .home_banner .swiper {
-  @apply w-full md:h-[700px] h-[400px];
+  @apply w-full md:h-[700px] h-[400px] !overflow-x-hidden;
 }
 
 .home_banner .swiper-slide {
@@ -87,19 +86,11 @@ nav .active li {
 }
 
 .verify_member {
-  @apply flex font-normal hover:font-bold w-full  
-  max-w-28 h-6 justify-center items-center px-2 text-base 
+  @apply flex hover:font-bold  
+   h-6 justify-center items-center  text-base 
   text-[#767676] hover:underline underline-offset-[4px] 
   decoration-[1px] hover:text-orange-400  
-    hoverEffect;
-}
-
-.non_verify_member {
-  @apply flex font-normal hover:font-bold w-full 
-  max-w-28 h-6 justify-center items-center px-2 text-base 
-text-[#767676] hover:underline underline-offset-[4px] 
-  decoration-[1px] hover:text-orange-400  
-  hoverEffect;
+    hoverEffect font-bold;
 }
 
 .product_detail {

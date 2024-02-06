@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Modal, Stack } from "@mui/material";
+import { Avatar, Box, Button, Stack } from "@mui/material";
 import React, {
   ChangeEvent,
   FC,
@@ -22,7 +22,6 @@ import assert from "assert";
 import { Definer } from "../../lib/Definer";
 import { verifyMemberData } from "../../app/ApiServices/verify";
 import { RippleBadge } from "../../app/MaterialTheme/styled";
-import { BiMessage } from "react-icons/bi";
 import { CloseRounded, MessageRounded } from "@mui/icons-material";
 import "../../pages/CommunityPage/community.css";
 
@@ -160,7 +159,7 @@ const CommunityChats = () => {
   }, [open]);
 
   return (
-    <div className="relative">
+    <div>
       <Button
         className={open ? "bg-red-500 chat_btn " : "chat_btn bg-[#007665]"}
         onClick={() => setOpen(!open)}

@@ -92,7 +92,7 @@ const TrendArticles = (props: any) => {
                   <div
                     key={article?._id}
                     className="flex flex-col gap-4 shadow-lg 
-                     mx-4 rounded-xl dark:bg-gray-800 bg-primary/10
+                     mx-4 rounded-xl bg-orange-100
                      max-w-[480px] h-[390px] relative"
                   >
                     <CssVarsProvider>

@@ -30,8 +30,8 @@ const Layout = () => {
   return (
     <div className="custom-scroll-container font-bodyFont">
       <Header />
-      <CommunityChats />
       <SpecialCase />
+      <CommunityChats />
       {width < 667 && pathname !== "/" ? (
         <h1 className="my-40 text-center text-black font-bold">
           Mobile version is developing <br /> Please use our desktop version.

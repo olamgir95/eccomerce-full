@@ -78,7 +78,7 @@ const Header = () => {
                   initial={{ y: 30, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.5 }}
-                  className="flex items-center w-full  p-0 gap-3"
+                  className="flex items-center w-full  p-0 gap-20"
                 >
                   <>
                     {navBarList?.map(({ _id, title, link }: NavBarItem) => {
@@ -99,15 +99,11 @@ const Header = () => {
                       return (
                         <NavLink
                           key={_id}
-                          className={
-                            verifyMemberData
-                              ? "verify_member"
-                              : "non_verify_member"
-                          }
+                          className={"verify_member"}
                           to={link}
                           state={{ data: location.pathname.split("/")[1] }}
                         >
-                          <li className="text-center w-28 lg:text-[18px] pl-2 ">
+                          <li className="text-center lg:text-[18px] ">
                             {title}
                           </li>
                         </NavLink>

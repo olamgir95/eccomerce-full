@@ -103,32 +103,24 @@ const ShopPage = () => {
               </div>
             </div>
             <div className="flex flex-wrap items-center justify-evenly">
-              {allProducts.length > 1 ? (
-                allProducts?.map((productItem: Product) => {
-                  return (
-                    <Products
-                      product={productItem}
-                      disable={false}
-                      setProductRebuild={setProductRebuild}
-                      filter={filter}
-                    />
-                  );
-                })
-              ) : (
-                <span>No data!</span>
-              )}
+              {allProducts.slice(0, 12)?.map((productItem: Product) => {
+                return (
+                  <Products
+                    product={productItem}
+                    disable={false}
+                    setProductRebuild={setProductRebuild}
+                    filter={filter}
+                  />
+                );
+              })}
             </div>
             <Stack className="flex justify-end items-center">
               {allProducts.length > 1 && (
                 <Pagination
                   count={
-                    allProducts.length > 12
-                      ? targetSearchObj?.page >= 3
-                        ? targetSearchObj?.page + 2
-                        : 3
-                      : 1
+                    targetSearchObj?.page >= 2 ? targetSearchObj?.page + 1 : 2
                   }
-                  page={targetSearchObj.page}
+                  page={allProducts && targetSearchObj.page}
                   renderItem={(item) => (
                     <PaginationItem
                       components={{

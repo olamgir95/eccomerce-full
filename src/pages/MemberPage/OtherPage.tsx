@@ -199,7 +199,7 @@ const OtherPage = (props: any) => {
                       src={
                         chosenMember?.mb_image
                           ? `${serverApi}/${chosenMember?.mb_image}`
-                          : "/download.png"
+                          : "/user.png"
                       }
                       alt=""
                     />

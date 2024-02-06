@@ -61,7 +61,7 @@ const TargetArticles = (props: any) => {
           : "default.svg";
         const userImage = article?.member_data?.mb_image
           ? `${serverApi}/${article?.member_data?.mb_image}`
-          : "/default.avif";
+          : "/user.png";
         const formattedDate = dayjs(article?.createdAt).fromNow();
         const delay = 200 * index;
         return (
