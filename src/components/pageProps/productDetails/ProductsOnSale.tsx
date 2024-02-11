@@ -12,7 +12,7 @@ const ProductsOnSale = (props: any) => {
   const { saleProducts } = useSelector(shopRetriever);
 
   return (
-    <div className="overflow-x-auto max-h-[500px] border-r border-gray-300 ">
+    <div className="overflow-scroll max-h-[500px] border-r border-gray-300 onSale">
       <h3 className="font-titleFont text-xl overflow-y-hidden  font-semibold mb-6 underline underline-offset-4 mt-5 decoration-[1px]">
         Products on sale
       </h3>

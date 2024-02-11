@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 body {
-  overflow-y: scroll !important;
+  /* overflow-y: scroll !important; */
   overflow-x: hidden !important;
   padding: 0 !important;
   margin: 0 !important;
@@ -829,4 +829,43 @@ flex justify-between items-end;
 .toastui-editor-defaultUI-toolbar {
   overflow: hidden;
   height: 32px;
+}
+
+.onSale {
+  overflow-y: auto;
+  overflow-x: auto;
+  &::-webkit-scrollbar {
+    width: 10px; /* width of the scrollbar */
+    height: 80%;
+    border-radius: 15px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #e3e8ee; /* color of the thumb */
+    border-radius: 15px; /* rounded corners */
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: #f9fafc; /* color of the track */
+    border-radius: 15px; /* rounded corners */
+  }
+
+  &::-webkit-scrollbar-button:end:increment {
+    height: 20px;
+    display: "block";
+  }
+
+  &::-webkit-scrollbar-button:start:decrement {
+    height: 20px;
+    display: "block";
+  }
+  &::-webkit-scrollbar-thumb:vertical {
+    background-color: #e3e8ee; /* color of the thumb */
+    border-radius: 15px; /* rounded corners */
+  }
+
+  &::-webkit-scrollbar-track:vertical {
+    background-color: #f9fafc; /* color of the track */
+    border-radius: 15px; /* rounded corners */
+  }
 }

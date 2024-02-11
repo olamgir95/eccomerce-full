@@ -12,7 +12,7 @@ const ProductInfo = ({ productInfo }: ProductProps) => {
   const { useBasket } = useCombinedContext();
   const { onAdd } = useBasket;
   return (
-    <div className="flex flex-col gap-5 -mt-10">
+    <div className="flex flex-col gap-5 ">
       <h2 className="text-4xl font-semibold">{productInfo?.product_name}</h2>
       <span className="flex gap-2">
         <span
@@ -37,7 +37,6 @@ const ProductInfo = ({ productInfo }: ProductProps) => {
       >
         {productInfo?.product_description}
       </p>
-      <p className="text-sm">Be the first to leave a review.</p>
       <ul className="flex justify-start flex-col capitalize font-medium text-lg">
         <li className="flex gap-4">
           {colors.map((color) => {

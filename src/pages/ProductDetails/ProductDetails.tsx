@@ -86,10 +86,10 @@ const ProductDetails = () => {
   return (
     <div className="w-full bg-gray-100 mx-auto border-b-[1px] border-b-gray-300 bg-cover bg-center pr_detail_container">
       <Container>
-        <div className="xl:-mt-10 -mt-7">
-          <Breadcrumbs title="" />
+        <div className="">
+          <Breadcrumbs title="Product Detail" />
         </div>
-        <div className="w-full bg-transparent backdrop-blur-md  grid grid-cols-1 md:grid-cols-3 xl:grid-cols-7 gap-4 h-full -mt-5 xl:-mt-8 pb-10 bg-gray-100 p-4">
+        <div className="w-full bg-transparent backdrop-blur-md  grid grid-cols-1 md:grid-cols-3 xl:grid-cols-7 gap-4 h-full -mt-5 xl:-mt-8  bg-gray-100 p-4">
           <div className="h-full col-span-1">
             <ProductsOnSale setProductRebuild={setProductRebuild} />
           </div>
@@ -140,7 +140,7 @@ const ProductDetails = () => {
               </Badge>
             </Button>
           </div>
-          <div className="h-full w-full md:col-span-2 xl:col-span-3 p-4 xl:p-8 flex flex-col justify-center">
+          <div className="h-full w-full md:col-span-2 xl:col-span-3 pl-2 py-4 xl:py-8 flex flex-col">
             <ProductInfo productInfo={chosenProduct} />
           </div>
         </div>

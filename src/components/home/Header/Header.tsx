@@ -58,11 +58,11 @@ const Header = () => {
   };
 
   return (
-    <div className="w-full h-20 bg-white sticky top-0 z-[51] border-b-[1px] border-b-gray-200">
+    <div className="w-full h-20 bg-white sticky top-0 overflow-hidden z-[51] border-b-[1px] border-b-gray-200">
       <Container>
         <nav className="h-full px-4 max-w-container mx-auto relative">
           <Flex className="flex items-center justify-between h-full">
-            <Link to="/">
+            <Link to="/" data-aos="zoom-in-right">
               <h1 className="lg:text-3xl text-xl font-bold text-orange-500 sm:text-left text-center mb-3 flex items-center lg:gap-3 gap-1">
                 <img
                   src={headerLogo}
@@ -72,14 +72,9 @@ const Header = () => {
                 FurniShop
               </h1>
             </Link>
-            <div>
+            <div data-aos="zoom-in-left">
               {showMenu && width > 667 && (
-                <motion.ul
-                  initial={{ y: 30, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.5 }}
-                  className="flex items-center w-full  p-0 gap-20"
-                >
+                <motion.ul className="flex items-center w-full  p-0 gap-20">
                   <>
                     {navBarList?.map(({ _id, title, link }: NavBarItem) => {
                       if (

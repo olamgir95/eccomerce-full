@@ -7,7 +7,6 @@ import { useEffect } from "react";
 import ScrollToTop from "./../constants/scrollToTop";
 import { CombinedProvider } from "../context/useCombinedContext";
 import OtherPage from "../pages/MemberPage/OtherPage";
-import "aos/dist/aos.css";
 import "@toast-ui/editor/dist/toastui-editor.css";
 
 interface CustomAosOptions extends AosOptions {

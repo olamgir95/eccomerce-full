@@ -40,55 +40,51 @@ const NewMessage: FC<NewMessageProps> = ({ data, key }) => {
   } else {
     return (
       <Box className="chat_main_left">
-        <Avatar alt={mb_nick} src={mb_image ?? "/comunity/user1.svg"} />
+        <Avatar alt={mb_nick} src={mb_image} />
         <div className="msg_left">{msg}</div>
       </Box>
     );
   }
-  return null;
 };
 
 const CommunityChats = () => {
   const msgInputRef: any = useRef(null);
-  const [messageList, setMessageList] = useState<Array<ReactElement<any>>>([]);
+  const [messagesList, setMessagesList] = useState<Array<ReactElement<any>>>(
+    []
+  );
   const socket = useContext(SocketContext);
   const [onlineUsers, setOnlineUsers] = useState<number>(0);
   const [message, setMessage] = useState<string>("");
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    console.log("hello");
-  }, []);
-
-  useEffect(() => {
     socket?.connect();
-    //@ts-ignore
-    socket?.on("connect", (msg: any) => {
+    socket?.on("connect", function () {
       console.log("Client connected");
     });
 
     socket?.on("newMsg", (new_msg: ChatMessage) => {
-      setMessageList((prevList) => [
-        ...prevList,
-        <NewMessage data={new_msg} key={prevList.length} />,
-      ]);
-      console.log("Client: new message");
+      messagesList.push(
+        //@ts-ignore
+        <NewMessage new_message={data} key={messagesList.length} />
+      );
+      setMessagesList([...messagesList]);
     });
 
     socket?.on("greetMsg", (new_msg: ChatGreetMsg) => {
-      setMessageList((prevList) => [
-        ...prevList,
+      messagesList.push(
+        //@ts-ignore
         <p
           style={{
             textAlign: "center",
             fontSize: "large",
-            fontFamily: "Poppins",
+            fontFamily: "serif",
           }}
         >
           {new_msg.text}, dear {verifyMemberData?.mb_nick ?? "guest"}
-        </p>,
-      ]);
-      console.log("Client: greet message");
+        </p>
+      );
+      setMessagesList([...messagesList]);
     });
 
     socket?.on("infoUsers", (msg: ChatInfoUsers) => {
@@ -99,7 +95,7 @@ const CommunityChats = () => {
     return () => {
       socket?.disconnect();
     };
-  }, [socket]);
+  }, [socket, messagesList]);
 
   //Handler//
 
@@ -108,10 +104,10 @@ const CommunityChats = () => {
       const text = e.target.value;
       setMessage(text);
     },
-    [message]
+    []
   );
 
-  const getKeyHandler = (e: any) => {
+  const getKeyHandler = async (e: any) => {
     try {
       if (e.key === "Enter") {
         assert.ok(message, Definer.input_err2);
@@ -119,11 +115,11 @@ const CommunityChats = () => {
       }
     } catch (err: any) {
       console.log(`getKeyHandler, ERROR: ${err}`);
-      sweetErrorHandling(err).then();
+      await sweetErrorHandling(err).then();
     }
   };
 
-  const onSendBtnHandler = () => {
+  const onSendBtnHandler = async () => {
     try {
       if (!verifyMemberData) {
         msgInputRef.current.value = "";
@@ -134,7 +130,7 @@ const CommunityChats = () => {
       msgInputRef.current.value = "";
       assert.ok(message, Definer.input_err2);
 
-      const mb_image_url = verifyMemberData?.mb_image ?? "/comunity/user1.svg";
+      const mb_image_url = verifyMemberData?.mb_image;
       socket?.emit("createMsg", {
         msg: message,
         mb_id: verifyMemberData?._id,
@@ -144,24 +140,14 @@ const CommunityChats = () => {
       setMessage("");
     } catch (err: any) {
       console.log(`onSendBtnHandler, ERROR: ${err}`);
-      sweetErrorHandling(err).then();
+      await sweetErrorHandling(err).then();
     }
   };
-
-  useEffect(() => {
-    const handleBodyScroll = () => {
-      document.body.style.overflow = open ? "scroll" : "scroll";
-    };
-
-    handleBodyScroll();
-
-    return () => {};
-  }, [open]);
 
   return (
     <div>
       <Button
-        className={open ? "bg-red-500 chat_btn " : "chat_btn bg-[#007665]"}
+        className={open ? "bg-red-500 chat_btn " : "chat_btn bg-orange-500"}
         onClick={() => setOpen(!open)}
       >
         {open ? <CloseRounded /> : <MessageRounded />}
@@ -181,7 +167,7 @@ const CommunityChats = () => {
             <Box className="chat_main_left">
               <div className="msg_left">Enjoy the live chatting !</div>
             </Box>
-            {messageList}
+            {messagesList}
           </Box>
         </Stack>
         <Box className="chat_bott">

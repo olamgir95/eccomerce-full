@@ -9,6 +9,7 @@ import {
   sweetTopSmallSuccessAlert,
 } from "../../lib/sweetAlert";
 import BackButton from "../../components/designLayouts/buttons/BackButton";
+import assert from "assert";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -27,6 +28,7 @@ const SignUp = () => {
 
   const handlePhone = (e: ChangeEvent<HTMLInputElement>) => {
     setPhone(e.target.value);
+
     setErrPhone("");
   };
   const handlePassword = (e: ChangeEvent<HTMLInputElement>) => {
@@ -36,6 +38,7 @@ const SignUp = () => {
 
   const handleSignUp = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+
     if (checked) {
       if (!clientName) {
         setErrClientName("Enter your name");
@@ -56,14 +59,15 @@ const SignUp = () => {
         setErrPhone("Please enter only number for phone number");
       }
     }
-
     try {
       const signup_data = {
         mb_nick: clientName,
         mb_password: password,
         mb_phone: phone,
       };
-
+      assert.ok(!errClientName, errClientName);
+      assert.ok(!errPassword, errPassword);
+      assert.ok(!errPhone, errPhone);
       const memberApiService = new MemberApiService();
       await memberApiService.signupRequest(signup_data);
 

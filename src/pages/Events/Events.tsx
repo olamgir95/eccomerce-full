@@ -57,14 +57,14 @@ export default function Events() {
               return (
                 <SwiperSlide
                   key={event._id}
-                  className="events_info_frame w-[350px] md:w-[420px] h-[440px] relative"
+                  className="events_info_frame shadow-lg w-[350px] md:w-[420px] h-[440px] relative overflow-hidden"
                 >
                   <img
                     src={image_path}
                     className="w-full h-[43%]  object-cover rounded-10"
                     alt=""
                   />
-                  <div className="  transform  p-2 h-[54.5%] rounded-b-2xl bg-white shadow-lg rounded-8">
+                  <div className="  transform  p-2 h-[100%] rounded-b-2xl bg-white shadow-lg rounded-8">
                     <div className="w-full flex flex-row justify-between items-center">
                       <div className="flex flex-col">
                         <div className="event_title_speaker">

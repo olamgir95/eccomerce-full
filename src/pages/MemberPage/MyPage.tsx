@@ -249,25 +249,31 @@ const MyPage = (props: any) => {
                     />
                     <Stack className="pagination">
                       <Box className="bottom_box">
-                        <Pagination
-                          count={
-                            memberArticleSearchObj.page >= 3
-                              ? memberArticleSearchObj.page + 1
-                              : 3
-                          }
-                          page={memberArticleSearchObj.page}
-                          renderItem={(item) => (
-                            <PaginationItem
-                              components={{
-                                previous: ArrowBackIcon,
-                                next: ArrowForwardIcon,
-                              }}
-                              {...item}
-                              color="primary"
-                            />
-                          )}
-                          onChange={handlePaginationChange}
-                        />
+                        {chosenMemberArticles ? (
+                          <Pagination
+                            count={
+                              memberArticleSearchObj.page >= 3
+                                ? memberArticleSearchObj.page + 1
+                                : 3
+                            }
+                            page={memberArticleSearchObj.page}
+                            renderItem={(item) => (
+                              <PaginationItem
+                                components={{
+                                  previous: ArrowBackIcon,
+                                  next: ArrowForwardIcon,
+                                }}
+                                {...item}
+                                color="primary"
+                              />
+                            )}
+                            onChange={handlePaginationChange}
+                          />
+                        ) : (
+                          <span className="font-normal mt-40">
+                            No data available!
+                          </span>
+                        )}
                       </Box>
                     </Stack>
                   </Box>
