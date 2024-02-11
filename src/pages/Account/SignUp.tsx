@@ -38,28 +38,29 @@ const SignUp = () => {
 
   const handleSignUp = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    try {
+      if (checked) {
+        if (!clientName) {
+          setErrClientName("Enter your name");
+        }
 
-    if (checked) {
-      if (!clientName) {
-        setErrClientName("Enter your name");
-      }
+        if (!phone) {
+          setErrPhone("Enter your phone number");
+        }
+        if (!password) {
+          setErrPassword("Create a password");
+        } else {
+          if (password.length < 4) {
+            setErrPassword("Passwords must be at least 4 characters");
+          }
+        }
 
-      if (!phone) {
-        setErrPhone("Enter your phone number");
-      }
-      if (!password) {
-        setErrPassword("Create a password");
-      } else {
-        if (password.length < 4) {
-          setErrPassword("Passwords must be at least 4 characters");
+        if (isNaN(Number(phone))) {
+          setErrPhone("Please enter only number for phone number");
         }
       }
+      assert.ok(Number(phone), "Please enter only number for phone number");
 
-      if (isNaN(Number(phone))) {
-        setErrPhone("Please enter only number for phone number");
-      }
-    }
-    try {
       const signup_data = {
         mb_nick: clientName,
         mb_password: password,

@@ -66,7 +66,7 @@ const CommunityChats = () => {
     socket?.on("newMsg", (new_msg: ChatMessage) => {
       messagesList.push(
         //@ts-ignore
-        <NewMessage new_message={data} key={messagesList.length} />
+        <NewMessage data={new_msg} key={messagesList.length} />
       );
       setMessagesList([...messagesList]);
     });
@@ -95,7 +95,7 @@ const CommunityChats = () => {
     return () => {
       socket?.disconnect();
     };
-  }, [socket, messagesList]);
+  }, [socket]);
 
   //Handler//
 
@@ -104,7 +104,7 @@ const CommunityChats = () => {
       const text = e.target.value;
       setMessage(text);
     },
-    []
+    [message]
   );
 
   const getKeyHandler = async (e: any) => {
