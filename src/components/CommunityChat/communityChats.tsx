@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { Avatar, Box, Button, Stack } from "@mui/material";
 import React, {
   ChangeEvent,
@@ -58,12 +59,12 @@ const CommunityChats = () => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    socket?.connect();
-    socket?.on("connect", function () {
+    socket.connect();
+    socket.on("connect", function () {
       console.log("Client connected");
     });
 
-    socket?.on("newMsg", (new_msg: ChatMessage) => {
+    socket.on("newMsg", (new_msg: ChatMessage) => {
       messagesList.push(
         //@ts-ignore
         <NewMessage data={new_msg} key={messagesList.length} />
@@ -71,7 +72,7 @@ const CommunityChats = () => {
       setMessagesList([...messagesList]);
     });
 
-    socket?.on("greetMsg", (new_msg: ChatGreetMsg) => {
+    socket.on("greetMsg", (new_msg: ChatGreetMsg) => {
       messagesList.push(
         //@ts-ignore
         <p
@@ -87,13 +88,13 @@ const CommunityChats = () => {
       setMessagesList([...messagesList]);
     });
 
-    socket?.on("infoUsers", (msg: ChatInfoUsers) => {
+    socket.on("infoUsers", (msg: ChatInfoUsers) => {
       console.log("Client: info users");
       setOnlineUsers(msg.total);
     });
 
     return () => {
-      socket?.disconnect();
+      socket.disconnect();
     };
   }, [socket]);
 
@@ -124,14 +125,14 @@ const CommunityChats = () => {
       if (!verifyMemberData) {
         msgInputRef.current.value = "";
         sweetFailureProvider("Please login first", true);
-        return;
+        return false;
       }
 
       msgInputRef.current.value = "";
       assert.ok(message, Definer.input_err2);
 
       const mb_image_url = verifyMemberData?.mb_image;
-      socket?.emit("createMsg", {
+      socket.emit("createMsg", {
         msg: message,
         mb_id: verifyMemberData?._id,
         mb_nick: verifyMemberData?.mb_nick,

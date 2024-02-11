@@ -6,7 +6,7 @@ import { Container } from "@mui/material";
 
 const BannerBottom = () => {
   return (
-    <div className="w-full bg-white border-b-[1px] py-4 border-b-gray-200 px-4">
+    <div className="w-full bg-white border-b-[1px] py-4 border-b-gray-200 ">
       <Container>
         <div className="max-w-container mx-auto md:h-20 gap-3 md:gap-0 grid grid-cols-2 md:flex  md:flex-row justify-between items-center">
           <div

@@ -1,6 +1,7 @@
-import { io, Socket } from "socket.io-client";
-import { serverApi } from "../lib/config";
+//@ts-nocheck
+import { io } from "socket.io-client";
 import { createContext } from "react";
+import { serverApi } from "../lib/config";
 
-export const socket: Socket = io(serverApi, { autoConnect: true });
-export const SocketContext = createContext<Socket | null>(null);
+export const socket = io.connect(serverApi);
+export const SocketContext = createContext();
