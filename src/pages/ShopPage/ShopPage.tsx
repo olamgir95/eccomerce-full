@@ -115,17 +115,20 @@ const ShopPage = () => {
               })}
             </div>
             <Stack className="flex justify-end items-center">
-              {allProducts.length > 1 && (
+              {allProducts.length > 0 && allProducts.length % 12 === 0 ? (
                 <Pagination
                   count={
-                    targetSearchObj?.page >= 2 ? targetSearchObj?.page + 1 : 2
+                    targetSearchObj.page >= 3 ? targetSearchObj.page + 1 : 3
                   }
-                  page={allProducts && targetSearchObj.page}
+                  page={targetSearchObj.page}
                   renderItem={(item) => (
                     <PaginationItem
                       components={{
                         previous: ArrowBackIcon,
-                        next: ArrowForwardIcon,
+                        next:
+                          targetSearchObj.page === 0
+                            ? () => null
+                            : ArrowForwardIcon, // Hide next button if page is 0
                       }}
                       {...item}
                       color="primary"
@@ -133,6 +136,31 @@ const ShopPage = () => {
                   )}
                   onChange={handlePaginationChange}
                 />
+              ) : allProducts.length === 0 ? (
+                <span className="font-normal text-xl mt-40">
+                  No data available!
+                </span>
+              ) : (
+                targetSearchObj.page > 1 && (
+                  <div>
+                    <Pagination
+                      count={targetSearchObj.page}
+                      page={targetSearchObj.page}
+                      renderItem={(item) => (
+                        <PaginationItem
+                          components={{
+                            previous: ArrowBackIcon,
+                            next: () => null, // Hide the next button
+                          }}
+                          {...item}
+                          color="primary"
+                        />
+                      )}
+                      onChange={handlePaginationChange}
+                      disabled={false}
+                    />
+                  </div>
+                )
               )}
             </Stack>
           </div>

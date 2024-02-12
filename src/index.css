@@ -445,7 +445,7 @@ flex justify-between items-end;
 
 .all_article_container {
   width: 100%;
-  padding: 5px 14px 5px 0px;
+  padding: 5px 14px 5px 10px;
 }
 
 .my_page .all_article_box .views {

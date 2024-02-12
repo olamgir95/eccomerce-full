@@ -126,19 +126,19 @@ const CommunityChats = () => {
         msgInputRef.current.value = "";
         sweetFailureProvider("Please login first", true);
         return false;
+      } else {
+        msgInputRef.current.value = "";
+        assert.ok(message, Definer.input_err2);
+
+        const mb_image_url = verifyMemberData?.mb_image;
+        socket.emit("createMsg", {
+          msg: message,
+          mb_id: verifyMemberData?._id,
+          mb_nick: verifyMemberData?.mb_nick,
+          mb_image: mb_image_url,
+        });
+        setMessage("");
       }
-
-      msgInputRef.current.value = "";
-      assert.ok(message, Definer.input_err2);
-
-      const mb_image_url = verifyMemberData?.mb_image;
-      socket.emit("createMsg", {
-        msg: message,
-        mb_id: verifyMemberData?._id,
-        mb_nick: verifyMemberData?.mb_nick,
-        mb_image: mb_image_url,
-      });
-      setMessage("");
     } catch (err: any) {
       console.log(`onSendBtnHandler, ERROR: ${err}`);
       await sweetErrorHandling(err).then();

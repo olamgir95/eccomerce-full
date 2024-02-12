@@ -171,17 +171,20 @@ const MemberFollowers = (props: any) => {
       })}
       <Stack className="pagination">
         <Box className="bottom_box">
-          {memberFollowers.length > 3 ? (
+          {memberFollowers.length > 0 && memberFollowers.length % 4 === 0 ? (
             <Pagination
               count={
-                followersSearchObj.page >= 3 ? followersSearchObj.page + 1 : 3
+                followersSearchObj.page >= 3 ? followersSearchObj.page + 1 : 2
               }
               page={followersSearchObj.page}
               renderItem={(item) => (
                 <PaginationItem
                   components={{
                     previous: ArrowBackIcon,
-                    next: ArrowForwardIcon,
+                    next:
+                      followersSearchObj.page === 0
+                        ? () => null
+                        : ArrowForwardIcon, // Hide next button if page is 0
                   }}
                   {...item}
                   color="primary"
@@ -189,10 +192,31 @@ const MemberFollowers = (props: any) => {
               )}
               onChange={handlePaginationChange}
             />
-          ) : (
+          ) : memberFollowers.length === 0 ? (
             <span className="font-normal text-xl mt-40">
               No data available!
             </span>
+          ) : (
+            followersSearchObj.page > 1 && (
+              <div>
+                <Pagination
+                  count={followersSearchObj.page}
+                  page={followersSearchObj.page}
+                  renderItem={(item) => (
+                    <PaginationItem
+                      components={{
+                        previous: ArrowBackIcon,
+                        next: () => null, // Hide the next button
+                      }}
+                      {...item}
+                      color="primary"
+                    />
+                  )}
+                  onChange={handlePaginationChange}
+                  disabled={false}
+                />
+              </div>
+            )
           )}
         </Box>
       </Stack>

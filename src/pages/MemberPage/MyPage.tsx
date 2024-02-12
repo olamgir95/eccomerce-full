@@ -129,7 +129,7 @@ const MyPage = (props: any) => {
       sweetErrorHandling(err).then();
     }
   };
-  console.log("art", chosenMemberArticles);
+  console.log("art", chosenMemberArticles.length % 4 === 0);
 
   return (
     <div className="my_page">
@@ -251,19 +251,23 @@ const MyPage = (props: any) => {
                     />
                     <Stack className="pagination">
                       <Box className="bottom_box">
-                        {chosenMemberArticles.length > 3 ? (
+                        {chosenMemberArticles.length > 0 &&
+                        chosenMemberArticles.length % 3 === 0 ? (
                           <Pagination
                             count={
                               memberArticleSearchObj.page >= 3
                                 ? memberArticleSearchObj.page + 1
-                                : 5
+                                : 2
                             }
                             page={memberArticleSearchObj.page}
                             renderItem={(item) => (
                               <PaginationItem
                                 components={{
                                   previous: ArrowBackIcon,
-                                  next: ArrowForwardIcon,
+                                  next:
+                                    memberArticleSearchObj.page === 0
+                                      ? () => null
+                                      : ArrowForwardIcon, // Hide next button if page is 0
                                 }}
                                 {...item}
                                 color="primary"
@@ -271,10 +275,31 @@ const MyPage = (props: any) => {
                             )}
                             onChange={handlePaginationChange}
                           />
-                        ) : (
+                        ) : chosenMemberArticles.length === 0 ? (
                           <span className="font-normal text-xl mt-40">
                             No data available!
                           </span>
+                        ) : (
+                          memberArticleSearchObj.page > 1 && (
+                            <div>
+                              <Pagination
+                                count={memberArticleSearchObj.page}
+                                page={memberArticleSearchObj.page}
+                                renderItem={(item) => (
+                                  <PaginationItem
+                                    components={{
+                                      previous: ArrowBackIcon,
+                                      next: () => null, // Hide the next button
+                                    }}
+                                    {...item}
+                                    color="primary"
+                                  />
+                                )}
+                                onChange={handlePaginationChange}
+                                disabled={false}
+                              />
+                            </div>
+                          )
                         )}
                       </Box>
                     </Stack>
