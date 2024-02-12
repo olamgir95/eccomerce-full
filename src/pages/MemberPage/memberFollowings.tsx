@@ -145,23 +145,29 @@ const MemberFollowings = (props: any) => {
       })}
       <Stack className="pagination">
         <Box className="bottom_box">
-          <Pagination
-            count={
-              followersSearchObj.page >= 3 ? followersSearchObj.page + 1 : 3
-            }
-            page={followersSearchObj.page}
-            renderItem={(item) => (
-              <PaginationItem
-                components={{
-                  previous: ArrowBackIcon,
-                  next: ArrowForwardIcon,
-                }}
-                {...item}
-                color="primary"
-              />
-            )}
-            onChange={handlePaginationChange}
-          />
+          {memberFollowings.length > 3 ? (
+            <Pagination
+              count={
+                followersSearchObj.page >= 3 ? followersSearchObj.page + 1 : 3
+              }
+              page={followersSearchObj.page}
+              renderItem={(item) => (
+                <PaginationItem
+                  components={{
+                    previous: ArrowBackIcon,
+                    next: ArrowForwardIcon,
+                  }}
+                  {...item}
+                  color="primary"
+                />
+              )}
+              onChange={handlePaginationChange}
+            />
+          ) : (
+            <span className="font-normal text-xl mt-40">
+              No data available!
+            </span>
+          )}
         </Box>
       </Stack>
     </Stack>

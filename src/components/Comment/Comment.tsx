@@ -367,7 +367,10 @@ const CommentExampleComment = (props: any) => {
           ) : null}
 
           <div className="action_btn">
-            <button onClick={createComment} className="comment_btn">
+            <button
+              onClick={createComment}
+              className="comment_btn bg-primary hover:bg-orange-500 font-bold"
+            >
               Submit Review
             </button>
           </div>

@@ -129,6 +129,7 @@ const MyPage = (props: any) => {
       sweetErrorHandling(err).then();
     }
   };
+  console.log("art", chosenMemberArticles);
 
   return (
     <div className="my_page">
@@ -181,6 +182,7 @@ const MyPage = (props: any) => {
                           {...props}
                           variant="contained"
                           onClick={() => setValue("4")}
+                          className=" capitalize"
                         >
                           Create article
                         </Button>
@@ -249,12 +251,12 @@ const MyPage = (props: any) => {
                     />
                     <Stack className="pagination">
                       <Box className="bottom_box">
-                        {chosenMemberArticles ? (
+                        {chosenMemberArticles.length > 3 ? (
                           <Pagination
                             count={
                               memberArticleSearchObj.page >= 3
                                 ? memberArticleSearchObj.page + 1
-                                : 3
+                                : 5
                             }
                             page={memberArticleSearchObj.page}
                             renderItem={(item) => (
@@ -270,7 +272,7 @@ const MyPage = (props: any) => {
                             onChange={handlePaginationChange}
                           />
                         ) : (
-                          <span className="font-normal mt-40">
+                          <span className="font-normal text-xl mt-40">
                             No data available!
                           </span>
                         )}

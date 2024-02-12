@@ -60,10 +60,14 @@ export function OrdersPage(props: any) {
                 <TabList
                   onChange={handleChange}
                   aria-label="basic tabs example"
-                  className={"order_nav"}
+                  className={"order_nav gap-40"}
                 >
-                  <Tab label="Process" value={"1"} />
-                  <Tab label="Finished" value={"2"} />
+                  <Tab
+                    label="Process"
+                    value={"1"}
+                    sx={{ marginRight: "200px", fontSize: "16px" }}
+                  />
+                  <Tab label="Finished" value={"2"} sx={{ fontSize: "16px" }} />
                 </TabList>
               </Box>
             </Box>

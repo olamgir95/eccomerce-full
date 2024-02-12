@@ -161,12 +161,6 @@
   border: 1px solid darkorchid;
 }
 
-.order_page .css-heg063-MuiTabs-flexContainer {
-  display: flex;
-  justify-content: flex-start;
-  gap: 140px;
-}
-
 .order_page .MuiTabs-indicator {
   width: 90px !important;
 }

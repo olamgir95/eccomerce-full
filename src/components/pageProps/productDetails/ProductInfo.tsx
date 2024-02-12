@@ -87,7 +87,7 @@ const ProductInfo = ({ productInfo }: ProductProps) => {
         onClick={() => {
           onAdd(productInfo);
         }}
-        className="w-full py-4 bg-orange-400 hover:bg-orange-500   rounded-md duration-300 text-white text-lg font-titleFont"
+        className="w-full py-4 bg-primary hover:bg-orange-500 font-bold rounded-md duration-300 text-white text-lg font-titleFont"
       >
         <ShoppingCart /> Add to Cart
       </button>
