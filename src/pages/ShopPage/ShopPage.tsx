@@ -115,7 +115,8 @@ const ShopPage = () => {
               })}
             </div>
             <Stack className="flex justify-end items-center">
-              {allProducts.length > 0 && allProducts.length % 12 === 0 ? (
+              {allProducts.length > 0 &&
+              allProducts.slice(0, 12).length % 12 === 0 ? (
                 <Pagination
                   count={
                     targetSearchObj.page >= 3 ? targetSearchObj.page + 1 : 3
