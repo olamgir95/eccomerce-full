@@ -13,7 +13,10 @@ const SwiperSlideComponent = (props: any) => {
 
         <button
           onClick={() => navigate("/shop")}
-          className="shop-button text-white font-bold hover:shadow-lg hover:scale-105 duration-300 shadow-white mt-4 bg-springGreen hover:bg-[rgba(255,255,255, 0.6)] px-[35px] py-[9px] mb-[160px] text-xl rounded-md backdrop-blur-md transition lg:px-[80px] lg:py-[16px] lg:mb-[194px]  "
+          className="shop-button text-white font-bold hover:shadow-lg hover:scale-105 
+          duration-300 shadow-white mt-4 bg-primary hover:bg-orange-500 
+          px-[35px] py-[9px] mb-[160px] text-xl rounded-md backdrop-blur-md transition lg:px-[80px] 
+          lg:py-[16px] lg:mb-[194px]  "
         >
           Shop Now
         </button>

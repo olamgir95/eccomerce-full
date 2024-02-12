@@ -8,6 +8,7 @@ import ScrollToTop from "./../constants/scrollToTop";
 import { CombinedProvider } from "../context/useCombinedContext";
 import OtherPage from "../pages/MemberPage/OtherPage";
 import "@toast-ui/editor/dist/toastui-editor.css";
+import NotFound from "../pages/NotFound/NotFound";
 
 interface CustomAosOptions extends AosOptions {
   offset: number;
@@ -58,6 +59,7 @@ function App() {
               }
             />
           </Route>
+          <Route path="*" element={<NotFound />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signin" element={<SignIn />} />
         </Routes>

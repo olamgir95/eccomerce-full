@@ -148,7 +148,11 @@ const CommunityChats = () => {
   return (
     <div>
       <Button
-        className={open ? "bg-red-500 chat_btn " : "chat_btn bg-orange-500"}
+        className={
+          open
+            ? "bg-red-500 chat_btn "
+            : "chat_btn bg-primary hover:bg-orange-500"
+        }
         onClick={() => setOpen(!open)}
       >
         {open ? <CloseRounded /> : <MessageRounded />}

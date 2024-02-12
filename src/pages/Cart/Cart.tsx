@@ -95,7 +95,7 @@ const Cart = (props: any) => {
               </div>
               <div className="flex justify-end">
                 <Link to="" onClick={processOrderHandler}>
-                  <button className="w-52 h-10 rounded bg-primeColor text-base mdl:text-lg text-white hover:bg-black duration-300">
+                  <button className="w-52 h-10 rounded bg-orange-500 text-base mdl:text-lg text-white hover:bg-orange-600 duration-200">
                     Order
                   </button>
                 </Link>
@@ -126,7 +126,7 @@ const Cart = (props: any) => {
               beds sofas, armchairs, chairs, etc. and make it happy.
             </p>
             <Link to="/shop">
-              <button className="bg-primeColor rounded-md cursor-pointer hover:bg-black active:bg-gray-900 px-8 py-2 font-titleFont font-semibold text-lg text-gray-200 hover:text-white duration-300">
+              <button className="bg-orange-500 rounded-md cursor-pointer hover:bg-orange-600 active:bg-orange-900 px-8 py-2 font-titleFont font-semibold text-lg text-gray-200 hover:text-white duration-200">
                 Continue Shopping
               </button>
             </Link>

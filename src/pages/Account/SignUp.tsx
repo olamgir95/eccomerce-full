@@ -86,7 +86,7 @@ const SignUp = () => {
         <div className="w-[450px] h-full bg-primeColor px-10 flex flex-col gap-6 justify-center">
           <Link to="/">
             <h1 className="sm:text-3xl text-xl align-middle text-orange-500 font-bold sm:text-left text-justify mb-3 flex items-center gap-3">
-              <img src={logoLight} alt="" className="max-w-[50px]" />
+              <img src={logoLight} alt="" className="max-w-[40px]" />
               FurniShop
             </h1>
           </Link>
@@ -159,7 +159,7 @@ const SignUp = () => {
           <div className="px-6 py-4 w-full h-[96%] flex flex-col justify-center overflow-y-scroll scrollbar-thin scrollbar-thumb-primeColor">
             <h1 className="font-sans underline underline-offset-4 decoration-[1px] font-semibold text-2xl mdl:text-4xl mb-4">
               Create your account
-              <BackButton onClick={() => navigate("/")} />
+              <BackButton onClick={() => navigate(-1)} />
             </h1>
             <div className="flex flex-col gap-3">
               {/* client name */}
