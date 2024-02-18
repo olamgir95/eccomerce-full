@@ -83,12 +83,12 @@ const ShopPage = () => {
                   </button>
                 );
               })}
-              <div className="flex gap-5">
+              <div className="flex gap-3">
                 <button
                   data-aos="zoom-in-left"
                   data-aos-delay={1200}
                   onClick={() => handleNewSaleChange("", "sale")}
-                  className=" bg-white border-solid border-blue-500 border hover:text-blue-500 text-gray *:focus:cursor-default   focus:text-blue-600 focus:font-bold  font-bold py-1 px-3 rounded "
+                  className=" bg-white border-solid border-blue-500 border hover:text-purple text-gray *:focus:cursor-default   focus:text-red-600 focus:font-bold  font-bold py-2 px-4 rounded "
                 >
                   Sale Products
                 </button>
@@ -96,7 +96,7 @@ const ShopPage = () => {
                   data-aos="zoom-in-left"
                   data-aos-delay={1400}
                   onClick={() => handleNewSaleChange("", "new")}
-                  className=" bg-white border-solid border-blue-500 border hover:text-blue-500 text-gray focus:cursor-default   focus:text-blue-600 focus:font-bold  font-bold py-1 px-3 rounded "
+                  className=" bg-white border-solid border-blue-500 border hover:text-purple text-gray focus:cursor-default   focus:text-electricPurple focus:font-bold  font-bold py-1 px-3 rounded "
                 >
                   New Arrivals
                 </button>

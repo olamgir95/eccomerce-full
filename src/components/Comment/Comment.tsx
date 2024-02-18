@@ -26,6 +26,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import { HiArrowSmLeft } from "react-icons/hi";
 import { PrDetailRetriever } from "../../pages/ProductDetails/useReduxPrDetail";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
+import { Comment } from "../../types/others";
 const colors = {
   orange: "#FFBA5A",
   grey: "#a9a9a9",
@@ -36,7 +37,7 @@ const CommentExampleComment = (props: any) => {
   dayjs.extend(relativeTime);
   const [isFormOpen, setIsFormOpen] = useState<Boolean>(false);
   const [hasReplies, setHasReplies] = useState<Boolean>(false);
-  const [currentValue, setCurrentValue] = useState(0);
+  const [currentValue, setCurrentValue] = useState<number>(0.5);
   const [hoverValue, setHoverValue] = useState(undefined);
   const stars = Array(5).fill(0);
   const [commentContent, setCommentContent] = useState<string>("");
@@ -52,6 +53,7 @@ const CommentExampleComment = (props: any) => {
   const handleClick = (value: any) => {
     setCurrentValue(value);
   };
+  console.log("value", currentValue);
 
   const handleMouseOver = (newHoverValue: any) => {
     setHoverValue(newHoverValue);
@@ -84,6 +86,7 @@ const CommentExampleComment = (props: any) => {
         comment_stars: currentValue,
         comment_owner: verifyMemberData,
       };
+      console.log("data", comment_data);
 
       const commentService = new CommentApiService();
       await commentService.createCommentRequest(comment_data);
@@ -157,7 +160,7 @@ const CommentExampleComment = (props: any) => {
       </Stack>
       {comments ? (
         <div className="comment_cover">
-          {comments?.map((comment: any) => {
+          {comments?.map((comment: Comment) => {
             const image_url = comment?.comment_owner
               ? `${comment?.comment_owner?.mb_image}`
               : "/user.png";
@@ -187,7 +190,12 @@ const CommentExampleComment = (props: any) => {
                       {formattedCreatedAt}
                     </div>
                   </Box>
-                  <Rating name="read-only" value={comment?.stars} readOnly />
+                  <Rating
+                    name="read-only"
+                    precision={0.5}
+                    defaultValue={comment?.comment_stars}
+                    readOnly
+                  />
                 </Box>
                 <Box className="comment_content">
                   <div className="content_like">
@@ -261,7 +269,8 @@ const CommentExampleComment = (props: any) => {
                       style={{ color: "#aaa" }}
                     >
                       {comment?.comment_replies &&
-                        comment?.comment_replies?.length > 0 && (
+                        Array.isArray(comment.comment_replies) &&
+                        comment.comment_replies.length > 0 && (
                           <span
                             onClick={() =>
                               setOpenRepliesForCommentId(comment?._id)
@@ -281,39 +290,42 @@ const CommentExampleComment = (props: any) => {
                     </div>
                     {hasReplies && openRepliesForCommentId === comment?._id ? (
                       <div className="comment_cover" style={{ width: "500px" }}>
-                        {comment?.comment_replies?.map((reply: any) => {
-                          const reply_image = reply?.reply_owner?.mb_image
-                            ? reply?.reply_owner?.mb_image
-                            : "/default.svg";
+                        {Array.isArray(comment.comment_replies) &&
+                          comment?.comment_replies?.map((reply: any) => {
+                            const reply_image = reply?.reply_owner?.mb_image
+                              ? reply?.reply_owner?.mb_image
+                              : "/default.svg";
 
-                          const formattedCreatedAt = dayjs(
-                            reply?.createdAt
-                          ).format("YYYY-MM-DD HH:mm");
+                            const formattedCreatedAt = dayjs(
+                              reply?.createdAt
+                            ).format("YYYY-MM-DD HH:mm");
 
-                          return (
-                            <div>
-                              <Box className={"comment_owner gap-3 w-[240px]"}>
-                                <div className="comment_img">
-                                  <img src={reply_image} alt="" />
-                                </div>
-                                <div className="comment_auth">
-                                  {reply?.reply_owner?.mb_nick}
-                                </div>
-                                <div
-                                  className="comment_time text-sm"
-                                  style={{ color: "#aaa" }}
+                            return (
+                              <div>
+                                <Box
+                                  className={"comment_owner gap-3 w-[240px]"}
                                 >
-                                  {formattedCreatedAt}
-                                </div>
-                              </Box>
-                              <Box className="comment_content   ">
-                                <h3 className="comment_detail font-thin text-sm text-black mx-4 my-2">
-                                  {reply?.reply_content}
-                                </h3>
-                              </Box>
-                            </div>
-                          );
-                        })}
+                                  <div className="comment_img">
+                                    <img src={reply_image} alt="" />
+                                  </div>
+                                  <div className="comment_auth">
+                                    {reply?.reply_owner?.mb_nick}
+                                  </div>
+                                  <div
+                                    className="comment_time text-sm"
+                                    style={{ color: "#aaa" }}
+                                  >
+                                    {formattedCreatedAt}
+                                  </div>
+                                </Box>
+                                <Box className="comment_content   ">
+                                  <h3 className="comment_detail font-thin text-sm text-black mx-4 my-2">
+                                    {reply?.reply_content}
+                                  </h3>
+                                </Box>
+                              </div>
+                            );
+                          })}
                       </div>
                     ) : null}
                   </div>
