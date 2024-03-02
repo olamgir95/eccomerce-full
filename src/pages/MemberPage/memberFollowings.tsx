@@ -46,7 +46,7 @@ const MemberFollowings = (props: any) => {
   const { setMemberFollowings } = actionDispatch(useDispatch());
   const { memberFollowings } = useSelector(FollowingsRetriever);
   const [followersSearchObj, setFollowersSearchObj] = useState<FollowSearchObj>(
-    { page: 1, limit: 5, mb_id: mb_id }
+    { page: 1, limit: 4, mb_id: mb_id }
   );
 
   useEffect(() => {

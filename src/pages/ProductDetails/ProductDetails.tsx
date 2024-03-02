@@ -20,7 +20,7 @@ import { serverApi } from "../../lib/config";
 import ProductsOnSale from "../../components/pageProps/productDetails/ProductsOnSale";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
-import CommentExampleComment from "./../../components/Comment/Comment";
+import CommentForProduct from "./../../components/Comment/Comment";
 import CommentApiService from "../../app/ApiServices/commentApiService";
 import { actionDispatchPr } from "./useReduxPrDetail";
 
@@ -144,7 +144,7 @@ const ProductDetails = () => {
             <ProductInfo productInfo={chosenProduct} />
           </div>
         </div>
-        <CommentExampleComment setProductRebuild={setProductRebuild} id={id} />
+        <CommentForProduct setProductRebuild={setProductRebuild} id={id} />
       </Container>
     </div>
   );

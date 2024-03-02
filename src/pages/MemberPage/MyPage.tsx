@@ -129,7 +129,6 @@ const MyPage = (props: any) => {
       sweetErrorHandling(err).then();
     }
   };
-  console.log("art", chosenMemberArticles.length % 4 === 0);
 
   return (
     <div className="my_page">

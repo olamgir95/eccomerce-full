@@ -869,3 +869,7 @@ flex justify-between items-end;
     border-radius: 15px; /* rounded corners */
   }
 }
+
+.css-1aquho2-MuiTabs-indicator {
+  display: none;
+}

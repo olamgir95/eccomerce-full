@@ -32,7 +32,7 @@ const colors = {
   grey: "#a9a9a9",
 };
 
-const CommentExampleComment = (props: any) => {
+const CommentForProduct = (props: any) => {
   dayjs.locale("en");
   dayjs.extend(relativeTime);
   const [isFormOpen, setIsFormOpen] = useState<Boolean>(false);
@@ -72,6 +72,7 @@ const CommentExampleComment = (props: any) => {
   const replyDivHandler = () => {
     setHasReplies(!hasReplies);
   };
+
   const createComment = async (e: any) => {
     e.preventDefault();
 
@@ -392,4 +393,4 @@ const CommentExampleComment = (props: any) => {
   );
 };
 
-export default CommentExampleComment;
+export default CommentForProduct;
