@@ -162,7 +162,7 @@ const CommentForProduct = (props: any) => {
       {comments ? (
         <div className="comment_cover">
           {comments?.map((comment: Comment) => {
-            const image_url = comment?.comment_owner
+            const image_url = comment?.comment_owner?.mb_image
               ? `${comment?.comment_owner?.mb_image}`
               : "/user.png";
             const formattedCreatedAt = dayjs(comment?.createdAt).fromNow();
